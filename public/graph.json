@@ -1,0 +1,20 @@
+{
+    "title": "Business Insights",
+    "date_range": "Oct'24 - Nov'24",
+    "interval": "Daily",
+    "y_axis": {
+      "label": "Sales",
+      "unit": "count",
+      "max_value": 1000
+    },
+    "data": [
+      { "date": "31st", "sales": 0 },
+      { "date": "1st", "sales": 0 },
+      { "date": "2nd", "sales": 0 },
+      { "date": "3rd", "sales": 0 },
+      { "date": "4th", "sales": 0 },
+      { "date": "5th", "sales": 800 },
+      { "date": "6th", "sales": 0 }
+    ]
+  }
+  
