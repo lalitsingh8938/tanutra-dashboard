@@ -81,6 +81,59 @@
 
 
 
+// import React from "react";
+// import { useNavigate } from "react-router-dom";
+// import { IoSearchOutline } from "react-icons/io5";
+// import { FaRegUser } from "react-icons/fa6";
+// import { IoMdHeartEmpty } from "react-icons/io";
+// import { IoBagOutline } from "react-icons/io5";
+
+// const Header = () => {
+//   const navigate = useNavigate();
+
+//   return (
+//     <header
+//       className="fixed top-0 w-full h-20 shadow-sm bg-white z-50 flex items-center"
+//     >
+//       {/* Logo */}
+//       <img
+//         src="Tanutra_Mobile_Logo.avif"
+//         className="w-36 h-[60px] ml-6 cursor-pointer"
+//         alt="logo"
+//       />
+
+//       {/* Navigation Links */}
+//       <nav className="items-center font-sans text-sm ml-44 flex gap-8 opacity-75 cursor-pointer">
+//         {["HOME", "SHOP", "CATEGORIES", "MANUFACTURERS", "ARTISANS", "GIFTING", "ABOUT US", "BLOGS"].map((item) => (
+//           <p key={item} className="hover:text-orange-600 hover:scale-125">
+//             {item}
+//           </p>
+//         ))}
+//       </nav>
+
+//       {/* Icons */}
+//       <div className="flex items-center gap-3 ml-56">
+//         <IoSearchOutline className="cursor-pointer w-10 h-6 hover:text-orange-600 hover:scale-125" />
+//         <FaRegUser
+//           className="cursor-pointer w-10 h-6 hover:text-orange-600 hover:scale-125"
+//           onClick={() => navigate("/Login")}
+//         />
+//         <IoMdHeartEmpty className="cursor-pointer w-10 h-6 hover:text-orange-600 hover:scale-125" />
+//         <IoBagOutline className="cursor-pointer w-10 h-6 hover:text-orange-600 hover:scale-125" />
+//       </div>
+//     </header>
+//   );
+// };
+
+// export default Header;
+
+
+
+
+
+
+
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { IoSearchOutline } from "react-icons/io5";
@@ -92,34 +145,32 @@ const Header = () => {
   const navigate = useNavigate();
 
   return (
-    <header
-      className="fixed top-0 w-full h-20 shadow-sm bg-white z-50 flex items-center"
-    >
+    <header className="fixed top-0 w-full h-20 shadow-sm bg-white z-50 flex items-center justify-between px-4 lg:px-10">
       {/* Logo */}
       <img
         src="Tanutra_Mobile_Logo.avif"
-        className="w-36 h-[60px] ml-6 cursor-pointer"
+        className="w-28 h-[60px] lg:w-32 lg:h-[68px] cursor-pointer"
         alt="logo"
       />
 
       {/* Navigation Links */}
-      <nav className="items-center font-sans text-sm ml-44 flex gap-8 opacity-75 cursor-pointer">
+      <nav className="hidden lg:flex items-center font-sans text-sm gap-6 opacity-75 cursor-pointer">
         {["HOME", "SHOP", "CATEGORIES", "MANUFACTURERS", "ARTISANS", "GIFTING", "ABOUT US", "BLOGS"].map((item) => (
-          <p key={item} className="hover:text-orange-600 hover:scale-125">
+          <p key={item} className="hover:text-orange-600 hover:scale-110">
             {item}
           </p>
         ))}
       </nav>
 
       {/* Icons */}
-      <div className="flex items-center gap-3 ml-56">
-        <IoSearchOutline className="cursor-pointer w-10 h-6 hover:text-orange-600 hover:scale-125" />
+      <div className="flex items-center gap-4">
+        <IoSearchOutline className="cursor-pointer w-6 h-6 hover:text-orange-600 hover:scale-110" />
         <FaRegUser
-          className="cursor-pointer w-10 h-6 hover:text-orange-600 hover:scale-125"
+          className="cursor-pointer w-6 h-6 hover:text-orange-600 hover:scale-110"
           onClick={() => navigate("/Login")}
         />
-        <IoMdHeartEmpty className="cursor-pointer w-10 h-6 hover:text-orange-600 hover:scale-125" />
-        <IoBagOutline className="cursor-pointer w-10 h-6 hover:text-orange-600 hover:scale-125" />
+        <IoMdHeartEmpty className="cursor-pointer w-6 h-6 hover:text-orange-600 hover:scale-110" />
+        <IoBagOutline className="cursor-pointer w-6 h-6 hover:text-orange-600 hover:scale-110" />
       </div>
     </header>
   );

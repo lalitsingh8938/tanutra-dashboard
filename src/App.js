@@ -83,7 +83,7 @@ function App() {
       <Router>
         <Routes>
           Default route (Home Page)
-          <Route path="/" element={<> <Header /><List /><Graph /> <Campaign /><SideMenu /></>}/>
+          <Route path="/" element={<> <Header /><SideMenu /><List /><Graph /><Campaign /></>}/>
           <Route path="/VendorProfile" element={<> <Header /><SideMenu /><VendorProfile /></>}/>
           <Route path="/VendorBusinessProfile" element={<> <Header /><VendorBusinessProfile /></>} /> 
           <Route path="/Signup" element={<> <Header /><Signup /></>}/>
