@@ -393,7 +393,7 @@ function VendorBusinessProfile() {
                   type="submit"
                   className="bg-indigo-500 text-white py-2 w-[600px] px-6 rounded-md hover:bg-indigo-600"
                 >
-                  Submit
+                 Next
                 </button>
               </div>
 

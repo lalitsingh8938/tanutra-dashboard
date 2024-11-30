@@ -19,7 +19,7 @@ function SideMenu() {
   return (
     <aside
       ref={sidebarRef}
-      className={`${menuWidth} h-screen fixed top-20 left-0 bg-[#FFFCF4] overflow-y-hidden transition-transform duration-500 z-40`}
+      className={`${menuWidth} h-screen fixed top-20 left-0 bg-slate-100 overflow-y-hidden transition-transform duration-500 z-40`}
     >
       {/* Profile Section */}
       <div className="flex">

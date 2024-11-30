@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import { Country, State, City } from "country-state-city";
 import axios from "axios";
@@ -216,11 +214,8 @@ function VendorKYC() {
   return (
     <div
       className="relative flex items-center justify-center min-h-screen bg-cover bg-center"
-      
-        
-          // backgroundImage: `url("./background.png")`,// Background image
-        
-      
+
+      // backgroundImage: `url("./background.png")`,// Background image
     >
       {/* Overlay */}
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
@@ -239,21 +234,21 @@ function VendorKYC() {
               // style={{ color: "#1f2021" }}
             >
               Vendor User Profile
-              <p className="text-sm font-medium opacity-80 text-center">If you already have an account with us, please login at the page </p>
+              <p className="text-sm font-medium opacity-80 text-center">
+                If you already have an account with us, please login at the page{" "}
+              </p>
             </p>
-          
-           
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="mt-14 bg-transparent">
               {/* First Row */}
-              <p className="ml-32 text-lg font-semibold text-slate-700">Vendor Personal Information</p>
+              <p className="ml-32 text-lg font-semibold text-slate-700">
+                Vendor Personal Information
+              </p>
 
               <div className="flex flex-wrap justify-center items-center gap-8 p-5">
                 {/* First Name */}
                 <div className="flex flex-col w-72">
-                  
-                  
                   <label className="font-semibold text-slate-800 p-2">
                     First Name
                   </label>
