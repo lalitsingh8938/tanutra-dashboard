@@ -1,6 +1,4 @@
 import React from "react";
-// import { HiChevronDown } from "react-icons/hi";
-// import { CiSearch } from "react-icons/ci";
 
 function ManageInventory() {
   return (
