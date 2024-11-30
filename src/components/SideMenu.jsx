@@ -37,14 +37,14 @@ function SideMenu() {
       </div>
 
       {/* Menu Items */}
-      <div className={`${menuWidth} flex mt-6`}>
+      <div className={`${menuWidth} flex mt-6 ml-2`}>
         <div
           className={`${itemWidth} h-11 border flex items-center cursor-pointer ${
             activeItem === "Home" ? "bg-[#1CACBD0A]" : ""
           }`}
           onClick={() => navigate("/")}
         >
-          <BiSupport className="h-5 w-5 ml-2" />
+          <BiSupport className="h-5 w-5 ml-5" />
           <p className="text-black text-sm ml-2">Home</p>
         </div>
         <div
@@ -59,8 +59,8 @@ function SideMenu() {
       </div>
 
       {/* Business Management Links */}
-      <div className="text-black mt-4 text-sm">
-        <p className="opacity-45 p-2 ml-2 mt-3 text-xs">Manage Business</p>
+      <div className="text-black mt-4 text-sm ml-3">
+        <p className="opacity-45 p-2 ml- mt-3 text-xs">Manage Business</p>
         {[
           { label: "My Orders", route: "/MyOrders", icon: "orders.svg" },
           { label: "Manage Inventory", route: "/ManageInventory", icon: "inventory.svg" },
