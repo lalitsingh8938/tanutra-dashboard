@@ -11,12 +11,7 @@ function Otp() {
   const [token, setToken] = useState(""); // State to store the token
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // const storedEmail = localStorage.getItem("email");
-    // if (!storedEmail) {
-    //   setErrorMessage("No email found. Please restart the process.");
-    // }
-  }, []);
+  useEffect(() => {}, []);
 
   const handleChange = (e) => {
     setOtp(e.target.value);
@@ -88,7 +83,6 @@ function Otp() {
         {
           headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`, // Use token in Authorization header
           },
         }
       );

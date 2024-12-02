@@ -98,7 +98,7 @@ function Login() {
         <div className="p-5">
           <img
             src="Tanutra_Mobile_Logo.avif"
-            className="w-56 h-24 mx-auto rounded-t-xl cursor-pointer"
+            className="w-48 h-24 mx-auto rounded-t-xl cursor-pointer"
             alt="logo"
           />
 
