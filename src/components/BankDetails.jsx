@@ -3,7 +3,7 @@ import { Country, State, City } from "country-state-city";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function BusinessDescription() {
+function BankDetails() {
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
@@ -169,7 +169,7 @@ function BusinessDescription() {
       if (response.status === 200) {
         alert("Profile created successfully!");
         setFormData({
-          Tell_us_about_your_journey : "",
+          Tell_us_about_your_journey: "",
           Business_Description: "",
           Challenges_faced_in_Business: "",
           How_Tanutra_can_help: "",
@@ -214,7 +214,7 @@ function BusinessDescription() {
                 alt="logo"
               />
               <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
-                Business Description :
+                Bank Details :
               </p>
             </div>
 
@@ -222,13 +222,13 @@ function BusinessDescription() {
               <div className="flex flex-wrap justify-center items-center gap-8 p-5">
                 <div className="flex flex-col w-full">
                   <label className="font-semibold text-slate-800 p-2">
-                    Tell us about your journey
+                    Bank Name
                   </label>
                   <input
                     type="text"
-                    name="Tell_us_about_your_journey"
-                    placeholder="abc...."
-                    value={formData.Tell_us_about_your_journey}
+                    name="Bank_Name"
+                    placeholder="bank of baroda"
+                    value={formData.Bank_Name}
                     onChange={handleChange}
                     className="w-full h-10 border rounded-md p-3"
                   />
@@ -236,13 +236,13 @@ function BusinessDescription() {
 
                 <div className="flex flex-col w-full">
                   <label className="font-semibold text-slate-800 p-2">
-                    Business Description
+                    Account Holder Name
                   </label>
                   <input
                     type="text"
-                    name=" Business_Description"
-                    placeholder="abc...."
-                    value={formData.Business_Description}
+                    name="Account_Holder_Name"
+                    placeholder="Mr. Ankush Agrawal"
+                    value={formData.Account_Holder_Name}
                     onChange={handleChange}
                     className="w-full h-10 border rounded-md p-3"
                   />
@@ -250,13 +250,13 @@ function BusinessDescription() {
 
                 <div className="flex flex-col w-full">
                   <label className="font-semibold text-slate-800 p-2">
-                    Challenges faced in Business
+                    Account Number
                   </label>
                   <input
                     type="text"
-                    name="Challenges_faced_in_Business"
-                    placeholder="abc...."
-                    value={formData.Challenges_faced_in_Business}
+                    name="Account_Number"
+                    placeholder="388abcd6502"
+                    value={formData.Account_Number}
                     onChange={handleChange}
                     className="w-full h-10 border rounded-md p-3"
                   />
@@ -264,29 +264,15 @@ function BusinessDescription() {
 
                 <div className="flex flex-col w-full">
                   <label className="font-semibold text-slate-800 p-2">
-                    How Tanutra can help
+                    IFSC Code
                   </label>
                   <input
                     type="text"
-                    name="How_Tanutra_can_help"
-                    placeholder="abc...."
-                    value={formData.How_Tanutra_can_help}
+                    name="IFSC_Code"
+                    placeholder="BARB0BARSAN"
+                    value={formData.IFSC_Code}
                     onChange={handleChange}
                     className="w-full h-10 border rounded-md p-3"
-                  />
-                </div>
-
-                <div className="flex flex-col w-full">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Year in Business
-                  </label>
-                  <input
-                    type="text"
-                    name="Year_in_Business"
-                    placeholder="1 year"
-                    value={formData.Year_in_Business}
-                    onChange={handleChange}
-                    className="w-80 h-8 border rounded-md p-3"
                   />
                 </div>
               </div>
@@ -318,4 +304,4 @@ function BusinessDescription() {
     </div>
   );
 }
-export default BusinessDescription;
+export default BankDetails;

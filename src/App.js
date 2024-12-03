@@ -21,8 +21,12 @@ import Otp from './components/Otp';
 import CreatePassword from './components/CreatePassword';
 import VendorProfile from './components/VendorProfile';
 import VendorKYC from './components/VendorKYC';
-import VendorBusinessProfile from './components/VendorBusinessProfile';
+import BusinessProfile from './components/BusinessProfile';
 import {Helmet} from "react-helmet";
+import BusinessDescription from './components/BusinessDescription';
+import BankDetails from './components/BankDetails';
+import SocialMedia from './components/SocialMedia';
+import KYCDocument from './components/KYCDocument';
 
 function App() {
   return (
@@ -37,15 +41,15 @@ function App() {
         <Routes>
           Default route (Home Page)
           <Route path="/" element={<> <Header /><SideMenu /><List /><Graph /><Campaign /></>}/>
-          <Route path="/VendorProfile" element={<> <Header /><SideMenu /><VendorProfile /><VendorBusinessProfile /></>}/>
-          <Route path="/VendorBusinessProfile" element={<> <Header /><VendorBusinessProfile /></>} /> 
+          <Route path="/VendorProfile" element={<> <Header /><SideMenu /><VendorProfile /></>}/>
+          <Route path="/BusinessProfile" element={<> <Header /><SideMenu /><BankDetails /><BusinessDescription /><BusinessProfile /></>} /> 
           <Route path="/Signup" element={<> <Header /><Signup /></>}/>
           <Route path="/VendorKYC" element={<> <Header /><VendorKYC /></>}/>
           <Route path="/OTPAuth" element={<> <Header /><OTPAuth /></>}/>
           <Route path="/Login" element={<> <Header /><Login /></>}/>
           <Route path="/MyOrders" element={<> <SideMenu /><Header /><MyOrders /></>}/>
           <Route path="/ManageInventory" element={<><SideMenu /><Header /> <ManageInventory /></>}/>
-          <Route path="/Catelog_uploads" element={<><SideMenu /><Catelog_uploads /></>}/>
+          <Route path="/Catelog_uploads" element={<><SideMenu /><Catelog_uploads /> <KYCDocument /><SocialMedia /></>}/>
           <Route path="/ForgotPassword" element={<> <Header /><ForgotPassword /></>}/>
           <Route path="/Otp" element={<> <Header /><Otp /></>}/>
           <Route path="/CreatePassword" element={<> <Header /><CreatePassword /></>}/>      

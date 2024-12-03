@@ -236,9 +236,16 @@ function VendorProfile() {
             {/* Form */}
             <form onSubmit={handleSubmit} className="mt-14 bg-transparent">
               {/* First Row */}
-              <p className="ml-32 text-lg font-semibold text-slate-700">
-                Vendor Personal Information
+              <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg">
+              <img
+                src="vendor_profile1.png"
+                className="w-8 h-8 rounded-xl ml-6 cursor-pointer border"
+                alt="logo"
+              />
+              <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
+                Vendor Personal Information :
               </p>
+            </div>
 
               <div className="flex flex-wrap justify-center items-center gap-8 p-5">
                 {/* First Name */}
@@ -384,21 +391,26 @@ function VendorProfile() {
               </div>
 
               {/* Profile Picture */}
-              <div className=" justify-center items-center gap-8">
-                <div className="flex flex-col w-72 border ml-[118px] bg-white rounded-lg mt-20 p-10">
-                  <div className="font-semibold text-slate-800 p-2 text-center">
-                    Upload Profile Picture
+              <div className=" justify-center items-center p-20 ml-10">
+              <div className="flex flex-col w-72 border bg-white rounded-lg p-3">
+                  <img
+                    src="Cloud computing.jpg"
+                    className="w-10 h-10 rounded-t-xl cursor-pointer items-center ml-28"
+                    alt="logo"
+                  />
+                  <div className="font-medium text-slate-800 p-1 text-center">
+                    Drag and drop your Profile Picture
                   </div>
                   <input
                     type="file"
                     onChange={handleImageChange}
-                    className="w-56 h-10 rounded-md p-2"
+                    className="w-56 h-10 rounded-md p-2 ml-6"
                   />
                   {image && (
                     <img
                       src={image}
                       alt="Profile Preview"
-                      className="w-24 h-24 mt-3 rounded-full"
+                      className="w-24 h-24 mt-3 ml-80"
                     />
                   )}
                 </div>

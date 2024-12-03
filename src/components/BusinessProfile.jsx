@@ -3,7 +3,7 @@ import { Country, State, City } from "country-state-city";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function VendorBusinessProfile() {
+function BusinessProfile() {
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
@@ -204,7 +204,7 @@ function VendorBusinessProfile() {
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
 
       {/* Form Container */}
-      <div className="relative z-10 w-full max-w-4xl border bg-transparent rounded-lg">
+      <div className="relative z-10 w-full max-w-4xl  bg-transparent rounded-lg">
         <div className="p-2 mt-20">
           {/* Logo */}
           <img
@@ -213,7 +213,7 @@ function VendorBusinessProfile() {
             alt="logo"
           />
 
-          <div className="rounded-xl bg-transparent p-2">
+          <div className="rounded-xl bg-transparent p-2 border">
             {/* Form */}
             <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
               {/* Section Title */}
@@ -408,4 +408,4 @@ function VendorBusinessProfile() {
     </div>
   );
 }
-export default VendorBusinessProfile;
+export default BusinessProfile;

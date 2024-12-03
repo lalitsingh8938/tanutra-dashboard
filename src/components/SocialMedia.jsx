@@ -3,7 +3,7 @@ import { Country, State, City } from "country-state-city";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function BusinessDescription() {
+function SocialMedia() {
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
@@ -169,7 +169,7 @@ function BusinessDescription() {
       if (response.status === 200) {
         alert("Profile created successfully!");
         setFormData({
-          Tell_us_about_your_journey : "",
+          Tell_us_about_your_journey: "",
           Business_Description: "",
           Challenges_faced_in_Business: "",
           How_Tanutra_can_help: "",
@@ -190,132 +190,140 @@ function BusinessDescription() {
 
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center">
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
-
-      {/* Form Container */}
-      <div className="relative z-10 w-full max-w-4xl  bg-transparent rounded-lg">
-        <div className="p-2 mt-20">
-          {/* Logo */}
-          <img
-            src="Tanutra_Mobile_Logo.avif"
-            className="w-52 h-24 mx-auto rounded-t-xl cursor-pointer"
-            alt="logo"
-          />
-
-          <div className="rounded-xl bg-transparent p-2 border">
-            {/* Form */}
-            <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
-              {/* Section Title */}
-              <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg">
+    {/* Overlay */}
+    <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
+  
+    {/* Form Container */}
+    <div className="relative z-10 w-full max-w-4xl bg-transparent rounded-lg">
+      <div className="p-2 mt-20">
+        {/* Logo */}
+        <img
+          src="Tanutra_Mobile_Logo.avif"
+          className="w-52 h-24 mx-auto rounded-t-xl cursor-pointer"
+          alt="logo"
+        />
+  
+        <div className="rounded-xl bg-transparent p-2 border">
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
+            {/* Section Title */}
+            <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg">
               <img
                 src="vendor_profile1.png"
                 className="w-8 h-8 rounded-xl ml-6 cursor-pointer border"
                 alt="logo"
               />
               <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
-                Business Description :
+                Social Media Links :
               </p>
             </div>
-
-              {/* Business Name and Brand Name */}
-              <div className="flex flex-wrap justify-center items-center gap-8 p-5">
-                <div className="flex flex-col w-full">
+  
+            {/* Social Media Links */}
+            <div className="flex flex-wrap justify-center items-center gap-8 p-5">
+              {/* Row 1: Instagram and Facebook */}
+              <div className="flex w-full gap-8">
+                <div className="flex flex-col w-1/2">
                   <label className="font-semibold text-slate-800 p-2">
-                    Tell us about your journey
+                    Instagram
                   </label>
                   <input
-                    type="text"
-                    name="Tell_us_about_your_journey"
-                    placeholder="abc...."
-                    value={formData.Tell_us_about_your_journey}
+                    type="link"
+                    name="Instagram"
+                    placeholder="(optional)"
+                    value={formData.Instagram}
                     onChange={handleChange}
-                    className="w-full h-10 border rounded-md p-3"
+                    className="w-96 h-10 border rounded-md p-3"
                   />
                 </div>
-
-                <div className="flex flex-col w-full">
+  
+                <div className="flex flex-col w-1/2">
                   <label className="font-semibold text-slate-800 p-2">
-                    Business Description
+                    Facebook
                   </label>
                   <input
-                    type="text"
-                    name=" Business_Description"
-                    placeholder="abc...."
-                    value={formData.Business_Description}
+                    type="link"
+                    name="Facebook"
+                    placeholder="(optional)"
+                    value={formData.Facebook}
                     onChange={handleChange}
-                    className="w-full h-10 border rounded-md p-3"
-                  />
-                </div>
-
-                <div className="flex flex-col w-full">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Challenges faced in Business
-                  </label>
-                  <input
-                    type="text"
-                    name="Challenges_faced_in_Business"
-                    placeholder="abc...."
-                    value={formData.Challenges_faced_in_Business}
-                    onChange={handleChange}
-                    className="w-full h-10 border rounded-md p-3"
-                  />
-                </div>
-
-                <div className="flex flex-col w-full">
-                  <label className="font-semibold text-slate-800 p-2">
-                    How Tanutra can help
-                  </label>
-                  <input
-                    type="text"
-                    name="How_Tanutra_can_help"
-                    placeholder="abc...."
-                    value={formData.How_Tanutra_can_help}
-                    onChange={handleChange}
-                    className="w-full h-10 border rounded-md p-3"
-                  />
-                </div>
-
-                <div className="flex flex-col w-full">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Year in Business
-                  </label>
-                  <input
-                    type="text"
-                    name="Year_in_Business"
-                    placeholder="1 year"
-                    value={formData.Year_in_Business}
-                    onChange={handleChange}
-                    className="w-80 h-8 border rounded-md p-3"
+                    className="w-96 h-10 border rounded-md p-3"
                   />
                 </div>
               </div>
-
-              {/* Submit Button */}
-              <div className="flex items-center justify-between">
-                <button
-                  type="submit"
-                  className="bg-green-500 justify-start ml-5 text-white py-2 mb-5 w-24 px-2 rounded-md hover:bg-indigo-600"
-                >
-                  Back
-                </button>
-                <button
-                  type="submit"
-                  className="bg-green-500 justify-end mr-5 text-white py-2 w-24 mb-5 rounded-md hover:bg-indigo-600"
-                >
-                  Next
-                </button>
+  
+              {/* Row 2: LinkedIn and Twitter */}
+              <div className="flex w-full gap-8">
+                <div className="flex flex-col w-1/2">
+                  <label className="font-semibold text-slate-800 p-2">
+                    LinkedIn
+                  </label>
+                  <input
+                    type="link"
+                    name="LinkedIn"
+                    placeholder="(optional)"
+                    value={formData.LinkedIn}
+                    onChange={handleChange}
+                    className="w-96 h-10 border rounded-md p-3"
+                  />
+                </div>
+  
+                <div className="flex flex-col w-1/2">
+                  <label className="font-semibold text-slate-800 p-2">
+                    Twitter
+                  </label>
+                  <input
+                    type="link"
+                    name="Twitter"
+                    placeholder="(optional)"
+                    value={formData.Twitter}
+                    onChange={handleChange}
+                    className="w-96 h-10 border rounded-md p-3"
+                  />
+                </div>
               </div>
-
-              {/* Error Message */}
-              {errorMessage && (
-                <p className="text-red-500 text-center mt-4">{errorMessage}</p>
-              )}
-            </form>
-          </div>
+            
+  
+              {/* Row 3: Others */}
+              <div className="flex flex-col w-full">
+                <label className="font-semibold text-slate-800 p-2">Others</label>
+                <input
+                  type="link"
+                  name="Others"
+                  placeholder="(optional)"
+                  value={formData.Others}
+                  onChange={handleChange}
+                  className="w-96 h-10 border rounded-md p-3"
+                />
+              </div>
+              </div>
+          
+  
+            {/* Submit Button */}
+            <div className="flex items-center justify-between">
+              <button
+                type="submit"
+                className="bg-green-500 justify-start ml-5 text-white py-2 mb-5 w-24 px-2 rounded-md hover:bg-indigo-600"
+              >
+                Back
+              </button>
+              <button
+                type="submit"
+                className="bg-green-500 justify-end mr-5 text-white py-2 w-24 mb-5 rounded-md hover:bg-indigo-600"
+              >
+                Next
+              </button>
+            </div>
+  
+            {/* Error Message */}
+            {errorMessage && (
+              <p className="text-red-500 text-center mt-4">{errorMessage}</p>
+            )}
+          </form>
         </div>
       </div>
     </div>
+  </div>
+  
   );
 }
-export default BusinessDescription;
+export default SocialMedia;

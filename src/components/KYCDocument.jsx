@@ -3,7 +3,7 @@ import { Country, State, City } from "country-state-city";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function BusinessDescription() {
+function KYCDocument() {
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
@@ -169,7 +169,7 @@ function BusinessDescription() {
       if (response.status === 200) {
         alert("Profile created successfully!");
         setFormData({
-          Tell_us_about_your_journey : "",
+          Tell_us_about_your_journey: "",
           Business_Description: "",
           Challenges_faced_in_Business: "",
           How_Tanutra_can_help: "",
@@ -207,87 +207,94 @@ function BusinessDescription() {
             {/* Form */}
             <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
               {/* Section Title */}
-              <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg">
-              <img
-                src="vendor_profile1.png"
-                className="w-8 h-8 rounded-xl ml-6 cursor-pointer border"
-                alt="logo"
-              />
-              <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
-                Business Description :
-              </p>
-            </div>
+              <div className=" flex items-center border rounded-md bg-[#ECB59D] opacity-60">
+                <img
+                  src="vendor_profile1.png"
+                  className="w-8 h-8 rounded-xl border ml-6 cursor-pointer"
+                  alt="logo"
+                />
+                <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
+                  KYC Documents :
+                </p>
+              </div>
 
-              {/* Business Name and Brand Name */}
-              <div className="flex flex-wrap justify-center items-center gap-8 p-5">
-                <div className="flex flex-col w-full">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Tell us about your journey
-                  </label>
-                  <input
-                    type="text"
-                    name="Tell_us_about_your_journey"
-                    placeholder="abc...."
-                    value={formData.Tell_us_about_your_journey}
-                    onChange={handleChange}
-                    className="w-full h-10 border rounded-md p-3"
+              {/* Business Brand Logo */}
+              <div className="flex flex-wrap flex-cols items-center p-5">
+                <p className="p-2 font-medium text-slate-800">
+                  Company Incorporation Certificate
+                </p>
+                <div className="flex flex-col w-full border-2 bg-white rounded-lg p-3">
+                  <img
+                    src="Cloud computing.jpg"
+                    className="w-10 h-10 rounded-t-xl cursor-pointer items-center ml-96"
+                    alt="logo"
                   />
+                  <div className="font-medium text-slate-800 p-1 text-center">
+                    Drag and drop your Company Certifiacate
+                  </div>
+                  <input
+                    type="file"
+                    onChange={handleImageChange}
+                    className="w-56 h-10 rounded-md p-2 ml-72"
+                  />
+                  {image && (
+                    <img
+                      src={image}
+                      alt="Profile Preview"
+                      className="w-24 h-24 mt-3 rounded-full ml-80"
+                    />
+                  )}
+                </div>
+                <p className="p-2 mt-5 font-medium text-slate-800">
+                  Business PAN
+                </p>
+                <div className="flex flex-col w-full border-2 bg-white rounded-lg p-3">
+                  <img
+                    src="Cloud computing.jpg"
+                    className="w-10 h-10 rounded-t-xl cursor-pointer items-center ml-96"
+                    alt="logo"
+                  />
+                  <div className="font-medium text-slate-800 p-1 text-center">
+                    Drag and drop your Business PAN
+                  </div>
+                  <input
+                    type="file"
+                    onChange={handleImageChange}
+                    className="w-56 h-10 rounded-md p-2 ml-72"
+                  />
+                  {image && (
+                    <img
+                      src={image}
+                      alt="Profile Preview"
+                      className="w-24 h-24 mt-3 ml-80"
+                    />
+                  )}
                 </div>
 
-                <div className="flex flex-col w-full">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Business Description
-                  </label>
-                  <input
-                    type="text"
-                    name=" Business_Description"
-                    placeholder="abc...."
-                    value={formData.Business_Description}
-                    onChange={handleChange}
-                    className="w-full h-10 border rounded-md p-3"
+                <p className="p-2 mt-5 font-medium text-slate-800">
+                  GST Certificate
+                </p>
+                <div className="flex flex-col w-full border-2 bg-white rounded-lg p-3">
+                  <img
+                    src="Cloud computing.jpg"
+                    className="w-10 h-10 rounded-t-xl cursor-pointer items-center ml-96"
+                    alt="logo"
                   />
-                </div>
-
-                <div className="flex flex-col w-full">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Challenges faced in Business
-                  </label>
+                  <div className="font-medium text-slate-800 p-1 text-center">
+                    Drag and drop your GST Certifiacate
+                  </div>
                   <input
-                    type="text"
-                    name="Challenges_faced_in_Business"
-                    placeholder="abc...."
-                    value={formData.Challenges_faced_in_Business}
-                    onChange={handleChange}
-                    className="w-full h-10 border rounded-md p-3"
+                    type="file"
+                    onChange={handleImageChange}
+                    className="w-56 h-10 rounded-md p-2 ml-72"
                   />
-                </div>
-
-                <div className="flex flex-col w-full">
-                  <label className="font-semibold text-slate-800 p-2">
-                    How Tanutra can help
-                  </label>
-                  <input
-                    type="text"
-                    name="How_Tanutra_can_help"
-                    placeholder="abc...."
-                    value={formData.How_Tanutra_can_help}
-                    onChange={handleChange}
-                    className="w-full h-10 border rounded-md p-3"
-                  />
-                </div>
-
-                <div className="flex flex-col w-full">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Year in Business
-                  </label>
-                  <input
-                    type="text"
-                    name="Year_in_Business"
-                    placeholder="1 year"
-                    value={formData.Year_in_Business}
-                    onChange={handleChange}
-                    className="w-80 h-8 border rounded-md p-3"
-                  />
+                  {image && (
+                    <img
+                      src={image}
+                      alt="Profile Preview"
+                      className="w-24 h-24 mt-3 ml-80"
+                    />
+                  )}
                 </div>
               </div>
 
@@ -318,4 +325,4 @@ function BusinessDescription() {
     </div>
   );
 }
-export default BusinessDescription;
+export default KYCDocument;
