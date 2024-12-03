@@ -218,8 +218,8 @@ function VendorProfile() {
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
 
       {/* Form Container */}
-      <div className="relative z-10 w-full max-w-4xl bg-transparent rounded-lg">
-        <div className="p-2 mt-20">
+      <div className="relative mt-24 z-10 w-full border max-w-4xl bg-transparent rounded-lg">
+        <div className="p-2 ">
           <img
             src="Tanutra_Mobile_Logo.avif"
             className="w-52 h-24 mx-auto rounded-t-xl cursor-pointer"
