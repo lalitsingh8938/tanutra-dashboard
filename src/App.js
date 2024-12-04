@@ -27,6 +27,9 @@ import BusinessDescription from './components/BusinessDescription';
 import BankDetails from './components/BankDetails';
 import SocialMedia from './components/SocialMedia';
 import KYCDocument from './components/KYCDocument';
+import LogOpe from './components/LogOpe';
+import PickupAdd from './components/PickupAdd';
+import ThanksYou from './components/ThanksYou';
 
 function App() {
   return (
@@ -41,7 +44,7 @@ function App() {
         <Routes>
           Default route (Home Page)
           <Route path="/" element={<> <Header /><SideMenu /><List /><Graph /><Campaign /></>}/>
-          <Route path="/VendorProfile" element={<> <Header /><SideMenu /><VendorProfile /></>}/>
+          <Route path="/VendorProfile" element={<> <Header /><SideMenu /><VendorProfile /> <SocialMedia /></>}/>
           <Route path="/BusinessProfile" element={<> <Header /><SideMenu /><BankDetails /><BusinessDescription /><BusinessProfile /></>} /> 
           <Route path="/Signup" element={<> <Header /><Signup /></>}/>
           <Route path="/VendorKYC" element={<> <Header /><VendorKYC /></>}/>
@@ -52,7 +55,8 @@ function App() {
           <Route path="/Catelog_uploads" element={<><SideMenu /><Catelog_uploads /> <KYCDocument /><SocialMedia /></>}/>
           <Route path="/ForgotPassword" element={<> <Header /><ForgotPassword /></>}/>
           <Route path="/Otp" element={<> <Header /><Otp /></>}/>
-          <Route path="/CreatePassword" element={<> <Header /><CreatePassword /></>}/>      
+          <Route path="/CreatePassword" element={<> <Header /><CreatePassword /></>}/> 
+          <Route path="/KYCDocument" element={<> <Header /><SideMenu /><ThanksYou /><PickupAdd /><LogOpe /><KYCDocument /></>}/>
     
         </Routes>
       </Router>

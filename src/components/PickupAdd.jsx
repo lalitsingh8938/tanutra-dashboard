@@ -3,7 +3,7 @@ import { Country, State, City } from "country-state-city";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function SocialMedia() {
+function PickupAdd() {
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
@@ -169,11 +169,21 @@ function SocialMedia() {
       if (response.status === 200) {
         alert("Profile created successfully!");
         setFormData({
-          Tell_us_about_your_journey: "",
-          Business_Description: "",
-          Challenges_faced_in_Business: "",
-          How_Tanutra_can_help: "",
-          Year_in_Business: "",
+          legal_business_name: "",
+          brand_name: "",
+          brand_logo: "",
+          gst_no: "",
+          business_id: "",
+          business_full_addr: [
+            {
+              street_addr: "",
+              city: "",
+              state: "",
+              pincode: "",
+              country: "",
+            },
+          ],
+          vendor_profile_picture: "",
         });
         setImage(null);
         setErrorMessage("");
@@ -194,7 +204,7 @@ function SocialMedia() {
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
 
       {/* Form Container */}
-      <div className="relative z-10 w-full max-w-4xl bg-transparent rounded-lg">
+      <div className="relative z-10 w-full max-w-4xl  bg-transparent rounded-lg">
         <div className="p-2 mt-20">
           {/* Logo */}
           <img
@@ -214,107 +224,106 @@ function SocialMedia() {
                   alt="logo"
                 />
                 <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
-                  Social Media Links :
+                  Vendor Pickup Address :
                 </p>
               </div>
 
-              {/* Social Media Links */}
-              <div className="flex flex-wrap justify-center items-center gap-8 p-5">
-                {/* Row 1: Instagram and Facebook */}
-                <div className="flex w-full gap-8">
-                  <div className="flex flex-col w-1/2">
-                    <label className="font-semibold text-slate-800 p-2 flex">
-                      Instagram
-                      <p className="ml-2 opacity-50">(optional)</p>
-                    </label>
-                    <input
-                      type="link"
-                      name="Instagram"
-                      placeholder="www.instagram.com"
-                      value={formData.Instagram}
-                      onChange={handleChange}
-                      className="w-96 h-10 border rounded-md p-3"
-                    />
-                  </div>
-
-                  <div className="flex flex-col w-1/2">
-                    <label className="font-semibold text-slate-800 p-2 flex">
-                      Facebook
-                      <p className="ml-2 opacity-50">(optional)</p>
-                    </label>
-                    <input
-                      type="link"
-                      name="Facebook"
-                      placeholder="www.facebook.com"
-                      value={formData.Facebook}
-                      onChange={handleChange}
-                      className="w-96 h-10 border rounded-md p-3"
-                    />
-                  </div>
-                </div>
-
-                {/* Row 2: LinkedIn and Twitter */}
-                <div className="flex w-full gap-8">
-                  <div className="flex flex-col w-1/2">
-                    <label className="font-semibold text-slate-800 p-2 flex">
-                      LinkedIn
-                      <p className=" ml-2 opacity-50">(optional)</p>
-                    </label>
-                    <input
-                      type="link"
-                      name="LinkedIn"
-                      placeholder="www.linkedin.com"
-                      value={formData.LinkedIn}
-                      onChange={handleChange}
-                      className="w-96 h-10 border rounded-md p-3"
-                    />
-                  </div>
-
-                  <div className="flex flex-col w-1/2">
-                    <label className="font-semibold text-slate-800 p-2 flex">
-                      Twitter
-                      <p className=" ml-2 opacity-50">(optional)</p>
-                    </label>
-                    <input
-                      type="link"
-                      name="Twitter"
-                      placeholder="www.twitter.com"
-                      value={formData.Twitter}
-                      onChange={handleChange}
-                      className="w-96 h-10 border rounded-md p-3"
-                    />
-                  </div>
-                </div>
-
-                {/* Row 3: Others */}
-                <div className="flex flex-col w-full">
-                  <label className="font-semibold text-slate-800 p-2 flex">
-                    Others
-                    <p className=" ml-2 opacity-50">(optional)</p>
+              {/* Location Details */}
+              <div className="flex flex-wrap justify-center items-center gap-8 mt-10">
+                {/* Country */}
+                <div className="flex flex-col w-72">
+                  <label className="font-semibold text-slate-800 p-2">
+                    Location Country
                   </label>
-                  <input
-                    type="link"
-                    name="Others"
-                    value={formData.Others}
-                    onChange={handleChange}
-                    className="w-96 h-10 border rounded-md p-3"
-                  />
+                  <select
+                    value={selectedCountry}
+                    onChange={handleCountryChange}
+                    className="w-full h-9 border rounded-md p-1"
+                  >
+                    <option value="">Select Country</option>
+                    {countries.map((country) => (
+                      <option value={country.isoCode} key={country.isoCode}>
+                        {country.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* State */}
+                <div className="flex flex-col w-72">
+                  <label className="font-semibold text-slate-800 p-2">
+                    State
+                  </label>
+                  <select
+                    value={selectedState}
+                    onChange={handleStateChange}
+                    className="w-full h-9 border rounded-md p-1"
+                  >
+                    <option value="">Select State</option>
+                    {states.map((state) => (
+                      <option value={state.isoCode} key={state.isoCode}>
+                        {state.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
+              <div className="flex flex-wrap justify-center items-center gap-8 mt-6">
+                {/* City */}
+                <div className="flex flex-col w-72">
+                  <label className="font-semibold text-slate-800 p-2">
+                    City
+                  </label>
+                  <select
+                    value={formData.location?.[0]?.city || ""}
+                    onChange={handleCityChange}
+                    className="w-full h-9 border rounded-md p-1"
+                  >
+                    <option value="">Select City</option>
+                    {cities.map((city) => (
+                      <option value={city.name} key={city.name}>
+                        {city.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="flex flex-col w-72">
+                  <label className="font-semibold text-slate-800 p-2">
+                    Street Address
+                  </label>
+                  <input
+                    type="text"
+                    name="street_name"
+                    placeholder="Meera 2A, 202 Omaxe Tower Noida"
+                    value={formData.street_name}
+                    onChange={handleChange}
+                    className="w-full h-9 border rounded-md p-3"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col w-72 ml-32 mt-6">
+                <label className="font-semibold text-slate-800 p-2">
+                  Pincode
+                </label>
+                <input
+                  type="text"
+                  name="pincode"
+                  placeholder="281121"
+                  value={formData.pincode}
+                  onChange={handleChange}
+                  className="w-full h-9 border rounded-md p-3"
+                />
+              </div>
+
               {/* Submit Button */}
-              <div className="flex items-center justify-center mt-10">
-                {/* <button
-                  type="submit"
-                  className="bg-green-500 justify-start ml-5 text-white py-2 mb-5 w-24 px-2 rounded-md hover:bg-indigo-600"
-                >
-                  Back
-                </button> */}
+              <div className="flex justify-center mt-14">
                 <button
                   type="submit"
-                  className="bg-green-500 justify-end mr-5 font-bold text-white py-2 w-24 mb-5 rounded-md hover:bg-pink-500"
+                  className="bg-green-500 text-white py-2 font-bold w-32 px-6 rounded-md hover:bg-pink-500"
                 >
-                  Next
+                  Submit
                 </button>
               </div>
 
@@ -329,4 +338,4 @@ function SocialMedia() {
     </div>
   );
 }
-export default SocialMedia;
+export default PickupAdd;

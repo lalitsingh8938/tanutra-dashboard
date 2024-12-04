@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Country, State, City } from "country-state-city";
 import axios from "axios";
@@ -237,15 +236,15 @@ function VendorProfile() {
             <form onSubmit={handleSubmit} className="mt-14 bg-transparent">
               {/* First Row */}
               <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg">
-              <img
-                src="vendor_profile1.png"
-                className="w-8 h-8 rounded-xl ml-6 cursor-pointer border"
-                alt="logo"
-              />
-              <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
-                Vendor Personal Information :
-              </p>
-            </div>
+                <img
+                  src="vendor_profile1.png"
+                  className="w-8 h-8 rounded-xl ml-6 cursor-pointer border"
+                  alt="logo"
+                />
+                <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
+                  Vendor Personal Information :
+                </p>
+              </div>
 
               <div className="flex flex-wrap justify-center items-center gap-8 p-5">
                 {/* First Name */}
@@ -293,6 +292,23 @@ function VendorProfile() {
                   />
                 </div>
 
+                {/* Date of Birth */}
+                <div className="flex flex-col w-72">
+                  <label className="font-semibold text-slate-800 p-2">
+                    D.O.B.
+                  </label>
+                  <input
+                    type="date"
+                    name="DOB"
+                    value={formData.DOB}
+                    onChange={handleChange}
+                    className="w-full h-9 border rounded-md p-3"
+                  />
+                </div>
+              </div>
+
+              {/* Third Row */}
+              <div className="flex flex-wrap justify-center items-center gap-8 mt-10">
                 {/* Gender */}
                 <div className="flex flex-col w-72">
                   <label className="font-semibold text-slate-800 p-2">
@@ -311,24 +327,6 @@ function VendorProfile() {
                     ))}
                   </select>
                 </div>
-              </div>
-
-              {/* Third Row */}
-              <div className="flex flex-wrap justify-center items-center gap-8 mt-10">
-                {/* Date of Birth */}
-                <div className="flex flex-col w-72">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Date of Birth
-                  </label>
-                  <input
-                    type="date"
-                    name="DOB"
-                    value={formData.DOB}
-                    onChange={handleChange}
-                    className="w-full h-9 border rounded-md p-3"
-                  />
-                </div>
-
                 {/* Country */}
                 <div className="flex flex-col w-72">
                   <label className="font-semibold text-slate-800 p-2">
@@ -392,7 +390,7 @@ function VendorProfile() {
 
               {/* Profile Picture */}
               <div className=" justify-center items-center p-20 ml-10">
-              <div className="flex flex-col w-72 border bg-white rounded-lg p-3">
+                <div className="flex flex-col w-72 border bg-white rounded-lg p-3">
                   <img
                     src="Cloud computing.jpg"
                     className="w-10 h-10 rounded-t-xl cursor-pointer items-center ml-28"
@@ -410,16 +408,16 @@ function VendorProfile() {
                     <img
                       src={image}
                       alt="Profile Preview"
-                      className="w-24 h-24 mt-3 ml-80"
+                      className="w-24 h-24 mt-3 ml-16"
                     />
                   )}
                 </div>
 
                 {/* Submit Button */}
-                <div className="flex justify-center mt-6">
+                <div className="flex justify-center mt-14">
                   <button
                     type="submit"
-                    className="bg-indigo-500 text-white py-2 w-[600px] px-6 rounded-md hover:bg-indigo-600"
+                    className="bg-green-500 text-white font-semibold py-2 w-44 px-8 rounded-md hover:bg-indigo-600"
                   >
                     Submit
                   </button>

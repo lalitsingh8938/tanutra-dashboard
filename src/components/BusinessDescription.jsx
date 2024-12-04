@@ -169,7 +169,7 @@ function BusinessDescription() {
       if (response.status === 200) {
         alert("Profile created successfully!");
         setFormData({
-          Tell_us_about_your_journey : "",
+          Tell_us_about_your_journey: "",
           Business_Description: "",
           Challenges_faced_in_Business: "",
           How_Tanutra_can_help: "",
@@ -208,15 +208,15 @@ function BusinessDescription() {
             <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
               {/* Section Title */}
               <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg">
-              <img
-                src="vendor_profile1.png"
-                className="w-8 h-8 rounded-xl ml-6 cursor-pointer border"
-                alt="logo"
-              />
-              <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
-                Business Description :
-              </p>
-            </div>
+                <img
+                  src="vendor_profile1.png"
+                  className="w-8 h-8 rounded-xl ml-6 cursor-pointer border"
+                  alt="logo"
+                />
+                <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
+                  Business Description :
+                </p>
+              </div>
 
               {/* Business Name and Brand Name */}
               <div className="flex flex-wrap justify-center items-center gap-8 p-5">
@@ -292,16 +292,16 @@ function BusinessDescription() {
               </div>
 
               {/* Submit Button */}
-              <div className="flex items-center justify-between">
-                <button
+              <div className="flex items-center justify-center">
+                {/* <button
                   type="submit"
                   className="bg-green-500 justify-start ml-5 text-white py-2 mb-5 w-24 px-2 rounded-md hover:bg-indigo-600"
                 >
                   Back
-                </button>
+                </button> */}
                 <button
                   type="submit"
-                  className="bg-green-500 justify-end mr-5 text-white py-2 w-24 mb-5 rounded-md hover:bg-indigo-600"
+                  className="bg-green-500 justify-end mr-5 text-white font-bold py-2 w-32 mb-5 rounded-md hover:bg-pink-500"
                 >
                   Next
                 </button>

@@ -143,8 +143,7 @@ function SideMenu() {
           { label: "Manage Inventory", route: "/ManageInventory", icon: "inventory.svg" },
           { label: "Business Profile", route: "/BusinessProfile", icon: "inventory.svg" },
           { label: "Catalog Uploads", route: "/Catelog_Uploads", icon: "catelogupload.svg" },
-
-          { label: "Payments", route: "/My_Payments_history", icon: "payments.svg" }]
+          { label: "Payments", route: "/KYCDocument", icon: "payments.svg" }]
           .map(({ label, route, icon }) => (
             <div
               key={label}

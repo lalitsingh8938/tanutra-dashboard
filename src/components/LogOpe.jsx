@@ -3,7 +3,7 @@ import { Country, State, City } from "country-state-city";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function SocialMedia() {
+function LogOpe() {
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
@@ -194,7 +194,7 @@ function SocialMedia() {
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
 
       {/* Form Container */}
-      <div className="relative z-10 w-full max-w-4xl bg-transparent rounded-lg">
+      <div className="relative z-10 w-full max-w-4xl  bg-transparent rounded-lg">
         <div className="p-2 mt-20">
           {/* Logo */}
           <img
@@ -214,105 +214,46 @@ function SocialMedia() {
                   alt="logo"
                 />
                 <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
-                  Social Media Links :
+                  Logistics and Operations :
                 </p>
               </div>
 
-              {/* Social Media Links */}
+              {/* Business Name and Brand Name */}
               <div className="flex flex-wrap justify-center items-center gap-8 p-5">
-                {/* Row 1: Instagram and Facebook */}
-                <div className="flex w-full gap-8">
-                  <div className="flex flex-col w-1/2">
-                    <label className="font-semibold text-slate-800 p-2 flex">
-                      Instagram
-                      <p className="ml-2 opacity-50">(optional)</p>
-                    </label>
-                    <input
-                      type="link"
-                      name="Instagram"
-                      placeholder="www.instagram.com"
-                      value={formData.Instagram}
-                      onChange={handleChange}
-                      className="w-96 h-10 border rounded-md p-3"
-                    />
-                  </div>
-
-                  <div className="flex flex-col w-1/2">
-                    <label className="font-semibold text-slate-800 p-2 flex">
-                      Facebook
-                      <p className="ml-2 opacity-50">(optional)</p>
-                    </label>
-                    <input
-                      type="link"
-                      name="Facebook"
-                      placeholder="www.facebook.com"
-                      value={formData.Facebook}
-                      onChange={handleChange}
-                      className="w-96 h-10 border rounded-md p-3"
-                    />
-                  </div>
-                </div>
-
-                {/* Row 2: LinkedIn and Twitter */}
-                <div className="flex w-full gap-8">
-                  <div className="flex flex-col w-1/2">
-                    <label className="font-semibold text-slate-800 p-2 flex">
-                      LinkedIn
-                      <p className=" ml-2 opacity-50">(optional)</p>
-                    </label>
-                    <input
-                      type="link"
-                      name="LinkedIn"
-                      placeholder="www.linkedin.com"
-                      value={formData.LinkedIn}
-                      onChange={handleChange}
-                      className="w-96 h-10 border rounded-md p-3"
-                    />
-                  </div>
-
-                  <div className="flex flex-col w-1/2">
-                    <label className="font-semibold text-slate-800 p-2 flex">
-                      Twitter
-                      <p className=" ml-2 opacity-50">(optional)</p>
-                    </label>
-                    <input
-                      type="link"
-                      name="Twitter"
-                      placeholder="www.twitter.com"
-                      value={formData.Twitter}
-                      onChange={handleChange}
-                      className="w-96 h-10 border rounded-md p-3"
-                    />
-                  </div>
-                </div>
-
-                {/* Row 3: Others */}
                 <div className="flex flex-col w-full">
-                  <label className="font-semibold text-slate-800 p-2 flex">
-                    Others
-                    <p className=" ml-2 opacity-50">(optional)</p>
+                  <label className="font-semibold text-slate-800 p-2">
+                    Shipping Availability
                   </label>
                   <input
-                    type="link"
-                    name="Others"
-                    value={formData.Others}
+                    type="text"
+                    name=" Shipping Availability"
+                    placeholder="  Yes"
+                    value={formData.Shipping_Availability}
                     onChange={handleChange}
-                    className="w-96 h-10 border rounded-md p-3"
+                    className="w-full h-10 border rounded-md p-3"
+                  />
+                </div>
+
+                <div className="flex flex-col w-full">
+                  <label className="font-semibold text-slate-800 p-2">
+                    Production Lead Time
+                  </label>
+                  <input
+                    type="text"
+                    name="Production Lead Time"
+                    placeholder=" 3                                                                                                                                                                        Days"
+                    value={formData.Production_Lead_Time}
+                    onChange={handleChange}
+                    className="w-full h-10 border rounded-md p-3"
                   />
                 </div>
               </div>
 
               {/* Submit Button */}
               <div className="flex items-center justify-center mt-10">
-                {/* <button
-                  type="submit"
-                  className="bg-green-500 justify-start ml-5 text-white py-2 mb-5 w-24 px-2 rounded-md hover:bg-indigo-600"
-                >
-                  Back
-                </button> */}
                 <button
                   type="submit"
-                  className="bg-green-500 justify-end mr-5 font-bold text-white py-2 w-24 mb-5 rounded-md hover:bg-pink-500"
+                  className="bg-green-500 justify-end mr-5 text-white font-bold py-2 w-32 mb-5 rounded-md hover:bg-pink-500"
                 >
                   Next
                 </button>
@@ -329,4 +270,4 @@ function SocialMedia() {
     </div>
   );
 }
-export default SocialMedia;
+export default LogOpe;

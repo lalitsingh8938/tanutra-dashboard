@@ -3,7 +3,7 @@ import { Country, State, City } from "country-state-city";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function BankDetails() {
+function ThanksYou() {
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
@@ -169,11 +169,21 @@ function BankDetails() {
       if (response.status === 200) {
         alert("Profile created successfully!");
         setFormData({
-          Tell_us_about_your_journey: "",
-          Business_Description: "",
-          Challenges_faced_in_Business: "",
-          How_Tanutra_can_help: "",
-          Year_in_Business: "",
+          legal_business_name: "",
+          brand_name: "",
+          brand_logo: "",
+          gst_no: "",
+          business_id: "",
+          business_full_addr: [
+            {
+              street_addr: "",
+              city: "",
+              state: "",
+              pincode: "",
+              country: "",
+            },
+          ],
+          vendor_profile_picture: "",
         });
         setImage(null);
         setErrorMessage("");
@@ -189,119 +199,57 @@ function BankDetails() {
   };
 
   return (
-    <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center">
+    <div className="relative flex justify-center min-h-screen bg-cover bg-center">
       {/* Overlay */}
-      <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
+      <div className="absolute inset-0 bg-[#FFFCF4]"></div>
 
       {/* Form Container */}
-      <div className="relative z-10 w-full max-w-4xl  bg-transparent rounded-lg">
-        <div className="p-2 mt-20">
-          {/* Logo */}
-          <img
-            src="Tanutra_Mobile_Logo.avif"
-            className="w-52 h-24 mx-auto rounded-t-xl cursor-pointer"
-            alt="logo"
-          />
-
-          <div className="rounded-xl bg-transparent p-2 border">
-            {/* Form */}
-            <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
-              {/* Section Title */}
-              <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg">
-              <img
-                src="vendor_profile1.png"
-                className="w-8 h-8 rounded-xl ml-6 cursor-pointer border"
-                alt="logo"
-              />
-              <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
-                Bank Details :
+      <div className="relative z-10 w-full mt-32 max-w-4xl bg-transparent rounded-lg">
+        <div className="rounded-xl bg-transparent ">
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="">
+            {/* Section Title */}
+            <div className="flex items-center rounded-lg">
+              <p className=" py-1 flex text-lg text-center items-center justify-center font-semibold text-black w-full">
+                Application Under Review :
               </p>
             </div>
-
-              {/* Business Name and Brand Name */}
-              <div className="flex flex-wrap justify-center items-center gap-8 p-5">
-                <div className="flex flex-col w-full">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Bank Name
-                  </label>
-                  <input
-                    type="text"
-                    name="Bank_Name"
-                    placeholder="Bank of Baroda"
-                    value={formData.bank_name}
-                    onChange={handleChange}
-                    className="w-full h-10 border rounded-md p-3"
-                  />
-                </div>
-
-                <div className="flex flex-col w-full">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Account Holder Name
-                  </label>
-                  <input
-                    type="text"
-                    name="Account_Holder_Name"
-                    placeholder="Ankush Agrawal"
-                    value={formData.account_holder_name}
-                    onChange={handleChange}
-                    className="w-full h-10 border rounded-md p-3"
-                  />
-                </div>
-
-                <div className="flex flex-col w-full">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Account Number
-                  </label>
-                  <input
-                    type="text"
-                    name="Account_Number"
-                    placeholder="388abcd6502"
-                    value={formData.account_number}
-                    onChange={handleChange}
-                    className="w-full h-10 border rounded-md p-3"
-                  />
-                </div>
-
-                <div className="flex flex-col w-full">
-                  <label className="font-semibold text-slate-800 p-2">
-                    IFSC Code
-                  </label>
-                  <input
-                    type="text"
-                    name="IFSC_Code"
-                    placeholder="BARB0000SAN"
-                    value={formData.ifsc_code}
-                    onChange={handleChange}
-                    className="w-full h-10 border rounded-md p-3"
-                  />
-                </div>
+            <div className="items-center justify-center text-center mt-16">
+              <p className="font-bold text-xl text-orange-500">
+                Thank you for your interest in joining Tanutra!
+              </p>
+              <div className="font-medium text-md mt-2">
+                <p className="">
+                  We're currently reviewing your application to ensure it meets
+                  our vendor requirements.
+                  <p>
+                    {" "}
+                    This process typically takes 24 to 48 hours. Once
+                    approved,you 'll receive a notification, and your
+                  </p>
+                  <p>business profile will be activated.</p>
+                </p>
               </div>
+            </div>
 
-              {/* Submit Button */}
-              <div className="flex items-center justify-center mt-10">
-                {/* <button
-                  type="submit"
-                  className="bg-green-500 justify-start ml-5 text-white py-2 mb-5 w-24 px-2 rounded-md hover:bg-indigo-600"
-                >
-                  Back
-                </button> */}
-                <button
-                  type="submit"
-                  className="bg-green-500 justify-end mr-5 text-white font-bold py-2 w-32 mb-5 rounded-md hover:bg-pink-500"
-                >
-                  Next
-                </button>
-              </div>
+            {/* Submit Button */}
+            <div className="flex justify-center mt-14">
+              <button
+                type="submit"
+                className="bg-green-500 text-white py-2 font-bold w-44 px-6 rounded-md hover:bg-pink-500"
+              >
+                Contact Support
+              </button>
+            </div>
 
-              {/* Error Message */}
-              {errorMessage && (
-                <p className="text-red-500 text-center mt-4">{errorMessage}</p>
-              )}
-            </form>
-          </div>
+            {/* Error Message */}
+            {errorMessage && (
+              <p className="text-red-500 text-center mt-4">{errorMessage}</p>
+            )}
+          </form>
         </div>
       </div>
     </div>
   );
 }
-export default BankDetails;
+export default ThanksYou;

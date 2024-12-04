@@ -217,9 +217,16 @@ function BusinessProfile() {
             {/* Form */}
             <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
               {/* Section Title */}
-              <p className="ml-36 text-lg font-semibold text-slate-700">
-                Vendor Business Profile:
-              </p>
+              <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg">
+                <img
+                  src="vendor_profile1.png"
+                  className="w-8 h-8 rounded-xl ml-6 cursor-pointer border"
+                  alt="logo"
+                />
+                <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
+                  Vendor Business Profile :
+                </p>
+              </div>
 
               {/* Business Name and Brand Name */}
               <div className="flex flex-wrap justify-center items-center gap-8 p-5">
@@ -229,8 +236,9 @@ function BusinessProfile() {
                   </label>
                   <input
                     type="text"
-                    name="first_name"
-                    value={formData.first_name}
+                    name="Legal_Business_Name"
+                    placeholder="Business name"
+                    value={formData.legal_business_name}
                     onChange={handleChange}
                     className="w-full h-9 border rounded-md p-3"
                   />
@@ -242,8 +250,9 @@ function BusinessProfile() {
                   </label>
                   <input
                     type="text"
-                    name="last_name"
-                    value={formData.last_name}
+                    name="Brand_Name"
+                    placeholder="Brand name"
+                    value={formData.brand_name}
                     onChange={handleChange}
                     className="w-full h-9 border rounded-md p-3"
                   />
@@ -253,20 +262,25 @@ function BusinessProfile() {
               {/* Profile Picture, GST Number, and Business ID */}
               <div className="flex flex-wrap justify-center items-start gap-8 mt-6">
                 {/* Upload Profile Picture */}
-                <div className="flex flex-col w-72 border bg-white rounded-lg p-11">
-                  <div className="font-semibold text-slate-800 text-center mb-2">
-                    Upload Profile Picture
+                <div className="flex flex-col w-72 border bg-white rounded-lg p-3">
+                  <img
+                    src="Cloud computing.jpg"
+                    className="w-10 h-10 rounded-xl cursor-pointer items-center ml-28 "
+                    alt="logo"
+                  />
+                  <div className="font-medium text-slate-800 p-1 text-center">
+                    Drag and drop your Brand logo 
                   </div>
                   <input
                     type="file"
                     onChange={handleImageChange}
-                    className="w-full h-10 rounded-md p-2"
+                    className="w-56 h-16 rounded-md p-2 ml-6"
                   />
                   {image && (
                     <img
                       src={image}
                       alt="Profile Preview"
-                      className="w-24 h-24 mt-3 rounded-full mx-auto"
+                      className="w-24 h-24 mt-3 ml-16"
                     />
                   )}
                 </div>
@@ -279,6 +293,7 @@ function BusinessProfile() {
                     <input
                       type="tel"
                       name="gst_number"
+                      placeholder="52487 xxxx 7539"
                       value={formData.gst_number}
                       onChange={handleChange}
                       className="w-full h-9 border rounded-md p-3"
@@ -291,8 +306,10 @@ function BusinessProfile() {
                     </label>
                     <input
                       type="tel"
-                      name="phone_number"
-                      value={formData.phone_number}
+                      name="Business_ID"
+                      placeholder="abc2de"
+
+                      value={formData.business_id}
                       onChange={handleChange}
                       className="w-full h-9 border rounded-md p-3"
                     />
@@ -368,6 +385,7 @@ function BusinessProfile() {
                   <input
                     type="text"
                     name="street_name"
+                    placeholder="Meera 2A, 202 Omaxe Tower Noida"
                     value={formData.street_name}
                     onChange={handleChange}
                     className="w-full h-9 border rounded-md p-3"
@@ -375,25 +393,26 @@ function BusinessProfile() {
                 </div>
               </div>
               <div className="flex flex-col w-72 ml-32 mt-6">
-                  <label className="font-semibold text-slate-800 p-2">
-                   Pincode
-                  </label>
-                  <input
-                    type="text"
-                    name="pincode"
-                    value={formData.pincode}
-                    onChange={handleChange}
-                    className="w-full h-9 border rounded-md p-3"
-                  />
-                </div>
+                <label className="font-semibold text-slate-800 p-2">
+                  Pincode
+                </label>
+                <input
+                  type="text"
+                  name="pincode" 
+                  placeholder="281121"
+                  value={formData.pincode}
+                  onChange={handleChange}
+                  className="w-full h-9 border rounded-md p-3"
+                />
+              </div>
 
               {/* Submit Button */}
-              <div className="flex justify-center mt-6">
+              <div className="flex justify-center mt-14">
                 <button
                   type="submit"
-                  className="bg-indigo-500 text-white py-2 w-[600px] px-6 rounded-md hover:bg-indigo-600"
+                  className="bg-green-500 text-white py-2 font-bold w-32 px-6 rounded-md hover:bg-pink-500"
                 >
-                 Next
+                  Next
                 </button>
               </div>
 
