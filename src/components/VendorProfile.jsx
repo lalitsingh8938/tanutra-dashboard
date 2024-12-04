@@ -212,12 +212,12 @@ function VendorProfile() {
   };
 
   return (
-    <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center">
+    <div className="relative md:px-8 lg:px-16 flex items-center justify-center min-h-screen bg-cover bg-center lg:w-full md:w-1/2">
       {/* Overlay */}
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
 
       {/* Form Container */}
-      <div className="relative mt-24 z-10 w-full border max-w-4xl bg-transparent rounded-lg">
+      <div className="relative mt-24 z-10 w-full border md:max-w-3xl sm:max-w-2xl lg:max-w-4xl bg-transparent rounded-lg">
         <div className="p-2 ">
           <img
             src="Tanutra_Mobile_Logo.avif"
@@ -436,3 +436,389 @@ function VendorProfile() {
 }
 
 export default VendorProfile;
+
+
+
+
+
+
+// import React, { useState, useEffect } from "react";
+// import { Country, State, City } from "country-state-city";
+// import axios from "axios";
+// import { useNavigate } from "react-router-dom";
+// import SideMenu from "./SideMenu"; // Assuming you have a separate SideMenu component for the sidebar
+
+// function VendorProfile() {
+//   const [countries, setCountries] = useState([]);
+//   const [states, setStates] = useState([]);
+//   const [cities, setCities] = useState([]);
+//   const [selectedCountry, setSelectedCountry] = useState("");
+//   const [selectedState, setSelectedState] = useState("");
+//   const [image, setImage] = useState(null);
+//   const [isOpen, setIsOpen] = useState(false); // To toggle sidebar
+
+//   const navigate = useNavigate();
+//   const [formData, setFormData] = useState({
+//     first_name: "",
+//     last_name: "",
+//     phone: "",
+//     DOB: "",
+//     gender: "",
+//     location: [
+//       {
+//         city: "",
+//         state: "",
+//         country: "",
+//       },
+//     ],
+//     vendor_profile_picture: "", // Include profile picture in formData
+//   });
+
+//   const [errorMessage, setErrorMessage] = useState("");
+
+//   const genderOptions = [
+//     { label: "-----", value: "" },
+//     { label: "Male", value: "Male" },
+//     { label: "Female", value: "Female" },
+//     { label: "Other", value: "Other" },
+//     { label: "Decline to state", value: "Decline to state" },
+//   ];
+
+//   // Fetch all countries on component mount
+//   useEffect(() => {
+//     const allCountries = Country.getAllCountries();
+//     setCountries(allCountries);
+//   }, []);
+
+//   // Handle country selection
+//   const handleCountryChange = (event) => {
+//     const countryCode = event.target.value;
+//     setSelectedCountry(countryCode);
+//     setSelectedState(""); // Reset state and city on country change
+
+//     if (countryCode) {
+//       const allStates = State.getStatesOfCountry(countryCode);
+//       setStates(allStates);
+//     } else {
+//       setStates([]);
+//     }
+
+//     setCities([]);
+//     setFormData({
+//       ...formData,
+//       location: [
+//         {
+//           ...formData.location[0],
+//           country: countryCode,
+//           state: "",
+//           city: "",
+//         },
+//       ],
+//     });
+//   };
+
+//   // Handle state selection
+//   const handleStateChange = (event) => {
+//     const stateCode = event.target.value;
+//     setSelectedState(stateCode);
+
+//     if (stateCode && selectedCountry) {
+//       const allCities = City.getCitiesOfState(selectedCountry, stateCode);
+//       setCities(allCities);
+//     } else {
+//       setCities([]);
+//     }
+
+//     setFormData({
+//       ...formData,
+//       location: [
+//         {
+//           ...formData.location[0],
+//           state: stateCode,
+//           city: "",
+//         },
+//       ],
+//     });
+//   };
+
+//   // Handle city selection
+//   const handleCityChange = (event) => {
+//     setFormData({
+//       ...formData,
+//       location: [
+//         {
+//           ...formData.location[0],
+//           city: event.target.value,
+//         },
+//       ],
+//     });
+//   };
+
+//   // Handle general input changes
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData({ ...formData, [name]: value });
+//   };
+
+//   // Handle image change
+//   const handleImageChange = (event) => {
+//     const file = event.target.files[0];
+//     if (file) {
+//       const reader = new FileReader();
+//       reader.onloadend = () => {
+//         setImage(reader.result); // Set the image state to the file's data URL
+//       };
+//       reader.readAsDataURL(file);
+//     }
+//   };
+
+//   // Helper function to convert base64 image to a file object
+//   const dataURLtoFile = (dataurl, filename) => {
+//     const arr = dataurl.split(",");
+//     const mime = arr[0].match(/:(.*?);/)[1];
+//     const bstr = atob(arr[1]);
+//     let n = bstr.length;
+//     const u8arr = new Uint8Array(n);
+//     while (n--) u8arr[n] = bstr.charCodeAt(n);
+//     return new File([u8arr], filename, { type: mime });
+//   };
+
+//   // Handle form submission
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     if (!formData.first_name || !formData.last_name || !formData.phone) {
+//       setErrorMessage("Please fill in all required fields.");
+//       return;
+//     }
+
+//     try {
+//       const accessToken = localStorage.getItem("access_token");
+
+//       // Initialize the FormData object
+//       const formDataWithFile = new FormData();
+
+//       // Append normal form data
+//       formDataWithFile.append("first_name", formData.first_name);
+//       formDataWithFile.append("last_name", formData.last_name);
+//       formDataWithFile.append("phone", formData.phone);
+//       formDataWithFile.append("DOB", formData.DOB);
+//       formDataWithFile.append("gender", formData.gender);
+
+//       // Convert `location` array to JSON and append it
+//       const locationData = JSON.stringify(formData.location); // Serialize location array
+//       formDataWithFile.append("location", locationData);
+
+//       // Append image if available
+//       if (image) {
+//         const file = dataURLtoFile(image, "profile-picture.jpg");
+//         formDataWithFile.append("vendor_profile_picture", file);
+//       }
+
+//       const response = await axios.post(
+//         "http://44.214.216.34:8008/api/create-vendor-profile/",
+//         formDataWithFile,
+//         {
+//           headers: {
+//             "Content-Type": "multipart/form-data",
+//             Authorization: `Bearer ${accessToken}`,
+//           },
+//         }
+//       );
+
+//       if (response.status === 200) {
+//         alert("Profile created successfully!");
+//         // Reset form and image
+//         setFormData({
+//           first_name: "",
+//           last_name: "",
+//           phone: "",
+//           DOB: "",
+//           gender: "",
+//           location: [
+//             {
+//               city: "",
+//               state: "",
+//               country: "",
+//             },
+//           ],
+//           vendor_profile_picture: "",
+//         });
+//         setImage(null);
+//         setErrorMessage("");
+//         navigate("/"); // Navigate to home after successful submission
+//       }
+//     } catch (error) {
+//       console.error(
+//         "Error during profile creation:",
+//         error.response?.data || error.message
+//       );
+//       setErrorMessage("Profile creation failed. Please try again.");
+//     }
+//   };
+
+//   return (
+//     <div className="flex min-h-screen">
+//       {/* Sidebar */}
+//       <SideMenu isOpen={isOpen} setIsOpen={setIsOpen} />
+
+//       {/* Vendor User Profile Content */}
+//       <div
+//       className={`flex-1 p-6 transition-all duration-300 ease-in-out ${
+//         isOpen ? "ml-64" : "ml-16"
+//       } flex justify-center items-center`}
+//     >
+//         <div className="relative bg-cover bg-center lg:w-full md:w-1/2">
+//           {/* Overlay */}
+//           <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
+
+//           {/* Form Container */}
+//           <div className="relative mt-24 z-10 w-full border md:max-w-3xl sm:max-w-2xl lg:max-w-4xl bg-transparent rounded-lg">
+//             <div className="p-2">
+//               <img
+//                 src="Tanutra_Mobile_Logo.avif"
+//                 className="w-52 h-24 mx-auto rounded-t-xl cursor-pointer"
+//                 alt="logo"
+//               />
+//               <div className="rounded-xl bg-transparent p-4">
+//                 <p className="text-xl font-bold text-center text-slate-700">
+//                   Vendor User Profile
+//                   <p className="text-sm font-medium opacity-80 text-center">
+//                     If you already have an account with us, please login at the page
+//                   </p>
+//                 </p>
+
+//                 {/* Form */}
+//                 <form onSubmit={handleSubmit} className="mt-14 bg-transparent">
+//                   {/* First Row */}
+//                   <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg">
+//                     <img
+//                       src="vendor_profile1.png"
+//                       className="w-8 h-8 rounded-xl ml-6 cursor-pointer border"
+//                       alt="logo"
+//                     />
+//                     <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
+//                       Vendor Personal Information :
+//                     </p>
+//                   </div>
+
+//                   <div className="flex flex-wrap justify-center items-center gap-8 p-5">
+//                     {/* First Name */}
+//                     <div className="flex flex-col w-full sm:w-72">
+//                       <label className="font-semibold text-slate-800 p-2">First Name</label>
+//                       <input
+//                         type="text"
+//                         name="first_name"
+//                         value={formData.first_name}
+//                         onChange={handleChange}
+//                         className="w-full h-9 border rounded-md p-3"
+//                       />
+//                     </div>
+
+//                     {/* Last Name */}
+//                     <div className="flex flex-col w-full sm:w-72">
+//                       <label className="font-semibold text-slate-800 p-2">Last Name</label>
+//                       <input
+//                         type="text"
+//                         name="last_name"
+//                         value={formData.last_name}
+//                         onChange={handleChange}
+//                         className="w-full h-9 border rounded-md p-3"
+//                       />
+//                     </div>
+
+//                     {/* Phone */}
+//                     <div className="flex flex-col w-full sm:w-72">
+//                       <label className="font-semibold text-slate-800 p-2">Phone</label>
+//                       <input
+//                         type="text"
+//                         name="phone"
+//                         value={formData.phone}
+//                         onChange={handleChange}
+//                         className="w-full h-9 border rounded-md p-3"
+//                       />
+//                     </div>
+//                   </div>
+
+//                   <div className="flex flex-wrap justify-center items-center gap-8 p-5">
+//                     {/* Country */}
+//                     <div className="flex flex-col w-full sm:w-72">
+//                       <label className="font-semibold text-slate-800 p-2">Country</label>
+//                       <select
+//                         name="country"
+//                         value={selectedCountry}
+//                         onChange={handleCountryChange}
+//                         className="w-full h-9 border rounded-md p-3"
+//                       >
+//                         <option value="">Select Country</option>
+//                         {countries.map((country) => (
+//                           <option key={country.isoCode} value={country.isoCode}>
+//                             {country.name}
+//                           </option>
+//                         ))}
+//                       </select>
+//                     </div>
+
+//                     {/* State */}
+//                     <div className="flex flex-col w-full sm:w-72">
+//                       <label className="font-semibold text-slate-800 p-2">State</label>
+//                       <select
+//                         name="state"
+//                         value={selectedState}
+//                         onChange={handleStateChange}
+//                         className="w-full h-9 border rounded-md p-3"
+//                       >
+//                         <option value="">Select State</option>
+//                         {states.map((state) => (
+//                           <option key={state.isoCode} value={state.isoCode}>
+//                             {state.name}
+//                           </option>
+//                         ))}
+//                       </select>
+//                     </div>
+
+//                     {/* City */}
+//                     <div className="flex flex-col w-full sm:w-72">
+//                       <label className="font-semibold text-slate-800 p-2">City</label>
+//                       <select
+//                         name="city"
+//                         value={formData.location[0].city}
+//                         onChange={handleCityChange}
+//                         className="w-full h-9 border rounded-md p-3"
+//                       >
+//                         <option value="">Select City</option>
+//                         {cities.map((city) => (
+//                           <option key={city.name} value={city.name}>
+//                             {city.name}
+//                           </option>
+//                         ))}
+//                       </select>
+//                     </div>
+//                   </div>
+
+//                   {/* Submit Button */}
+//                   <div className="mt-6 flex justify-center">
+//                     <button
+//                       type="submit"
+//                       className="bg-[#ECB59D] hover:bg-[#FCF3D0] text-[#A57D4E] font-bold py-2 px-4 rounded-lg shadow-md w-1/2"
+//                     >
+//                       Create Profile
+//                     </button>
+//                   </div>
+
+//                   {errorMessage && (
+//                     <div className="mt-4 text-center text-red-500">
+//                       <p>{errorMessage}</p>
+//                     </div>
+//                   )}
+//                 </form>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default VendorProfile;
