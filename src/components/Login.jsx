@@ -44,8 +44,8 @@ function Login() {
         console.log("Login successful:", response.data);
 
         // Extract tokens from the nested data object
-        const access_token = response.data.data.access;
-        const refresh_token = response.data.data.refresh;
+        const access_token = response.data?.data?.access;
+        const refresh_token = response.data?.data?.refresh;
 
         // Save tokens to localStorage
         localStorage.setItem("access_token", access_token);
@@ -64,19 +64,25 @@ function Login() {
         navigate("/");
       }
     } catch (error) {
-      // console.error(
-      //   "Error during login:",
-      //   error.response?.data || error.message
-      // );
+      console.error(
+        "Error during login:",
+        error.response?.data || error.message
+      );
 
       // Handle different error responses
+      // if (error.response) {
+      //   const errorMessage = error.response.data?.message || "Login failed. Please try again.";
+      //   setErrorMessage(errorMessage);
+      // } else {
+      //   setErrorMessage(
+      //     " fdffgg An unexpected error occurred. Please try again later."
+      //   );
+      // } 
       if (error.response) {
         const errorMessage = error.response.data?.message || "Login failed. Please try again.";
         setErrorMessage(errorMessage);
       } else {
-        setErrorMessage(
-          " fdffgg An unexpected error occurred. Please try again later."
-        );
+        setErrorMessage("An unexpected error occurred. Please try again later.");
       }
     }
   };
