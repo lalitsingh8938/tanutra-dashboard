@@ -170,7 +170,7 @@ function VendorProfile() {
       }
 
       const response = await axios.post(
-        "http://44.214.216.34:8008/api/create-vendor-profile/",
+        "https://api.tanutra.com/create-vendor-profile/",
         formDataWithFile,
         {
           headers: {

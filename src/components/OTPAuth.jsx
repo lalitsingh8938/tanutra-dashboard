@@ -34,7 +34,7 @@ function OTPAuth() {
       console.log("Submitting OTP:", otp);
 
       const response = await axios.post(
-        "http://44.214.216.34:8008/api/otp-verification/",
+        "https://api.tanutra.com/api/otp-verification/",
         {
           otp: String(otp),
           email,

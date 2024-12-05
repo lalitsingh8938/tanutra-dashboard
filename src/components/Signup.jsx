@@ -1,6 +1,3 @@
-
-
-
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -46,7 +43,7 @@ function Signup() {
     // API Call
     try {
       const response = await axios.post(
-        "http://44.214.216.34:8008/api/register/",
+        "https://api.tanutra.com/api/register/",
         {
           email: formData.email,
           // mobile_no: formData.phone_number,

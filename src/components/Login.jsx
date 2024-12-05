@@ -27,7 +27,7 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "http://44.214.216.34:8008/api/login/",
+        "https:/api.tanutra.com/api/login/",
         {
           email: formData.email,
           password: formData.password,

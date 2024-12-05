@@ -32,7 +32,7 @@ function Otp() {
 
     try {
       const response = await axios.post(
-        "http://44.214.216.34:8008/api/reset-password/",
+        "https://api.tanutra.com/api/reset-password/",
         {
           otp: String(otp),
           email,
