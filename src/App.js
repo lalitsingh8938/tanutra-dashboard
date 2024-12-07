@@ -46,17 +46,21 @@ function App() {
           <Route path="/" element={<> <Header /><SideMenu /><List /><Graph /><Campaign /></>}/>
           <Route path="/VendorProfile" element={<> <Header /><SideMenu /><VendorProfile /> <SocialMedia /></>}/>
           <Route path="/BusinessProfile" element={<> <Header /><SideMenu /><BankDetails /><BusinessDescription /><BusinessProfile /></>} /> 
+          <Route path="/BusinessDescription" element={<> <Header /><SideMenu /><BusinessDescription /></>}/>
+          <Route path="/BankDetails" element={<> <Header /><SideMenu /><BankDetails /></>}/>
+          <Route path="/BankDetails" element={<> <Header /><SideMenu /><SocialMedia /></>}/>
+          <Route path="/LogOpe" element={<> <Header /><SideMenu /><LogOpe /></>}/>
           <Route path="/Signup" element={<> <Header /><Signup /></>}/>
           <Route path="/VendorKYC" element={<> <Header /><VendorKYC /></>}/>
           <Route path="/OTPAuth" element={<> <Header /><OTPAuth /></>}/>
           <Route path="/Login" element={<> <Header /><Login /></>}/>
-          <Route path="/MyOrders" element={<> <SideMenu /><Header /><MyOrders /></>}/>
+          <Route path="/MyOrders" element={<> <SideMenu /><Header /><MyOrders /><ThanksYou /><PickupAdd /><LogOpe /></>}/>
           <Route path="/ManageInventory" element={<><SideMenu /><Header /> <ManageInventory /></>}/>
           <Route path="/Catelog_uploads" element={<><SideMenu /><Catelog_uploads /> <KYCDocument /><SocialMedia /></>}/>
           <Route path="/ForgotPassword" element={<> <Header /><ForgotPassword /></>}/>
           <Route path="/Otp" element={<> <Header /><Otp /></>}/>
           <Route path="/CreatePassword" element={<> <Header /><CreatePassword /></>}/> 
-          <Route path="/KYCDocument" element={<> <Header /><SideMenu /><ThanksYou /><PickupAdd /><LogOpe /><KYCDocument /></>}/>
+          <Route path="/KYCDocument" element={<> <Header /><SideMenu /><KYCDocument /></>}/>
     
         </Routes>
       </Router>

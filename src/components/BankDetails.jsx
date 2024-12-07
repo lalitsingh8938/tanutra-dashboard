@@ -1,191 +1,217 @@
-import React, { useState, useEffect } from "react";
-import { Country, State, City } from "country-state-city";
-import axios from "axios";
+// import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom";
+
+// function BankDetails() {
+//   const [formData, setFormData] = useState({
+//     bank_name: "",
+//     account_holder_name: "",
+//     account_number: "",
+//     ifsc_code: "",
+//   });
+
+//   const [errorMessage, setErrorMessage] = useState("");
+//   const navigate = useNavigate();
+
+//   // Handle input changes
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData({ ...formData, [name]: value });
+//   };
+
+//   // Handle form submission
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+
+//     // Validate required fields
+//     const { bank_name, account_holder_name, account_number, ifsc_code } =
+//       formData;
+
+//     if (!bank_name || !account_holder_name || !account_number || !ifsc_code) {
+//       setErrorMessage("Please fill in all required fields.");
+//       return;
+//     }
+
+//     // Save data to localStorage
+//     localStorage.setItem("bank_details", JSON.stringify(formData));
+
+//     // Navigate to the next page
+//     navigate("/next-page"); // Update this route as per your application
+//   };
+
+//   return (
+//     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center">
+//       {/* Overlay */}
+//       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
+
+//       {/* Form Container */}
+//       <div className="relative z-10 w-full max-w-4xl  bg-transparent rounded-lg">
+//         <div className="p-2 mt-20">
+//           {/* Logo */}
+//           <img
+//             src="Tanutra_Mobile_Logo.avif"
+//             className="w-52 h-24 mx-auto rounded-t-xl cursor-pointer"
+//             alt="logo"
+//           />
+
+//           <div className="rounded-xl bg-transparent p-2 border">
+//             {/* Form */}
+//             <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
+//               {/* Section Title */}
+//               <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg">
+//               <img
+//                 src="vendor_profile1.png"
+//                 className="w-8 h-8 rounded-xl ml-6 cursor-pointer border"
+//                 alt="logo"
+//               />
+//               <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
+//                 Bank Details :
+//               </p>
+//             </div>
+
+//               {/* Business Name and Brand Name */}
+//               <div className="flex flex-wrap justify-center items-center gap-8 p-5">
+//                 <div className="flex flex-col w-full">
+//                   <label className="font-semibold text-slate-800 p-2">
+//                     Bank Name
+//                   </label>
+//                   <input
+//                     type="text"
+//                     name="Bank_Name"
+//                     placeholder="Bank of Baroda"
+//                     value={formData.bank_name}
+//                     onChange={handleChange}
+//                     className="w-full h-10 border rounded-md p-3"
+//                   />
+//                 </div>
+
+//                 <div className="flex flex-col w-full">
+//                   <label className="font-semibold text-slate-800 p-2">
+//                     Account Holder Name
+//                   </label>
+//                   <input
+//                     type="text"
+//                     name="Account_Holder_Name"
+//                     placeholder="Ankush Agrawal"
+//                     value={formData.account_holder_name}
+//                     onChange={handleChange}
+//                     className="w-full h-10 border rounded-md p-3"
+//                   />
+//                 </div>
+
+//                 <div className="flex flex-col w-full">
+//                   <label className="font-semibold text-slate-800 p-2">
+//                     Account Number
+//                   </label>
+//                   <input
+//                     type="text"
+//                     name="Account_Number"
+//                     placeholder="388abcd6502"
+//                     value={formData.account_number}
+//                     onChange={handleChange}
+//                     className="w-full h-10 border rounded-md p-3"
+//                   />
+//                 </div>
+
+//                 <div className="flex flex-col w-full">
+//                   <label className="font-semibold text-slate-800 p-2">
+//                     IFSC Code
+//                   </label>
+//                   <input
+//                     type="text"
+//                     name="IFSC_Code"
+//                     placeholder="BARB0000SAN"
+//                     value={formData.ifsc_code}
+//                     onChange={handleChange}
+//                     className="w-full h-10 border rounded-md p-3"
+//                   />
+//                 </div>
+//               </div>
+
+//               {/* Submit Button */}
+//               <div className="flex items-center justify-center mt-10">
+//                 {/* <button
+//                   type="submit"
+//                   className="bg-green-500 justify-start ml-5 text-white py-2 mb-5 w-24 px-2 rounded-md hover:bg-indigo-600"
+//                 >
+//                   Back
+//                 </button> */}
+//                 <button
+//                   type="submit"
+//                   className="bg-green-500 justify-end mr-5 text-white font-bold py-2 w-32 mb-5 rounded-md hover:bg-pink-500"
+//                 >
+//                   Next
+//                 </button>
+//               </div>
+
+//               {/* Error Message */}
+//               {errorMessage && (
+//                 <p className="text-red-500 text-center mt-4">{errorMessage}</p>
+//               )}
+//             </form>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+// export default BankDetails;
+
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function BankDetails() {
-  const [countries, setCountries] = useState([]);
-  const [states, setStates] = useState([]);
-  const [cities, setCities] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState("");
-  const [selectedState, setSelectedState] = useState("");
-  const [image, setImage] = useState(null);
-
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    legal_business_name: "",
-    brand_name: "",
-    brand_logo: "",
-    gst_no: "",
-    business_id: "",
-    business_full_addr: [
-      {
-        street_addr: "",
-        city: "",
-        state: "",
-        pincode: "",
-        country: "",
-      },
-    ],
-    vendor_profile_picture: "",
+    bank_name: "",
+    account_holder_name: "",
+    account_number: "",
+    ifsc_code: "",
   });
 
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const allCountries = Country.getAllCountries();
-    setCountries(allCountries);
-  }, []);
-
-  const handleCountryChange = (event) => {
-    const countryCode = event.target.value;
-    setSelectedCountry(countryCode);
-    setSelectedState("");
-    setCities([]);
-
-    if (countryCode) {
-      const allStates = State.getStatesOfCountry(countryCode);
-      setStates(allStates);
-    } else {
-      setStates([]);
-    }
-
-    setFormData({
-      ...formData,
-      business_full_addr: [
-        {
-          ...formData.business_full_addr[0],
-          country: countryCode,
-          state: "",
-          city: "",
-        },
-      ],
-    });
-  };
-
-  const handleStateChange = (event) => {
-    const stateCode = event.target.value;
-    setSelectedState(stateCode);
-    setCities([]);
-
-    if (stateCode && selectedCountry) {
-      const allCities = City.getCitiesOfState(selectedCountry, stateCode);
-      setCities(allCities);
-    } else {
-      setCities([]);
-    }
-
-    setFormData({
-      ...formData,
-      business_full_addr: [
-        {
-          ...formData.business_full_addr[0],
-          state: stateCode,
-          city: "",
-        },
-      ],
-    });
-  };
-
-  const handleCityChange = (event) => {
-    setFormData({
-      ...formData,
-      business_full_addr: [
-        {
-          ...formData.business_full_addr[0],
-          city: event.target.value,
-        },
-      ],
-    });
-  };
-
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const dataURLtoFile = (dataurl, filename) => {
-    const arr = dataurl.split(",");
-    const mime = arr[0].match(/:(.*?);/)[1];
-    const bstr = atob(arr[1]);
-    let n = bstr.length;
-    const u8arr = new Uint8Array(n);
-    while (n--) u8arr[n] = bstr.charCodeAt(n);
-    return new File([u8arr], filename, { type: mime });
-  };
-
-  const handleSubmit = async (e) => {
+  // Handle form submission
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (
-      !formData.legal_business_name ||
-      !formData.brand_name ||
-      !formData.gst_no ||
-      !formData.business_id
-    ) {
+    // Validate required fields
+    const { bank_name, account_holder_name, account_number, ifsc_code } =
+      formData;
+
+    if (!bank_name || !account_holder_name || !account_number || !ifsc_code) {
       setErrorMessage("Please fill in all required fields.");
       return;
     }
 
-    try {
-      const accessToken = localStorage.getItem("access_token");
+    // Save data to localStorage
+    localStorage.setItem("bank_details", JSON.stringify(formData));
 
-      const formDataWithFile = new FormData();
-      Object.keys(formData).forEach((key) => {
-        if (key === "business_full_addr") {
-          formDataWithFile.append(key, JSON.stringify(formData[key]));
-        } else {
-          formDataWithFile.append(key, formData[key]);
-        }
-      });
+    // Navigate to the next page
+    navigate("/KYCDocument"); // Update this route with the actual next page
 
-      if (image) {
-        const file = dataURLtoFile(image, "profile-picture.jpg");
-        formDataWithFile.append("vendor_profile_picture", file);
-      }
+    // Create the data object to send in the required format
+    const formDataToSend = {
+      bank_name: formData.bank_name,
+      account_holder_name: formData.account_holder_name,
+      account_number: formData.account_number, // Send as file
+      ifsc_code: formData.ifsc_code,
+    };
 
-      const response = await axios.post(
-        "http://44.214.216.34:8008/api/create-vendor-profile/",
-        formDataWithFile,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
+    localStorage.setItem("bank_name", formData.bank_name);
+    localStorage.setItem("account_holder_name", formData.account_holder_name);
+    localStorage.setItem("account_number", formData.account_number);
+    localStorage.setItem("ifsc_code", formData.ifsc_code);
 
-      if (response.status === 200) {
-        alert("Profile created successfully!");
-        setFormData({
-          Tell_us_about_your_journey: "",
-          Business_Description: "",
-          Challenges_faced_in_Business: "",
-          How_Tanutra_can_help: "",
-          Year_in_Business: "",
-        });
-        setImage(null);
-        setErrorMessage("");
-        navigate("/");
-      }
-    } catch (error) {
-      console.error(
-        "Error during profile creation:",
-        error.response?.data || error.message
-      );
-      setErrorMessage("Profile creation failed. Please try again.");
-    }
+    alert(localStorage.getItem("bank_name"));
+    alert(localStorage.getItem("account_holder_name"));
+    alert(localStorage.getItem("account_number"));
+    alert(localStorage.getItem("ifsc_code"));
   };
 
   return (
@@ -194,7 +220,7 @@ function BankDetails() {
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
 
       {/* Form Container */}
-      <div className="relative z-10 w-full max-w-4xl  bg-transparent rounded-lg">
+      <div className="relative z-10 w-full max-w-4xl bg-transparent rounded-lg">
         <div className="p-2 mt-20">
           {/* Logo */}
           <img
@@ -208,86 +234,88 @@ function BankDetails() {
             <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
               {/* Section Title */}
               <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg">
-              <img
-                src="vendor_profile1.png"
-                className="w-8 h-8 rounded-xl ml-6 cursor-pointer border"
-                alt="logo"
-              />
-              <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
-                Bank Details :
-              </p>
-            </div>
+                <img
+                  src="vendor_profile1.png"
+                  className="w-8 h-8 rounded-xl ml-6 cursor-pointer border"
+                  alt="logo"
+                />
+                <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
+                  Bank Details:
+                </p>
+              </div>
 
-              {/* Business Name and Brand Name */}
+              {/* Form Fields */}
               <div className="flex flex-wrap justify-center items-center gap-8 p-5">
+                {/* Bank Name */}
                 <div className="flex flex-col w-full">
                   <label className="font-semibold text-slate-800 p-2">
                     Bank Name
                   </label>
                   <input
                     type="text"
-                    name="Bank_Name"
+                    name="bank_name"
                     placeholder="Bank of Baroda"
                     value={formData.bank_name}
                     onChange={handleChange}
                     className="w-full h-10 border rounded-md p-3"
+                    required
                   />
                 </div>
 
+                {/* Account Holder Name */}
                 <div className="flex flex-col w-full">
                   <label className="font-semibold text-slate-800 p-2">
                     Account Holder Name
                   </label>
                   <input
                     type="text"
-                    name="Account_Holder_Name"
+                    name="account_holder_name"
                     placeholder="Ankush Agrawal"
                     value={formData.account_holder_name}
                     onChange={handleChange}
                     className="w-full h-10 border rounded-md p-3"
+                    required
                   />
                 </div>
 
+                {/* Account Number */}
                 <div className="flex flex-col w-full">
                   <label className="font-semibold text-slate-800 p-2">
                     Account Number
                   </label>
                   <input
                     type="text"
-                    name="Account_Number"
+                    name="account_number"
                     placeholder="388abcd6502"
                     value={formData.account_number}
                     onChange={handleChange}
                     className="w-full h-10 border rounded-md p-3"
+                    required
                   />
                 </div>
 
+                {/* IFSC Code */}
                 <div className="flex flex-col w-full">
                   <label className="font-semibold text-slate-800 p-2">
                     IFSC Code
                   </label>
                   <input
                     type="text"
-                    name="IFSC_Code"
+                    name="ifsc_code"
                     placeholder="BARB0000SAN"
                     value={formData.ifsc_code}
                     onChange={handleChange}
                     className="w-full h-10 border rounded-md p-3"
+                    required
                   />
                 </div>
               </div>
 
               {/* Submit Button */}
               <div className="flex items-center justify-center mt-10">
-                {/* <button
-                  type="submit"
-                  className="bg-green-500 justify-start ml-5 text-white py-2 mb-5 w-24 px-2 rounded-md hover:bg-indigo-600"
-                >
-                  Back
-                </button> */}
                 <button
                   type="submit"
-                  className="bg-green-500 justify-end mr-5 text-white font-bold py-2 w-32 mb-5 rounded-md hover:bg-pink-500"
+                  className="bg-green-500 text-white font-bold py-2 w-32 mb-5 rounded-md hover:bg-pink-500"
                 >
                   Next
                 </button>
@@ -304,4 +332,5 @@ function BankDetails() {
     </div>
   );
 }
+
 export default BankDetails;

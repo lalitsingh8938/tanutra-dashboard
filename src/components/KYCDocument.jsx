@@ -324,153 +324,507 @@
 // }
 // export default KYCDocument;
 
+// import React, { useState } from "react";
+// function KYCForm() {
+//   const [companyCertificate, setCompanyCertificate] = useState(null);
+//   const [businessPAN, setBusinessPAN] = useState(null);
+//   const [gstCertificate, setGstCertificate] = useState(null);
+
+//   // Functions to handle file uploads
+//   const handleCompanyCertificateChange = (e) => {
+//     const file = e.target.files[0];
+//     if (file) {
+//       setCompanyCertificate(URL.createObjectURL(file));
+//     }
+//   };
+
+//   const handleBusinessPANChange = (e) => {
+//     const file = e.target.files[0];
+//     if (file) {
+//       setBusinessPAN(URL.createObjectURL(file));
+//     }
+//   };
+
+//   const handleGstCertificateChange = (e) => {
+//     const file = e.target.files[0];
+//     if (file) {
+//       setGstCertificate(URL.createObjectURL(file));
+//     }
+//   };
+
+//   return (
+//     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center">
+//       {/* Overlay */}
+//       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
+
+//       {/* Form Container */}
+//       <div className="relative z-10 w-full max-w-4xl bg-transparent rounded-lg">
+//         <div className="p-2 mt-20">
+//           {/* Logo */}
+//           <img
+//             src="Tanutra_Mobile_Logo.avif"
+//             className="w-52 h-24 mx-auto rounded-t-xl cursor-pointer"
+//             alt="logo"
+//           />
+
+//           <div className="rounded-xl bg-transparent p-2 border">
+//             {/* Form */}
+//             <form className="mt-12 bg-transparent">
+//               <div className="flex items-center border rounded-md bg-[#ECB59D] opacity-60">
+//                 <img
+//                   src="vendor_profile1.png"
+//                   className="w-8 h-8 rounded-xl border ml-6 cursor-pointer"
+//                   alt="logo"
+//                 />
+//                 <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
+//                   KYC Documents:
+//                 </p>
+//               </div>
+
+//               {/* Company Certificate */}
+//               <div className="flex flex-wrap flex-cols items-center p-5">
+//                 <p className="p-2 mt-5 font-medium text-slate-800">
+//                   Company Incorporation Certificate
+//                 </p>
+//                 <div className="flex flex-col h-40 justify-center items-center w-full border-2 bg-white rounded-lg p-2">
+//                   <img
+//                     src="Cloud computing.jpg"
+//                     className="w-10 h-10 rounded-xl cursor-pointer"
+//                     alt="Cloud computing icon"
+//                   />
+//                   <div className="font-medium text-slate-800 p-1 text-center">
+//                     Drag and drop your Company Certificate
+//                   </div>
+//                   <input
+//                     type="file"
+//                     onChange={handleGstCertificateChange}
+//                     className="w-56 h-10 rounded p-2"
+//                   />
+//                   {gstCertificate && (
+//                     <img
+//                       src={gstCertificate}
+//                       alt="GST Certificate Preview"
+//                       className="w-24 h-24 mt-3"
+//                     />
+//                   )}
+//                 </div>
+
+//                 {/* Business PAN */}
+
+//                 <p className="p-2 mt-5 font-medium text-slate-800">
+//                 Business PAN
+//                 </p>
+//                 <div className="flex flex-col h-40 justify-center items-center w-full border-2 bg-white rounded-lg p-2">
+//                   <img
+//                     src="Cloud computing.jpg"
+//                     className="w-10 h-10 rounded-xl cursor-pointer"
+//                     alt="Cloud computing icon"
+//                   />
+//                   <div className="font-medium text-slate-800 p-1 text-center">
+//                     Drag and drop your Business PAN
+//                   </div>
+//                   <input
+//                     type="file"
+//                     onChange={handleGstCertificateChange}
+//                     className="w-56 h-10 rounded p-2"
+//                   />
+//                   {gstCertificate && (
+//                     <img
+//                       src={gstCertificate}
+//                       alt="GST Certificate Preview"
+//                       className="w-24 h-24 mt-3"
+//                     />
+//                   )}
+//                 </div>
+
+//                 {/* GST Certificate */}
+//                 <p className="p-2 mt-5 font-medium text-slate-800">
+//                   GST Certificate
+//                 </p>
+//                 <div className="flex flex-col h-40 justify-center items-center w-full border-2 bg-white rounded-lg p-2">
+//                   <img
+//                     src="Cloud computing.jpg"
+//                     className="w-10 h-10 rounded-xl cursor-pointer"
+//                     alt="Cloud computing icon"
+//                   />
+//                   <div className="font-medium text-slate-800 p-1 text-center">
+//                     Drag and drop your GST Certificate
+//                   </div>
+//                   <input
+//                     type="file"
+//                     onChange={handleGstCertificateChange}
+//                     className="w-56 h-10 rounded p-2"
+//                   />
+//                   {gstCertificate && (
+//                     <img
+//                       src={gstCertificate}
+//                       alt="GST Certificate Preview"
+//                       className="w-24 h-24 mt-3"
+//                     />
+//                   )}
+//                 </div>
+//               </div>
+
+//               {/* Submit Button */}
+//               <div className="flex items-center justify-center mt-10">
+//                 <button
+//                   type="submit"
+//                   className="bg-green-500 justify-end mr-5 font-bold text-white py-2 w-24 mb-5 rounded-md hover:bg-pink-600"
+//                 >
+//                   Next
+//                 </button>
+//               </div>
+//             </form>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default KYCForm;
+
+
+// import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom"; // Importing navigate hook for navigation
+
+// function KYCForm() {
+//   const [companyCertificate, setCompanyCertificate] = useState(null);
+//   const [businessPAN, setBusinessPAN] = useState(null);
+//   const [gstCertificate, setGstCertificate] = useState(null);
+//   const navigate = useNavigate(); // Using navigate hook for navigation
+
+//   const handleFileChange = (e, setFile) => {
+//     const file = e.target.files[0];
+//     if (file) {
+//       setFile(file); // Store the file object itself (not URL)
+//     }
+//   };
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+
+//     // Checking if the required files are uploaded
+//     if (!companyCertificate || !businessPAN || !gstCertificate) {
+//       alert("Please upload all required documents.");
+//       return;
+//     }
+
+//     // Prepare the data to be saved in localStorage (storing file names or other metadata)
+//     const kycData = {
+//       companyCertificate: companyCertificate.name,
+//       businessPAN: businessPAN.name,
+//       gstCertificate: gstCertificate.name,
+//     };
+
+//     // Saving file names to localStorage (you can modify this to store actual file data if needed)
+//     localStorage.setItem("kyc_documents", JSON.stringify(kycData));
+
+//     // Alert the user
+//     alert("KYC documents saved successfully!");
+
+//     // Navigate to the next page (adjust the route accordingly)
+//     navigate("/LogOpe"); // Adjust the route to your next page
+//   };
+
+//   return (
+//     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center">
+//       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
+//       <div className="relative z-10 w-full max-w-4xl bg-transparent rounded-lg">
+//         <div className="p-2 mt-20">
+//           <img
+//             src="Tanutra_Mobile_Logo.avif"
+//             className="w-52 h-24 mx-auto rounded-t-xl cursor-pointer"
+//             alt="logo"
+//           />
+//           <div className="rounded-xl bg-transparent p-2 border">
+//             <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
+//               <div className="flex items-center border rounded-md bg-[#ECB59D] opacity-60">
+//                 <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
+//                   KYC Documents:
+//                 </p>
+//               </div>
+
+//               <div className="flex flex-wrap flex-cols items-center p-5">
+//                 {/* Company Certificate */}
+//                 <FileUploadField
+//                   label="Company Incorporation Certificate"
+//                   file={companyCertificate}
+//                   onFileChange={(e) =>
+//                     handleFileChange(e, setCompanyCertificate)
+//                   }
+//                 />
+
+//                 {/* Business PAN */}
+//                 <FileUploadField
+//                   label="Business PAN"
+//                   file={businessPAN}
+//                   onFileChange={(e) => handleFileChange(e, setBusinessPAN)}
+//                 />
+
+//                 {/* GST Certificate */}
+//                 <FileUploadField
+//                   label="GST Certificate"
+//                   file={gstCertificate}
+//                   onFileChange={(e) => handleFileChange(e, setGstCertificate)}
+                
+//                 />
+//               </div>
+
+//               <div className="flex items-center justify-center mt-10">
+//                 <button
+//                   type="submit"
+//                   className="bg-green-500 font-bold text-white py-2 w-24 mb-5 rounded-md hover:bg-pink-600"
+//                 >
+//                   Next
+//                 </button>
+//               </div>
+//             </form>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// function FileUploadField({ label, file, onFileChange }) {
+//   return (
+//     <>
+//       <p className="p-2 mt-5 font-medium text-slate-800">{label}</p>
+//       <div className="flex flex-col h-40 justify-center items-center w-full border-2 bg-white rounded-lg p-2">
+//         <div className="font-medium text-slate-800 p-1 text-center">
+//           Drag and drop your {label}
+//         </div>
+//         <input
+//           type="file"
+//           onChange={onFileChange}
+//           className="w-56 h-10 rounded p-2"
+//         />
+//         {file && (
+//           <div className="w-24 h-24 mt-3">
+//             <p>{file.name}</p>
+//           </div>
+//         )}
+//       </div>
+//     </>
+//   );
+// }
+
+// export default KYCForm;
+
+// // import React, { useState } from "react";
+// // import { useNavigate } from "react-router-dom"; // Importing navigate hook for navigation
+
+// // function KYCForm() {
+// //   const [companyCertificate, setCompanyCertificate] = useState(null);
+// //   const [businessPAN, setBusinessPAN] = useState(null);
+// //   const [gstCertificate, setGstCertificate] = useState(null);
+// //   const navigate = useNavigate(); // Using navigate hook for navigation
+
+// //   const handleFileChange = (e, setFile) => {
+// //     const file = e.target.files[0];
+// //     if (file) {
+// //       setFile(URL.createObjectURL(file)); // Creating a preview of the file for display
+// //     }
+// //   };
+
+// //   const handleSubmit = (e) => {
+// //     e.preventDefault();
+
+// //     // Checking if the required files are uploaded
+// //     if (!companyCertificate || !businessPAN || !gstCertificate) {
+// //       alert("Please upload all required documents.");
+// //       return;
+// //     }
+
+// //     // Save the file data to localStorage
+// //     const kycData = {
+// //       companyCertificate,
+// //       businessPAN,
+// //       gstCertificate,
+// //     };
+
+// //     // Saving files as data URLs in localStorage
+// //     localStorage.setItem("kyc_documents", JSON.stringify(kycData));
+
+// //     // Alert the user
+// //     alert("KYC documents saved successfully!");
+
+// //     // Navigate to the next page (adjust the route accordingly)
+// //     navigate("/LogOpe"); // Adjust the route to your next page
+// //   };
+// //   return (
+// //     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center">
+// //       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
+// //       <div className="relative z-10 w-full max-w-4xl bg-transparent rounded-lg">
+// //         <div className="p-2 mt-20">
+// //           <img
+// //             src="Tanutra_Mobile_Logo.avif"
+// //             className="w-52 h-24 mx-auto rounded-t-xl cursor-pointer"
+// //             alt="logo"
+// //           />
+// //           <div className="rounded-xl bg-transparent p-2 border">
+// //             <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
+// //               <div className="flex items-center border rounded-md bg-[#ECB59D] opacity-60">
+// //                 <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
+// //                   KYC Documents:
+// //                 </p>
+// //               </div>
+
+// //               <div className="flex flex-wrap flex-cols items-center p-5">
+// //                 {/* Company Certificate */}
+// //                 <FileUploadField
+// //                   label="Company Incorporation Certificate"
+// //                   file={companyCertificate}
+// //                   onFileChange={(e) =>
+// //                     handleFileChange(e, setCompanyCertificate)
+// //                   }
+// //                 />
+
+// //                 {/* Business PAN */}
+// //                 <FileUploadField
+// //                   label="Business PAN"
+// //                   file={businessPAN}
+// //                   onFileChange={(e) => handleFileChange(e, setBusinessPAN)}
+// //                 />
+
+// //                 {/* GST Certificate */}
+// //                 <FileUploadField
+// //                   label="GST Certificate"
+// //                   file={gstCertificate}
+// //                   onFileChange={(e) => handleFileChange(e, setGstCertificate)}
+// //                 />
+// //               </div>
+
+// //               <div className="flex items-center justify-center mt-10">
+// //                 <button
+// //                   type="submit"
+// //                   className="bg-green-500 font-bold text-white py-2 w-24 mb-5 rounded-md hover:bg-pink-600"
+// //                 >
+// //                   Next
+// //                 </button>
+// //               </div>
+// //             </form>
+// //           </div>
+// //         </div>
+// //       </div>
+// //     </div>
+// //   );
+// // }
+
+// // function FileUploadField({ label, file, onFileChange }) {
+// //   return (
+// //     <>
+// //       <p className="p-2 mt-5 font-medium text-slate-800">{label}</p>
+// //       <div className="flex flex-col h-40 justify-center items-center w-full border-2 bg-white rounded-lg p-2">
+// //         <div className="font-medium text-slate-800 p-1 text-center">
+// //           Drag and drop your {label}
+// //         </div>
+// //         <input
+// //           type="file"
+// //           onChange={onFileChange}
+// //           className="w-56 h-10 rounded p-2"
+// //         />
+// //         {file && (
+// //           <img src={file} alt={`${label} Preview`} className="w-24 h-24 mt-3" />
+// //         )}
+// //       </div>
+// //     </>
+// //   );
+// // }
+
+// // export default KYCForm;
+
+
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Importing navigate hook for navigation
 
 function KYCForm() {
   const [companyCertificate, setCompanyCertificate] = useState(null);
   const [businessPAN, setBusinessPAN] = useState(null);
   const [gstCertificate, setGstCertificate] = useState(null);
+  const navigate = useNavigate(); // Using navigate hook for navigation
 
-  // Functions to handle file uploads
-  const handleCompanyCertificateChange = (e) => {
+  const handleFileChange = (e, setFile) => {
     const file = e.target.files[0];
     if (file) {
-      setCompanyCertificate(URL.createObjectURL(file));
+      setFile(file); // Store the file object itself
     }
   };
 
-  const handleBusinessPANChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setBusinessPAN(URL.createObjectURL(file));
-    }
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const handleGstCertificateChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setGstCertificate(URL.createObjectURL(file));
+    // Checking if the required files are uploaded
+    if (!companyCertificate || !businessPAN || !gstCertificate) {
+      alert("Please upload all required documents.");
+      return;
     }
+
+    // Prepare the data to be saved in localStorage (storing file names or other metadata)
+    const kycData = {
+      companyCertificate: companyCertificate.name,
+      businessPAN: businessPAN.name,
+      gstCertificate: gstCertificate.name,
+    };
+
+    // Saving file names to localStorage (you can modify this to store actual file data if needed)
+    localStorage.setItem("kyc_documents", JSON.stringify(kycData));
+
+    // Alert the user
+    alert("KYC documents saved successfully!");
+
+    // Navigate to the next page (adjust the route accordingly)
+    navigate("/LogOpe"); // Adjust the route to your next page
   };
 
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center">
-      {/* Overlay */}
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
-
-      {/* Form Container */}
       <div className="relative z-10 w-full max-w-4xl bg-transparent rounded-lg">
         <div className="p-2 mt-20">
-          {/* Logo */}
           <img
             src="Tanutra_Mobile_Logo.avif"
             className="w-52 h-24 mx-auto rounded-t-xl cursor-pointer"
             alt="logo"
           />
-
           <div className="rounded-xl bg-transparent p-2 border">
-            {/* Form */}
-            <form className="mt-12 bg-transparent">
+            <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
               <div className="flex items-center border rounded-md bg-[#ECB59D] opacity-60">
-                <img
-                  src="vendor_profile1.png"
-                  className="w-8 h-8 rounded-xl border ml-6 cursor-pointer"
-                  alt="logo"
-                />
                 <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
                   KYC Documents:
                 </p>
               </div>
 
-              {/* Company Certificate */}
               <div className="flex flex-wrap flex-cols items-center p-5">
-                <p className="p-2 mt-5 font-medium text-slate-800">
-                  Company Incorporation Certificate
-                </p>
-                <div className="flex flex-col h-40 justify-center items-center w-full border-2 bg-white rounded-lg p-2">
-                  <img
-                    src="Cloud computing.jpg"
-                    className="w-10 h-10 rounded-xl cursor-pointer"
-                    alt="Cloud computing icon"
-                  />
-                  <div className="font-medium text-slate-800 p-1 text-center">
-                    Drag and drop your Company Certificate
-                  </div>
-                  <input
-                    type="file"
-                    onChange={handleGstCertificateChange}
-                    className="w-56 h-10 rounded p-2"
-                  />
-                  {gstCertificate && (
-                    <img
-                      src={gstCertificate}
-                      alt="GST Certificate Preview"
-                      className="w-24 h-24 mt-3"
-                    />
-                  )}
-                </div>
+                {/* Company Certificate */}
+                <FileUploadField
+                  label="Company Incorporation Certificate"
+                  file={companyCertificate}
+                  onFileChange={(e) =>
+                    handleFileChange(e, setCompanyCertificate)
+                  }
+                />
 
                 {/* Business PAN */}
-
-                <p className="p-2 mt-5 font-medium text-slate-800">
-                Business PAN
-                </p>
-                <div className="flex flex-col h-40 justify-center items-center w-full border-2 bg-white rounded-lg p-2">
-                  <img
-                    src="Cloud computing.jpg"
-                    className="w-10 h-10 rounded-xl cursor-pointer"
-                    alt="Cloud computing icon"
-                  />
-                  <div className="font-medium text-slate-800 p-1 text-center">
-                    Drag and drop your Business PAN
-                  </div>
-                  <input
-                    type="file"
-                    onChange={handleGstCertificateChange}
-                    className="w-56 h-10 rounded p-2"
-                  />
-                  {gstCertificate && (
-                    <img
-                      src={gstCertificate}
-                      alt="GST Certificate Preview"
-                      className="w-24 h-24 mt-3"
-                    />
-                  )}
-                </div>
+                <FileUploadField
+                  label="Business PAN"
+                  file={businessPAN}
+                  onFileChange={(e) => handleFileChange(e, setBusinessPAN)}
+                />
 
                 {/* GST Certificate */}
-                <p className="p-2 mt-5 font-medium text-slate-800">
-                  GST Certificate
-                </p>
-                <div className="flex flex-col h-40 justify-center items-center w-full border-2 bg-white rounded-lg p-2">
-                  <img
-                    src="Cloud computing.jpg"
-                    className="w-10 h-10 rounded-xl cursor-pointer"
-                    alt="Cloud computing icon"
-                  />
-                  <div className="font-medium text-slate-800 p-1 text-center">
-                    Drag and drop your GST Certificate
-                  </div>
-                  <input
-                    type="file"
-                    onChange={handleGstCertificateChange}
-                    className="w-56 h-10 rounded p-2"
-                  />
-                  {gstCertificate && (
-                    <img
-                      src={gstCertificate}
-                      alt="GST Certificate Preview"
-                      className="w-24 h-24 mt-3"
-                    />
-                  )}
-                </div>
+                <FileUploadField
+                  label="GST Certificate"
+                  file={gstCertificate}
+                  onFileChange={(e) => handleFileChange(e, setGstCertificate)}
+                />
               </div>
 
-              {/* Submit Button */}
               <div className="flex items-center justify-center mt-10">
                 <button
                   type="submit"
-                  className="bg-green-500 justify-end mr-5 font-bold text-white py-2 w-24 mb-5 rounded-md hover:bg-pink-600"
+                  className="bg-green-500 font-bold text-white py-2 w-24 mb-5 rounded-md hover:bg-pink-600"
                 >
                   Next
                 </button>
@@ -480,6 +834,47 @@ function KYCForm() {
         </div>
       </div>
     </div>
+  );
+}
+
+function FileUploadField({ label, file, onFileChange }) {
+  const [preview, setPreview] = useState(null);
+
+  const handleFilePreview = (file) => {
+    if (file && file.type.startsWith("image/")) {
+      const previewUrl = URL.createObjectURL(file); // Generate preview URL
+      setPreview(previewUrl);
+    }
+  };
+
+  // When file changes, generate preview if it's an image
+  React.useEffect(() => {
+    if (file) {
+      handleFilePreview(file);
+    } else {
+      setPreview(null);
+    }
+  }, [file]);
+
+  return (
+    <>
+      <p className="p-2 mt-5 font-medium text-slate-800">{label}</p>
+      <div className="flex flex-col h-52 justify-center items-center w-full border-2 bg-white rounded-lg p-2">
+        <div className="font-medium text-slate-800 p-1 text-center">
+          Drag and drop your {label}
+        </div>
+        <input
+          type="file"
+          onChange={onFileChange}
+          className="w-56 h-10 rounded p-2"
+        />
+        {preview && (
+          <div className="w-24 h-24 mt-4">
+            <img src={preview} alt={`${label} Preview`} className="w-full h-full object-cover" />
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 
