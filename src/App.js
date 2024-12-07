@@ -61,6 +61,7 @@ function App() {
           <Route path="/Otp" element={<> <Header /><Otp /></>}/>
           <Route path="/CreatePassword" element={<> <Header /><CreatePassword /></>}/> 
           <Route path="/KYCDocument" element={<> <Header /><SideMenu /><KYCDocument /></>}/>
+          <Route path="/PickupAdd" element={<> <Header /><PickupAdd /></>}/>
     
         </Routes>
       </Router>
