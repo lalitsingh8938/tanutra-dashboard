@@ -193,7 +193,7 @@ function BankDetails() {
     localStorage.setItem("bank_details", JSON.stringify(formData));
 
     // Navigate to the next page
-    navigate("/KYCDocument"); // Update this route with the actual next page
+    navigate("/SocialMedia"); // Update this route with the actual next page
 
     // Create the data object to send in the required format
     const formDataToSend = {

@@ -836,7 +836,6 @@
 
 import React, { useState, useEffect } from "react";
 import { Country, State, City } from "country-state-city";
-// import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const BusinessProfile = () => {
@@ -919,14 +918,18 @@ const BusinessProfile = () => {
 
   // Handle file input for brand logo
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
       setFormData({
         ...formData,
-        brand_logo: file,
+        brand_logo: reader.result, // Convert file to Base64
       });
-    }
-  };
+    };
+    reader.readAsDataURL(file);
+  }
+};
 
   const handleCountryChange = (e) => {
     const selectedCountry = e.target.value;
@@ -975,7 +978,7 @@ const BusinessProfile = () => {
     localStorage.setItem("businessData", JSON.stringify(formData));
 
     // Navigate to the next page
-    navigate("/BankDetails"); // Replace with your desired route
+    navigate("/BusinessDescription"); // Replace with your desired route
 
     // Create the data object to send in the required format
     const formDataToSend = {

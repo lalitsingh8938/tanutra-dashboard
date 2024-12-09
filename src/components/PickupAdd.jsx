@@ -485,8 +485,6 @@
 //       return;
 //     }
 
-    
-
 //     try {
 //       const accessToken = localStorage.getItem("access_token");
 
@@ -713,11 +711,9 @@
 //   );
 // }
 // export default PickupAdd;
-
-
-
 import React, { useState, useEffect } from "react";
 import { Country, State, City } from "country-state-city";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function PickupAdd() {
@@ -826,23 +822,69 @@ function PickupAdd() {
     setIsCheckboxChecked(event.target.checked);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Validate checkbox
     if (!isCheckboxChecked) {
-      alert("Please confirm that you have read and agree to the terms and conditions.");
+      alert(
+        "Please confirm that you have read and agree to the terms and conditions."
+      );
       return;
     }
 
-    // Save data to localStorage
+    // Save formData to localStorage
     localStorage.setItem("formData", JSON.stringify(formData));
 
-    // Alert data
-    alert(`Submitted Data:\n${JSON.stringify(formData, null, 2)}`);
+    // Prepare data to send in API request
+    const businessData = localStorage.getItem("businessData");
+    const businessDescriptionData = localStorage.getItem(
+      "businessDescriptionData"
+    );
+    const accessToken = localStorage.getItem("access_token");
+    const bank_details = localStorage.getItem("bank_details");
+    const socialMediaData = localStorage.getItem("socialMediaData");
+    const kyc_documents = localStorage.getItem("kyc_documents");
 
-    // Navigate to next page
-    navigate("/LogOpe");
+    const storedFormData = JSON.parse(localStorage.getItem("formData"));
+
+    const dataToSend = {
+      formData: storedFormData,
+      businessData,
+      businessDescriptionData,
+      bank_details,
+      socialMediaData,
+      kyc_documents,
+    };
+
+    console.log(businessData);
+    console.log(businessDescriptionData);
+    console.log(bank_details);
+    console.log(socialMediaData);
+    console.log(kyc_documents);
+
+    try {
+      // Send data to API (replace API_URL with the actual endpoint)
+      const response = await axios.post(
+        "https://api.tanutra.com/api/apply-vendor-business-profile/",
+        dataToSend,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        alert("Data submitted successfully!");
+        navigate("/ThanksYou");
+      } else {
+        alert(`Error: ${response.data.message || "Something went wrong!"}`);
+      }
+    } catch (error) {
+      alert(`Error: ${error.message}`);
+    }
   };
 
   return (
@@ -1008,3 +1050,65 @@ function PickupAdd() {
 }
 
 export default PickupAdd;
+
+{
+  /*
+
+{
+  "vendor_kyc_info" : {
+      "legal_business_name" : "",
+      "brand_name" : "",
+      "gst_no" : "",
+      "business_id" : "",
+      "year_in_business" : "",
+      "business_description" : "",
+      "vendor_story_and_experience" : {
+          "tell_us_about_your_journey" : "",
+          "challenges_faced_in_business" : "",
+          "how_tanutra_can_help" : ""
+      },
+      "logistics_and_operations" : {
+          "shipping_availability" : "",
+          "preffered_payment_terms" : "",
+          "production_lead_time" : ""
+      },
+      "business_full_address" : {
+          "street_address" : "",
+          "city" : "",
+          "state" : "",
+          "country" : "",
+          "pin_code" : ""
+      },
+      "tanutraTAndCs" : true,
+      "tanutraDeliveryTAndCs" : true,
+      "contentsharingTAndCs" : true,
+      "pricing_policyTAndCs" : true,
+      "vendor_pickup_addr" : [{
+          "street_address" : "",
+          "city" : "",
+          "state" : "",
+          "country" : "",
+          "pin_code" : ""
+      }],
+      "social_media_links" : {
+          "instagram" : "",
+          "facebook" : "",
+          "linkedin" : "",
+          "twitter/X" : "",
+          "other" : ""
+      },
+      "bank_details" : {
+          "bank_name" : "",
+          "account_number" : "",
+          "ifsc_code" : "",
+          "account_holder_name" : ""
+      }
+  },
+  "brand_logo" : "", # file
+  "business_incorporation_certificate_image" : "", # file
+  "business_PAN_image" : "", # file
+  "GST_certificate_image" : "" # file
+}
+
+*/
+}

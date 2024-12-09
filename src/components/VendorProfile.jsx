@@ -818,8 +818,6 @@
 
 // export default VendorProfile;
 
-
-
 // import React, { useState, useEffect } from "react";
 // import { Country, State, City } from "country-state-city";
 // import axios from "axios";
@@ -1151,6 +1149,8 @@
 
 // export default VendorProfile;
 
+
+
 import React, { useState, useEffect } from "react";
 import { Country, State, City } from "country-state-city";
 import axios from "axios";
@@ -1178,6 +1178,7 @@ function VendorProfile() {
         country: "",
       },
     ],
+    profile_pic: "",
   });
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -1332,10 +1333,11 @@ function VendorProfile() {
               country: "",
             },
           ],
+          profile_pic: "",
         });
         setImage(null);
         setErrorMessage("");
-        navigate("/");
+        navigate("/"); // Navigate to home or another page
       }
     } catch (error) {
       console.error(
@@ -1345,9 +1347,6 @@ function VendorProfile() {
       setErrorMessage("Profile creation failed. Please try again.");
     }
   };
-
- 
-
 
   return (
     <div className="relative md:px-8 lg:px-16 flex items-center justify-center min-h-screen bg-cover bg-center lg:w-full md:w-1/2">

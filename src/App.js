@@ -27,7 +27,7 @@ import BusinessDescription from './components/BusinessDescription';
 import BankDetails from './components/BankDetails';
 import SocialMedia from './components/SocialMedia';
 import KYCDocument from './components/KYCDocument';
-import LogOpe from './components/LogOpe';
+// import LogOpe from './components/LogOpe';
 import PickupAdd from './components/PickupAdd';
 import ThanksYou from './components/ThanksYou';
 
@@ -44,24 +44,24 @@ function App() {
         <Routes>
           Default route (Home Page)
           <Route path="/" element={<> <Header /><SideMenu /><List /><Graph /><Campaign /></>}/>
-          <Route path="/VendorProfile" element={<> <Header /><SideMenu /><VendorProfile /> <SocialMedia /></>}/>
-          <Route path="/BusinessProfile" element={<> <Header /><SideMenu /><BankDetails /><BusinessDescription /><BusinessProfile /></>} /> 
+          <Route path="/VendorProfile" element={<> <Header /><SideMenu /><VendorProfile /></>}/>
+          <Route path="/BusinessProfile" element={<> <Header /><SideMenu /><BusinessProfile /></>} /> 
           <Route path="/BusinessDescription" element={<> <Header /><SideMenu /><BusinessDescription /></>}/>
           <Route path="/BankDetails" element={<> <Header /><SideMenu /><BankDetails /></>}/>
-          <Route path="/BankDetails" element={<> <Header /><SideMenu /><SocialMedia /></>}/>
-          <Route path="/LogOpe" element={<> <Header /><SideMenu /><LogOpe /></>}/>
+          <Route path="/ThanksYou" element={<> <Header /><ThanksYou /></>}/>
           <Route path="/Signup" element={<> <Header /><Signup /></>}/>
           <Route path="/VendorKYC" element={<> <Header /><VendorKYC /></>}/>
           <Route path="/OTPAuth" element={<> <Header /><OTPAuth /></>}/>
           <Route path="/Login" element={<> <Header /><Login /></>}/>
-          <Route path="/MyOrders" element={<> <SideMenu /><Header /><MyOrders /><ThanksYou /><PickupAdd /><LogOpe /></>}/>
+          <Route path="/MyOrders" element={<> <SideMenu /><Header /><MyOrders /></>}/>
           <Route path="/ManageInventory" element={<><SideMenu /><Header /> <ManageInventory /></>}/>
-          <Route path="/Catelog_uploads" element={<><SideMenu /><Catelog_uploads /> <KYCDocument /><SocialMedia /></>}/>
+          <Route path="/Catelog_uploads" element={<><SideMenu /></>}/>
           <Route path="/ForgotPassword" element={<> <Header /><ForgotPassword /></>}/>
           <Route path="/Otp" element={<> <Header /><Otp /></>}/>
           <Route path="/CreatePassword" element={<> <Header /><CreatePassword /></>}/> 
           <Route path="/KYCDocument" element={<> <Header /><SideMenu /><KYCDocument /></>}/>
-          <Route path="/PickupAdd" element={<> <Header /><PickupAdd /></>}/>
+          <Route path="/PickupAdd" element={<> <Header /><SideMenu /><PickupAdd /></>}/>
+          <Route path="/SocialMedia" element={<> <Header /><SideMenu /><SocialMedia /></>}/>
     
         </Routes>
       </Router>

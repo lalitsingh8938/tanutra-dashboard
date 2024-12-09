@@ -484,7 +484,6 @@
 
 // export default KYCForm;
 
-
 // import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom"; // Importing navigate hook for navigation
 
@@ -567,7 +566,7 @@
 //                   label="GST Certificate"
 //                   file={gstCertificate}
 //                   onFileChange={(e) => handleFileChange(e, setGstCertificate)}
-                
+
 //                 />
 //               </div>
 
@@ -735,7 +734,6 @@
 
 // // export default KYCForm;
 
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Importing navigate hook for navigation
 
@@ -775,7 +773,7 @@ function KYCForm() {
     alert("KYC documents saved successfully!");
 
     // Navigate to the next page (adjust the route accordingly)
-    navigate("/LogOpe"); // Adjust the route to your next page
+    navigate("/PickupAdd"); // Adjust the route to your next page
   };
 
   return (
@@ -870,7 +868,11 @@ function FileUploadField({ label, file, onFileChange }) {
         />
         {preview && (
           <div className="w-24 h-24 mt-4">
-            <img src={preview} alt={`${label} Preview`} className="w-full h-full object-cover" />
+            <img
+              src={preview}
+              alt={`${label} Preview`}
+              className="w-full h-full object-cover"
+            />
           </div>
         )}
       </div>
