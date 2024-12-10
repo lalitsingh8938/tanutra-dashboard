@@ -837,7 +837,7 @@ function PickupAdd() {
     localStorage.setItem("formData", JSON.stringify(formData));
 
     // Prepare data to send in API request
-    const businessData = localStorage.getItem("businessData");
+    const businessData = JSON.parse(localStorage.getItem("businessData"));
     const businessDescriptionData = localStorage.getItem(
       "businessDescriptionData"
     );
@@ -846,22 +846,52 @@ function PickupAdd() {
     const socialMediaData = localStorage.getItem("socialMediaData");
     const kyc_documents = localStorage.getItem("kyc_documents");
 
+    console.log("BUSINESS DATA", businessData);
+    console.log("Bank DETAILS ",bank_details);
+    console.log("social media link ",socialMediaData);
+    console.log("kyc documents",kyc_documents);
+    console.log("businessDescription",businessDescriptionData);
+
     const storedFormData = JSON.parse(localStorage.getItem("formData"));
 
+    const vendor_kyc_info = {
+        "legal_business_name" : businessData.legal_business_name,
+        "brand_name" : businessData.brand_name,
+        "gst_no" : businessData.gst_no,
+        "business_id" : businessData.business_id,
+        "year_in_business" : businessDescriptionData.year_in_business,
+        "business_description" : businessDescriptionData.business_description,
+        "vendor_story_and_experience" : {
+            "tell_us_about_your_journey" : businessDescriptionData.tell_us_about_your_journey,
+            "challenges_faced_in_business" : businessDescriptionData.challenges_faced_in_business,
+            "how_tanutra_can_help" : businessDescriptionData.how_tanutra_can_help
+        },
+        
+        "business_full_address" : businessData.business_full_addr,
+        "tanutraTAndCs" : true,
+        "vendor_pickup_addr" : formData.business_pickup_addr,
+        "social_media_links" : socialMediaData.social_media_links,
+        "bank_details" : bank_details.bank_details
+    }
+
+    const brandLogo = businessData.brand_logo
+    const business_incorporation_certificate_image = kyc_documents.companyCertificate
+    const business_PAN_image = kyc_documents.businessPAN
+    const GST_certificate_image = kyc_documents.gstCertificate
+
     const dataToSend = {
-      formData: storedFormData,
-      businessData,
-      businessDescriptionData,
-      bank_details,
-      socialMediaData,
-      kyc_documents,
+      vendor_kyc_info: vendor_kyc_info,
+      brand_logo : brandLogo,
+      business_incorporation_certificate_image: business_incorporation_certificate_image,
+      business_PAN_image: business_PAN_image,
+      GST_certificate_image: GST_certificate_image
     };
 
-    console.log(businessData);
-    console.log(businessDescriptionData);
-    console.log(bank_details);
-    console.log(socialMediaData);
-    console.log(kyc_documents);
+    // console.log("lalitsingh",businessData);
+    // console.log(businessDescriptionData);
+    // console.log(bank_details);
+    // console.log(socialMediaData);
+    // console.log(kyc_documents);
 
     try {
       // Send data to API (replace API_URL with the actual endpoint)
