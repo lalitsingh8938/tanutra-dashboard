@@ -920,11 +920,11 @@ const BusinessProfile = () => {
   const handleFileChange = (e) => {
   const file = e.target.files[0];
   if (file) {
-    const reader = new FileReader();
-    reader.onloadend = () => {
+    // const reader = new FileReader();
+    // reader.onloadend = () => {
       setFormData({
         ...formData,
-        brand_logo: reader.result, // Convert file to Base64
+        brand_logo: file // reader.result, // Convert file to Base64
       });
     };
     reader.readAsDataURL(file);
