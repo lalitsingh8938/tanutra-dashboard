@@ -918,16 +918,19 @@ const BusinessProfile = () => {
 
   // Handle file input for brand logo
   const handleFileChange = (e) => {
-  const file = e.target.files[0];
-  if (file) {
-    // const reader = new FileReader();
-    // reader.onloadend = () => {
-      setFormData({
-        ...formData,
-        brand_logo: file // reader.result, // Convert file to Base64
-      });
-    // reader.readAsDataURL(file);
-  }
+    const file = e.target.files[0];
+    if (file) {
+      // const reader = new FileReader();
+      // reader.onloadend = () => {
+        setFormData({
+          ...formData,
+          brand_logo: file // reader.result, // Convert file to Base64
+        });
+      // reader.readAsDataURL(file);
+    }
+    else {
+      console.log("No file uploaded");
+    }
 };
 
   const handleCountryChange = (e) => {
