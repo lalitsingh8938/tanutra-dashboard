@@ -926,8 +926,7 @@ const BusinessProfile = () => {
         ...formData,
         brand_logo: file // reader.result, // Convert file to Base64
       });
-    };
-    reader.readAsDataURL(file);
+    // reader.readAsDataURL(file);
   }
 };
 
