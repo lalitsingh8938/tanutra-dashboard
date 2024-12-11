@@ -711,11 +711,11 @@
 //   );
 // }
 // export default PickupAdd;
+
 import React, { useState, useEffect } from "react";
 import { Country, State, City } from "country-state-city";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
 function PickupAdd() {
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
@@ -824,7 +824,7 @@ function PickupAdd() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     // Validate checkbox
     if (!isCheckboxChecked) {
       alert(
@@ -832,80 +832,99 @@ function PickupAdd() {
       );
       return;
     }
-
+  
     // Save formData to localStorage
     localStorage.setItem("formData", JSON.stringify(formData));
-
+  
     // Prepare data to send in API request
-    const businessData = JSON.parse(localStorage.getItem("businessData"));
-    const businessDescriptionData = localStorage.getItem(
-      "businessDescriptionData"
-    );
-    const accessToken = localStorage.getItem("access_token");
-    const bank_details = localStorage.getItem("bank_details");
-    const socialMediaData = localStorage.getItem("socialMediaData");
-    const kyc_documents = localStorage.getItem("kyc_documents");
+    const businessData = JSON.parse(localStorage.getItem("businessData") || "{}");
+    const businessDescriptionData = JSON.parse(localStorage.getItem("businessDescriptionData") || "{}");
+    const accessToken = JSON.parse(localStorage.getItem("access_token") || "null");
+    const bankDetails = JSON.parse(localStorage.getItem("bank_details") || "{}");
+    const socialMediaData = JSON.parse(localStorage.getItem("socialMediaData") || "{}");
+    const kycDocuments = JSON.parse(localStorage.getItem("kyc_documents") || "{}");
 
     console.log("BUSINESS DATA", businessData);
-    console.log("Bank DETAILS ",bank_details);
-    console.log("social media link ",socialMediaData);
-    console.log("kyc documents",kyc_documents);
-    console.log("businessDescription",businessDescriptionData);
-
-    const storedFormData = JSON.parse(localStorage.getItem("formData"));
-
-    const vendor_kyc_info = {
-        "legal_business_name" : businessData.legal_business_name,
-        "brand_name" : businessData.brand_name,
-        "gst_no" : businessData.gst_no,
-        "business_id" : businessData.business_id,
-        "year_in_business" : businessDescriptionData.year_in_business,
-        "business_description" : businessDescriptionData.business_description,
-        "vendor_story_and_experience" : {
-            "tell_us_about_your_journey" : businessDescriptionData.tell_us_about_your_journey,
-            "challenges_faced_in_business" : businessDescriptionData.challenges_faced_in_business,
-            "how_tanutra_can_help" : businessDescriptionData.how_tanutra_can_help
-        },
-        
-        "business_full_address" : businessData.business_full_addr,
-        "tanutraTAndCs" : true,
-        "vendor_pickup_addr" : formData.business_pickup_addr,
-        "social_media_links" : socialMediaData.social_media_links,
-        "bank_details" : bank_details.bank_details
-    }
-
-    const brandLogo = businessData.brand_logo
-    const business_incorporation_certificate_image = kyc_documents.companyCertificate
-    const business_PAN_image = kyc_documents.businessPAN
-    const GST_certificate_image = kyc_documents.gstCertificate
-
-    const dataToSend = {
-      vendor_kyc_info: vendor_kyc_info,
-      brand_logo : brandLogo,
-      business_incorporation_certificate_image: business_incorporation_certificate_image,
-      business_PAN_image: business_PAN_image,
-      GST_certificate_image: GST_certificate_image
+    console.log("Bank DETAILS", bankDetails);
+    console.log("Social Media Links", socialMediaData);
+    console.log("KYC Documents", kycDocuments);
+    console.log("Business Description", businessDescriptionData);
+  
+    const vendorKycInfo = {
+      legal_business_name: businessData.legal_business_name,
+      brand_name: businessData.brand_name,
+      gst_no: businessData.gst_no,
+      business_id: businessData.business_id,
+      year_in_business: businessDescriptionData.year_in_business,
+      business_description: businessDescriptionData.business_description,
+      vendor_story_and_experience: {
+        tell_us_about_your_journey:
+          businessDescriptionData.tell_us_about_your_journey,
+        challenges_faced_in_business:
+          businessDescriptionData.challenges_faced_in_business,
+        how_tanutra_can_help: businessDescriptionData.how_tanutra_can_help,
+      },
+      logistics_and_operations: {
+        shipping_availability: businessDescriptionData.shipping_availability,
+        preffered_payment_terms: businessDescriptionData.preffered_payment_terms,
+        production_lead_time: businessDescriptionData.production_lead_time,
+      },
+      business_full_address: {
+        street_address: businessData.business_full_addr.street_address,
+        city: businessData.business_full_addr.city,
+        state: businessData.business_full_addr.state,
+        country: businessData.business_full_addr.country,
+        pin_code: businessData.business_full_addr.pin_code,
+      },
+      tanutraTAndCs: true,
+      tanutraDeliveryTAndCs: true,
+      contentsharingTAndCs: true,
+      pricing_policyTAndCs: true,
+      vendor_pickup_addr: formData.business_pickup_addr.map((addr) => ({
+        street_address: addr.street_addr,
+        city: addr.city,
+        state: addr.state,
+        country: addr.country,
+        pin_code: addr.pincode,
+      })),
+      social_media_links: {
+        instagram: socialMediaData.instagram || "",
+        facebook: socialMediaData.facebook || "",
+        linkedin: socialMediaData.linkedin || "",
+        twitter: socialMediaData.twitter || "",
+        other: socialMediaData.other || "",
+      },
+      bank_details: {
+        bank_name: bankDetails.bank_name,
+        account_number: bankDetails.account_number,
+        ifsc_code: bankDetails.ifsc_code,
+        account_holder_name: bankDetails.account_holder_name,
+      },
     };
-
-    // console.log("lalitsingh",businessData);
-    // console.log(businessDescriptionData);
-    // console.log(bank_details);
-    // console.log(socialMediaData);
-    // console.log(kyc_documents);
-
+  
+    const dataToSend = {
+      vendor_kyc_info: vendorKycInfo,
+      brand_logo: businessData.brand_logo,
+      business_incorporation_certificate_image:
+        kycDocuments.companyCertificate,
+      business_PAN_image: kycDocuments.businessPAN,
+      GST_certificate_image: kycDocuments.gstCertificate,
+    };
+  
+    console.log("Data to be sent:", JSON.stringify(dataToSend, null, 2));
+  
     try {
-      // Send data to API (replace API_URL with the actual endpoint)
       const response = await axios.post(
         "https://api.tanutra.com/api/apply-vendor-business-profile/",
         dataToSend,
         {
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${accessToken}`,
           },
         }
       );
-
+  
       if (response.status === 200) {
         alert("Data submitted successfully!");
         navigate("/ThanksYou");
@@ -913,10 +932,11 @@ function PickupAdd() {
         alert(`Error: ${response.data.message || "Something went wrong!"}`);
       }
     } catch (error) {
+      console.error("Error during API call:", error.response?.data || error.message);
       alert(`Error: ${error.message}`);
     }
   };
-
+  
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center">
       {/* Overlay */}

@@ -45,9 +45,9 @@ function App() {
           Default route (Home Page)
           <Route path="/" element={<> <Header /><SideMenu /><List /><Graph /><Campaign /></>}/>
           <Route path="/VendorProfile" element={<> <Header /><SideMenu /><VendorProfile /></>}/>
-          <Route path="/BusinessProfile" element={<> <Header /><SideMenu /><BusinessProfile /></>} /> 
-          <Route path="/BusinessDescription" element={<> <Header /><SideMenu /><BusinessDescription /></>}/>
-          <Route path="/BankDetails" element={<> <Header /><SideMenu /><BankDetails /></>}/>
+          <Route path="/BusinessProfile" element={<> <BusinessProfile /></>} /> 
+          <Route path="/BusinessDescription" element={<> <Header /><BusinessDescription /></>}/>
+          <Route path="/BankDetails" element={<> <Header /><BankDetails /></>}/>
           <Route path="/ThanksYou" element={<> <Header /><ThanksYou /></>}/>
           <Route path="/Signup" element={<> <Header /><Signup /></>}/>
           <Route path="/VendorKYC" element={<> <Header /><VendorKYC /></>}/>
@@ -59,9 +59,9 @@ function App() {
           <Route path="/ForgotPassword" element={<> <Header /><ForgotPassword /></>}/>
           <Route path="/Otp" element={<> <Header /><Otp /></>}/>
           <Route path="/CreatePassword" element={<> <Header /><CreatePassword /></>}/> 
-          <Route path="/KYCDocument" element={<> <Header /><SideMenu /><KYCDocument /></>}/>
-          <Route path="/PickupAdd" element={<> <Header /><SideMenu /><PickupAdd /></>}/>
-          <Route path="/SocialMedia" element={<> <Header /><SideMenu /><SocialMedia /></>}/>
+          <Route path="/KYCDocument" element={<> <Header /><KYCDocument /></>}/>
+          <Route path="/PickupAdd" element={<> <PickupAdd /></>}/>
+          <Route path="/SocialMedia" element={<> <Header /><SocialMedia /></>}/>
     
         </Routes>
       </Router>
