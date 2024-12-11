@@ -54,7 +54,7 @@ function App() {
           <Route path="/Login" element={<> <Header /><Login /></>}/>
           <Route path="/MyOrders" element={<> <SideMenu /><Header /><MyOrders /></>}/>
           <Route path="/ManageInventory" element={<><SideMenu /><Header /> <ManageInventory /></>}/>
-          <Route path="/Catelog_uploads" element={<><SideMenu /></>}/>
+          <Route path="/Catelog_uploads" element={<><SideMenu /><Catelog_uploads/></>}/>
           <Route path="/ForgotPassword" element={<> <Header /><ForgotPassword /></>}/>
           <Route path="/Otp" element={<> <Header /><Otp /></>}/>
           <Route path="/CreatePassword" element={<> <Header /><CreatePassword /></>}/> 
