@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-// axios.defaults.withCredentials = true;
-
 function Signup() {
   const [formData, setFormData] = useState({
     email: "",
-    // phone_number: "",
+
     password: "",
     confirm_password: "",
   });
@@ -25,12 +23,7 @@ function Signup() {
     e.preventDefault();
 
     // Basic Validation
-    if (
-      !formData.email ||
-      // !formData.phone_number ||
-      !formData.password ||
-      !formData.confirm_password
-    ) {
+    if (!formData.email || !formData.password || !formData.confirm_password) {
       setErrorMessage("All fields are required.");
       return;
     }
@@ -46,12 +39,11 @@ function Signup() {
         "https://api.tanutra.com/api/register/",
         {
           email: formData.email,
-          // mobile_no: formData.phone_number,
+
           password: formData.password,
           password2: formData.confirm_password,
         },
         {
-          // withCredentials: true,
           headers: {
             "Content-Type": "application/json",
           },
@@ -70,7 +62,6 @@ function Signup() {
         // Reset form data
         setFormData({
           email: "",
-          // phone_number: "",
           password: "",
           confirm_password: "",
         });
@@ -121,18 +112,7 @@ function Signup() {
               required
             />
           </div>
-          {/* <div className="text-center mt-4">
-            <input
-              className="w-full sm:w-[350px] h-9 border rounded-md px-3"
-              type="tel"
-              id="phone_number"
-              name="phone_number"
-              value={formData.phone_number}
-              onChange={handleChange}
-              placeholder="Enter your phone number"
-              required
-            />
-          </div> */}
+
           <div className="text-center mt-4">
             <input
               className="w-full sm:w-[350px] h-9 border rounded-md px-3"
@@ -189,9 +169,3 @@ function Signup() {
 }
 
 export default Signup;
-
-
-
-
-
-

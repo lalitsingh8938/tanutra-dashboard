@@ -69,20 +69,14 @@ function Login() {
         error.response?.data || error.message
       );
 
-      // Handle different error responses
-      // if (error.response) {
-      //   const errorMessage = error.response.data?.message || "Login failed. Please try again.";
-      //   setErrorMessage(errorMessage);
-      // } else {
-      //   setErrorMessage(
-      //     " fdffgg An unexpected error occurred. Please try again later."
-      //   );
-      // } 
       if (error.response) {
-        const errorMessage = error.response.data?.message || "Login failed. Please try again.";
+        const errorMessage =
+          error.response.data?.message || "Login failed. Please try again.";
         setErrorMessage(errorMessage);
       } else {
-        setErrorMessage("An unexpected error occurred. Please try again later.");
+        setErrorMessage(
+          "An unexpected error occurred. Please try again later."
+        );
       }
     }
   };

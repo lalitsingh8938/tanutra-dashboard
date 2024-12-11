@@ -27,7 +27,6 @@ import BusinessDescription from './components/BusinessDescription';
 import BankDetails from './components/BankDetails';
 import SocialMedia from './components/SocialMedia';
 import KYCDocument from './components/KYCDocument';
-// import LogOpe from './components/LogOpe';
 import PickupAdd from './components/PickupAdd';
 import ThanksYou from './components/ThanksYou';
 
@@ -45,12 +44,12 @@ function App() {
           Default route (Home Page)
           <Route path="/" element={<> <Header /><SideMenu /><List /><Graph /><Campaign /></>}/>
           <Route path="/VendorProfile" element={<> <Header /><SideMenu /><VendorProfile /></>}/>
-          <Route path="/BusinessProfile" element={<> <BusinessProfile /></>} /> 
-          <Route path="/BusinessDescription" element={<> <Header /><BusinessDescription /></>}/>
-          <Route path="/BankDetails" element={<> <Header /><BankDetails /></>}/>
-          <Route path="/ThanksYou" element={<> <Header /><ThanksYou /></>}/>
+          <Route path="/BusinessProfile" element={<><Header /><SideMenu /><BusinessProfile /></>} /> 
+          <Route path="/BusinessDescription" element={<><Header /><SideMenu /><Header /><BusinessDescription /></>}/>
+          <Route path="/BankDetails" element={<><Header /><SideMenu /><BankDetails /></>}/>
+          <Route path="/ThanksYou" element={<> <Header /><SideMenu /><ThanksYou /></>}/>
           <Route path="/Signup" element={<> <Header /><Signup /></>}/>
-          <Route path="/VendorKYC" element={<> <Header /><VendorKYC /></>}/>
+          <Route path="/VendorKYC" element={<> <Header /><SideMenu /><VendorKYC /></>}/>
           <Route path="/OTPAuth" element={<> <Header /><OTPAuth /></>}/>
           <Route path="/Login" element={<> <Header /><Login /></>}/>
           <Route path="/MyOrders" element={<> <SideMenu /><Header /><MyOrders /></>}/>
@@ -59,9 +58,9 @@ function App() {
           <Route path="/ForgotPassword" element={<> <Header /><ForgotPassword /></>}/>
           <Route path="/Otp" element={<> <Header /><Otp /></>}/>
           <Route path="/CreatePassword" element={<> <Header /><CreatePassword /></>}/> 
-          <Route path="/KYCDocument" element={<> <Header /><KYCDocument /></>}/>
-          <Route path="/PickupAdd" element={<> <PickupAdd /></>}/>
-          <Route path="/SocialMedia" element={<> <Header /><SocialMedia /></>}/>
+          <Route path="/KYCDocument" element={<><Header /><SideMenu /><KYCDocument /></>}/>
+          <Route path="/PickupAdd" element={<> <Header /><SideMenu /><PickupAdd /></>}/>
+          <Route path="/SocialMedia" element={<> <Header /><SideMenu /><SocialMedia /></>}/>
     
         </Routes>
       </Router>

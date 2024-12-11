@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -62,7 +61,9 @@ function OTPAuth() {
       );
 
       if (error.response && error.response.data) {
-        setErrorMessage(error.response.data.message || "Invalid OTP. Please try again.");
+        setErrorMessage(
+          error.response.data.message || "Invalid OTP. Please try again."
+        );
       } else {
         setErrorMessage("An error occurred. Please try again later.");
       }

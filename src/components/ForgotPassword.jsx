@@ -105,7 +105,7 @@ function ForgotPassword() {
                   className="font-semibold text-slate-800 text-left ml-2 mb-2"
                   htmlFor="email"
                 >
-                Your Email 
+                  Your Email
                 </label>
                 <input
                   className="w-full h-9 border rounded-md"

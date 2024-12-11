@@ -1,6 +1,5 @@
-import React from 'react';
-import { Route, Navigate } from 'react-router-dom';
-// import Login from './components/Login';
+import React from "react";
+import { Route, Navigate } from "react-router-dom";
 
 // Private Route Component
 function PrivateRoute({ element: Element, ...rest }) {
