@@ -821,10 +821,9 @@ function PickupAdd() {
   const handleCheckboxChange = (event) => {
     setIsCheckboxChecked(event.target.checked);
   };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     // Validate checkbox
     if (!isCheckboxChecked) {
       alert(
@@ -832,24 +831,26 @@ function PickupAdd() {
       );
       return;
     }
-  
-    // Save formData to localStorage
-    localStorage.setItem("formData", JSON.stringify(formData));
-  
-    // Prepare data to send in API request
-    const businessData = JSON.parse(localStorage.getItem("businessData") || "{}");
-    const businessDescriptionData = JSON.parse(localStorage.getItem("businessDescriptionData") || "{}");
-    const accessToken = JSON.parse(localStorage.getItem("access_token") || "null");
-    const bankDetails = JSON.parse(localStorage.getItem("bank_details") || "{}");
-    const socialMediaData = JSON.parse(localStorage.getItem("socialMediaData") || "{}");
-    const kycDocuments = JSON.parse(localStorage.getItem("kyc_documents") || "{}");
 
-    console.log("BUSINESS DATA", businessData);
-    console.log("Bank DETAILS", bankDetails);
-    console.log("Social Media Links", socialMediaData);
-    console.log("KYC Documents", kycDocuments);
-    console.log("Business Description", businessDescriptionData);
-  
+    // Prepare data to send in API request
+    const businessData = JSON.parse(
+      localStorage.getItem("businessData") || "{}"
+    );
+    const businessDescriptionData = JSON.parse(
+      localStorage.getItem("businessDescriptionData") || "{}"
+    );
+    const accessToken = localStorage.getItem("access_token"); // Get access token
+    const bankDetails = JSON.parse(
+      localStorage.getItem("bank_details") || "{}"
+    );
+    const socialMediaData = JSON.parse(
+      localStorage.getItem("socialMediaData") || "{}"
+    );
+    const kycDocuments = JSON.parse(
+      localStorage.getItem("kyc_documents") || "{}"
+    );
+
+    // Data object to be sent in API request
     const vendorKycInfo = {
       legal_business_name: businessData.legal_business_name,
       brand_name: businessData.brand_name,
@@ -864,11 +865,7 @@ function PickupAdd() {
           businessDescriptionData.challenges_faced_in_business,
         how_tanutra_can_help: businessDescriptionData.how_tanutra_can_help,
       },
-      logistics_and_operations: {
-        shipping_availability: businessDescriptionData.shipping_availability,
-        preffered_payment_terms: businessDescriptionData.preffered_payment_terms,
-        production_lead_time: businessDescriptionData.production_lead_time,
-      },
+
       business_full_address: {
         street_address: businessData.business_full_addr.street_address,
         city: businessData.business_full_addr.city,
@@ -877,9 +874,6 @@ function PickupAdd() {
         pin_code: businessData.business_full_addr.pin_code,
       },
       tanutraTAndCs: true,
-      tanutraDeliveryTAndCs: true,
-      contentsharingTAndCs: true,
-      pricing_policyTAndCs: true,
       vendor_pickup_addr: formData.business_pickup_addr.map((addr) => ({
         street_address: addr.street_addr,
         city: addr.city,
@@ -901,30 +895,29 @@ function PickupAdd() {
         account_holder_name: bankDetails.account_holder_name,
       },
     };
-  
+
     const dataToSend = {
       vendor_kyc_info: vendorKycInfo,
       brand_logo: businessData.brand_logo,
-      business_incorporation_certificate_image:
-        kycDocuments.companyCertificate,
+      business_incorporation_certificate_image: kycDocuments.companyCertificate,
       business_PAN_image: kycDocuments.businessPAN,
       GST_certificate_image: kycDocuments.gstCertificate,
     };
-  
+
     console.log("Data to be sent:", JSON.stringify(dataToSend, null, 2));
-  
+
     try {
       const response = await axios.post(
         "https://api.tanutra.com/api/apply-vendor-business-profile/",
         dataToSend,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json", // Specify content type as JSON
+            Authorization: `Bearer ${accessToken}`, // Send access token here
           },
         }
       );
-  
+
       if (response.status === 200) {
         alert("Data submitted successfully!");
         navigate("/ThanksYou");
@@ -932,11 +925,14 @@ function PickupAdd() {
         alert(`Error: ${response.data.message || "Something went wrong!"}`);
       }
     } catch (error) {
-      console.error("Error during API call:", error.response?.data || error.message);
+      console.error(
+        "Error during API call:",
+        error.response?.data || error.message
+      );
       alert(`Error: ${error.message}`);
     }
   };
-  
+
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center">
       {/* Overlay */}

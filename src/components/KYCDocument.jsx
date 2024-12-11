@@ -849,47 +849,84 @@
 // }
 
 // export default KYCForm;
-
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Importing navigate hook for navigation
+import { useNavigate } from "react-router-dom";
+import imageCompression from "browser-image-compression"; // Importing the image compression library
 
 function KYCForm() {
   const [companyCertificate, setCompanyCertificate] = useState(null);
   const [businessPAN, setBusinessPAN] = useState(null);
   const [gstCertificate, setGstCertificate] = useState(null);
-  const navigate = useNavigate(); // Using navigate hook for navigation
+  const [companyCertificateBase64, setCompanyCertificateBase64] = useState(null);
+  const [businessPANBase64, setBusinessPANBase64] = useState(null);
+  const [gstCertificateBase64, setGstCertificateBase64] = useState(null);
+  const navigate = useNavigate();
 
-  const handleFileChange = (e, setFile) => {
+  const handleFileChange = async (e, setFile, setBase64, fileName) => {
     const file = e.target.files[0];
     if (file) {
-      setFile(file); // Store the file object itself
+      // Compress the image
+      const options = {
+        maxSizeMB: 1, // Limit the image to 1MB
+        maxWidthOrHeight: 800, // Set the maximum width or height
+        useWebWorker: true,
+      };
+      
+      try {
+        const compressedFile = await imageCompression(file, options);
+        const reader = new FileReader();
+        
+        reader.onloadend = () => {
+          setBase64(reader.result); // Store Base64 string
+          setFile(compressedFile); // Store compressed file (optional)
+
+          // Alert to confirm Base64 conversion
+          alert(`${fileName} has been converted to Base64 and saved successfully!`);
+
+          // Save to localStorage for each file
+          const kycData = {
+            [fileName]: reader.result
+          };
+          try {
+            localStorage.setItem("kyc_documents", JSON.stringify(kycData));
+          } catch (error) {
+            console.error(`Error saving ${fileName} to localStorage:`, error);
+            alert(`Error saving ${fileName}.`);
+          }
+        };
+        
+        reader.readAsDataURL(compressedFile);
+      } catch (error) {
+        console.error("Image compression failed:", error);
+      }
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Checking if the required files are uploaded
+    // Check if all required files are uploaded
     if (!companyCertificate || !businessPAN || !gstCertificate) {
       alert("Please upload all required documents.");
       return;
     }
 
-    // Prepare the data to be saved in localStorage (storing file names or other metadata)
+    // Prepare the data to be saved in localStorage
     const kycData = {
-      companyCertificate: companyCertificate.name,
-      businessPAN: businessPAN.name,
-      gstCertificate: gstCertificate.name,
+      companyCertificate: companyCertificateBase64,
+      businessPAN: businessPANBase64,
+      gstCertificate: gstCertificateBase64,
     };
 
-    // Saving file names to localStorage (you can modify this to store actual file data if needed)
-    localStorage.setItem("kyc_documents", JSON.stringify(kycData));
-
-    // Alert the user
-    alert("KYC documents saved successfully!");
-
-    // Navigate to the next page (adjust the route accordingly)
-    navigate("/PickupAdd"); // Adjust the route to your next page
+    // Save the Base64 data to localStorage
+    try {
+      localStorage.setItem("kyc_documents", JSON.stringify(kycData));
+      alert("All KYC documents saved successfully!");
+      navigate("/PickupAdd"); // Navigate to the next page
+    } catch (error) {
+      console.error("Error saving to localStorage:", error);
+      alert("Error saving KYC documents. Please try again.");
+    }
   };
 
   return (
@@ -916,7 +953,7 @@ function KYCForm() {
                   label="Company Incorporation Certificate"
                   file={companyCertificate}
                   onFileChange={(e) =>
-                    handleFileChange(e, setCompanyCertificate)
+                    handleFileChange(e, setCompanyCertificate, setCompanyCertificateBase64, "companyCertificate")
                   }
                 />
 
@@ -924,14 +961,18 @@ function KYCForm() {
                 <FileUploadField
                   label="Business PAN"
                   file={businessPAN}
-                  onFileChange={(e) => handleFileChange(e, setBusinessPAN)}
+                  onFileChange={(e) =>
+                    handleFileChange(e, setBusinessPAN, setBusinessPANBase64, "businessPAN")
+                  }
                 />
 
                 {/* GST Certificate */}
                 <FileUploadField
                   label="GST Certificate"
                   file={gstCertificate}
-                  onFileChange={(e) => handleFileChange(e, setGstCertificate)}
+                  onFileChange={(e) =>
+                    handleFileChange(e, setGstCertificate, setGstCertificateBase64, "gstCertificate")
+                  }
                 />
               </div>
 
@@ -956,12 +997,11 @@ function FileUploadField({ label, file, onFileChange }) {
 
   const handleFilePreview = (file) => {
     if (file && file.type.startsWith("image/")) {
-      const previewUrl = URL.createObjectURL(file); // Generate preview URL
+      const previewUrl = URL.createObjectURL(file);
       setPreview(previewUrl);
     }
   };
 
-  // When file changes, generate preview if it's an image
   React.useEffect(() => {
     if (file) {
       handleFilePreview(file);
@@ -997,3 +1037,152 @@ function FileUploadField({ label, file, onFileChange }) {
 }
 
 export default KYCForm;
+
+
+// import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom"; // Importing navigate hook for navigation
+
+// function KYCForm() {
+//   const [companyCertificate, setCompanyCertificate] = useState(null);
+//   const [businessPAN, setBusinessPAN] = useState(null);
+//   const [gstCertificate, setGstCertificate] = useState(null);
+//   const navigate = useNavigate(); // Using navigate hook for navigation
+
+//   const handleFileChange = (e, setFile) => {
+//     const file = e.target.files[0];
+//     if (file) {
+//       setFile(file); // Store the file object itself
+//     }
+//   };
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+
+//     // Checking if the required files are uploaded
+//     if (!companyCertificate || !businessPAN || !gstCertificate) {
+//       alert("Please upload all required documents.");
+//       return;
+//     }
+
+//     // Prepare the data to be saved in localStorage (storing file names or other metadata)
+//     const kycData = {
+//       companyCertificate: companyCertificate.name,
+//       businessPAN: businessPAN.name,
+//       gstCertificate: gstCertificate.name,
+//     };
+
+//     // Saving file names to localStorage (you can modify this to store actual file data if needed)
+//     localStorage.setItem("kyc_documents", JSON.stringify(kycData));
+
+//     // Alert the user
+//     alert("KYC documents saved successfully!");
+
+//     // Navigate to the next page (adjust the route accordingly)
+//     navigate("/PickupAdd"); // Adjust the route to your next page
+//   };
+
+//   return (
+//     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center">
+//       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
+//       <div className="relative z-10 w-full max-w-4xl bg-transparent rounded-lg">
+//         <div className="p-2 mt-20">
+//           <img
+//             src="Tanutra_Mobile_Logo.avif"
+//             className="w-52 h-24 mx-auto rounded-t-xl cursor-pointer"
+//             alt="logo"
+//           />
+//           <div className="rounded-xl bg-transparent p-2 border">
+//             <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
+//               <div className="flex items-center border rounded-md bg-[#ECB59D] opacity-60">
+//                 <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
+//                   KYC Documents:
+//                 </p>
+//               </div>
+
+//               <div className="flex flex-wrap flex-cols items-center p-5">
+//                 {/* Company Certificate */}
+//                 <FileUploadField
+//                   label="Company Incorporation Certificate"
+//                   file={companyCertificate}
+//                   onFileChange={(e) =>
+//                     handleFileChange(e, setCompanyCertificate)
+//                   }
+//                 />
+
+//                 {/* Business PAN */}
+//                 <FileUploadField
+//                   label="Business PAN"
+//                   file={businessPAN}
+//                   onFileChange={(e) => handleFileChange(e, setBusinessPAN)}
+//                 />
+
+//                 {/* GST Certificate */}
+//                 <FileUploadField
+//                   label="GST Certificate"
+//                   file={gstCertificate}
+//                   onFileChange={(e) => handleFileChange(e, setGstCertificate)}
+//                 />
+//               </div>
+
+//               <div className="flex items-center justify-center mt-10">
+//                 <button
+//                   type="submit"
+//                   className="bg-green-500 font-bold text-white py-2 w-24 mb-5 rounded-md hover:bg-pink-600"
+//                 >
+//                   Next
+//                 </button>
+//               </div>
+//             </form>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// function FileUploadField({ label, file, onFileChange }) {
+//   const [preview, setPreview] = useState(null);
+
+//   const handleFilePreview = (file) => {
+//     if (file && file.type.startsWith("image/")) {
+//       const previewUrl = URL.createObjectURL(file); // Generate preview URL
+//       setPreview(previewUrl);
+//     }
+//   };
+
+//   // When file changes, generate preview if it's an image
+//   React.useEffect(() => {
+//     if (file) {
+//       handleFilePreview(file);
+//     } else {
+//       setPreview(null);
+//     }
+//   }, [file]);
+
+//   return (
+//     <>
+//       <p className="p-2 mt-5 font-medium text-slate-800">{label}</p>
+//       <div className="flex flex-col h-52 justify-center items-center w-full border-2 bg-white rounded-lg p-2">
+//         <div className="font-medium text-slate-800 p-1 text-center">
+//           Drag and drop your {label}
+//         </div>
+//         <input
+//           type="file"
+//           onChange={onFileChange}
+//           className="w-56 h-10 rounded p-2"
+//         />
+//         {preview && (
+//           <div className="w-24 h-24 mt-4">
+//             <img
+//               src={preview}
+//               alt={`${label} Preview`}
+//               className="w-full h-full object-cover"
+//             />
+//           </div>
+//         )}
+//       </div>
+//     </>
+//   );
+// }
+
+// export default KYCForm;
