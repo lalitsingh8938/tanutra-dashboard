@@ -384,28 +384,26 @@ function KYCForm() {
           <div className="rounded-xl bg-transparent p-2 border  md:max-w-3xl sm:max-w-2xl lg:max-w-4xl ">
             <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
               <div className="flex  items-center mb-4">
-              <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg w-full">
-                <img
-                  src="vendor_profile1.png"
-                  className="w-8 h-8 rounded-xl ml-32 cursor-pointer border"
-                  alt="logo"
-                />
-                <p className="px-5 py-1 flex text-lg  font-semibold text-black w-full">
-                 KYC Documents
-                </p>
-              </div>
-                
+                <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg w-full">
+                  <img
+                    src="vendor_profile1.png"
+                    className="w-8 h-8 rounded-xl ml-32 cursor-pointer border"
+                    alt="logo"
+                  />
+                  <p className="px-5 py-1 flex text-lg  font-semibold text-black w-full">
+                    KYC Documents
+                  </p>
+                </div>
               </div>
 
               <div className="flex flex-wrap justify-center p-5">
-                <div className="w-72 flex flex-col items-center bg-white border rounded-lg p-3 m-2">
+                <div className="w-72 flex flex-col items-center bg-white border rounded-lg p-3 m-3">
                   <div className="font-medium text-slate-800 text-center mb-2">
-                  <img
-                    src="Cloud computing.jpg"
-                    className="w-10 h-10 rounded-t-xl cursor-pointer items-center ml-28"
-                    alt="logo"
-                  />
-
+                    <img
+                      src="Cloud computing.jpg"
+                      className="w-10 h-10 rounded-t-xl cursor-pointer items-center ml-28"
+                      alt="logo"
+                    />
                     Company Incorporation Certificate
                   </div>
                   <FileUploadField
@@ -423,16 +421,16 @@ function KYCForm() {
                   )}
                 </div>
 
-                <div className="w-72 flex flex-col items-center bg-white border rounded-lg p-3 m-2">
+                <div className="w-72 flex flex-col items-center bg-white border rounded-lg p-3 m-3">
                   <div className="font-medium text-slate-800 text-center mb-2">
-                  <img
-                    src="Cloud computing.jpg"
-                    className="w-10 h-10 rounded-t-xl cursor-pointer items-center ml-8"
-                    alt="logo"
-                  />
+                    <img
+                      src="Cloud computing.jpg"
+                      className="w-10 h-10 rounded-t-xl cursor-pointer items-center ml-8"
+                      alt="logo"
+                    />
                     Business PAN
                   </div>
-                  
+
                   <FileUploadField
                     file={businessPAN}
                     onFileChange={(e) => handleFileChange(e, "businessPAN")}
@@ -446,14 +444,13 @@ function KYCForm() {
                   )}
                 </div>
 
-                <div className="w-72 flex flex-col items-center bg-white border rounded-lg p-3 m-2">
+                <div className="w-72 flex flex-col items-center bg-white border rounded-lg p-3 m-3">
                   <div className="font-medium text-slate-800 text-center mb-2">
-
-                  <img
-                    src="Cloud computing.jpg"
-                    className="w-10 h-10 rounded-t-xl cursor-pointer items-center ml-6"
-                    alt="logo"
-                  />
+                    <img
+                      src="Cloud computing.jpg"
+                      className="w-10 h-10 rounded-t-xl cursor-pointer items-center ml-6"
+                      alt="logo"
+                    />
                     Brand Logo
                   </div>
                   <FileUploadField
@@ -469,13 +466,13 @@ function KYCForm() {
                   )}
                 </div>
 
-                <div className="w-72 flex flex-col items-center bg-white border rounded-lg p-3 m-2">
+                <div className="w-72 flex flex-col items-center bg-white border rounded-lg p-3 m-3">
                   <div className="font-medium text-slate-800 text-center mb-2">
-                  <img
-                    src="Cloud computing.jpg"
-                    className="w-10 h-10 rounded-t-xl cursor-pointer items-center ml-8"
-                    alt="logo"
-                  />
+                    <img
+                      src="Cloud computing.jpg"
+                      className="w-10 h-10 rounded-t-xl cursor-pointer items-center ml-8"
+                      alt="logo"
+                    />
                     GST Certificate
                   </div>
                   <FileUploadField
@@ -495,7 +492,7 @@ function KYCForm() {
               <div className="flex items-center justify-center mt-10">
                 <button
                   type="submit"
-                  className="bg-green-500 font-bold text-white py-2 w-24 mb-5 rounded-md hover:bg-pink-600"
+                  className="bg-green-500 font-bold text-white py-2 w-24 mb-5 rounded-md hover:bg-indigo-600"
                 >
                   Next
                 </button>

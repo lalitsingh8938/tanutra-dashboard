@@ -285,7 +285,7 @@ function PickupAdd() {
               <div className="flex justify-center mt-14">
                 <button
                   type="submit"
-                  className="w-72 h-12 bg-[#ECB59D] rounded-md font-bold text-white"
+                  className="w-44 h-12 bg-green-500 rounded-md font-bold text-white mb-4 hover:bg-indigo-600"
                 >
                   Save Address
                 </button>

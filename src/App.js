@@ -3,8 +3,7 @@ import List from './components/List';
 import Graph from './components/Graph';
 import Campaign from './components/Campaign';
 import SideMenu from './components/SideMenu';
-import PrivateRoute from './components/PrivateRoute'; // Correct the path if necessary
-
+import PrivateRoute from './components/PrivateRoute'; 
 import {
   BrowserRouter as Router,
   Routes,
@@ -29,6 +28,8 @@ import SocialMedia from './components/SocialMedia';
 import KYCDocument from './components/KYCDocument';
 import PickupAdd from './components/PickupAdd';
 import ThanksYou from './components/ThanksYou';
+import ProductUpload from './components/ProductUpload';
+
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
           <Route path="/KYCDocument" element={<><Header /><SideMenu /><KYCDocument /></>}/>
           <Route path="/PickupAdd" element={<> <Header /><SideMenu /><PickupAdd /></>}/>
           <Route path="/SocialMedia" element={<> <Header /><SideMenu /><SocialMedia /></>}/>
+          <Route path="/ProductUpload" element={<> <Header /><ProductUpload /></>}/>
     
         </Routes>
       </Router>

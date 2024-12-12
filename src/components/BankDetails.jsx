@@ -33,7 +33,6 @@ function BankDetails() {
 
     // Save data to localStorage
     localStorage.setItem("bank_details", JSON.stringify(formData));
-    
     alert("Data submitted successfully!");
 
     // Navigate to the next page

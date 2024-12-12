@@ -158,7 +158,7 @@ function BusinessDescription() {
               <div className="flex items-center justify-center">
                 <button
                   type="submit"
-                  className="bg-green-500 justify-end mr-5 text-white font-bold py-2 w-32 mb-5 rounded-md hover:bg-pink-500"
+                  className="bg-green-500 justify-end mr-5 text-white font-bold py-2 w-32 mb-2 rounded-md hover:bg-pink-500"
                 >
                   Next
                 </button>
