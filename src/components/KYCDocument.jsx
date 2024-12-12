@@ -381,7 +381,7 @@ function KYCForm() {
             className="w-52 h-24 mx-auto rounded-t-xl cursor-pointer"
             alt="logo"
           />
-          <div className="rounded-xl bg-transparent p-2 border lg:min-h-screen md:max-w-3xl sm:max-w-2xl lg:max-w-4xl ">
+          <div className="rounded-xl bg-transparent p-2 border  md:max-w-3xl sm:max-w-2xl lg:max-w-4xl ">
             <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
               <div className="flex  items-center mb-4">
               <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg w-full">

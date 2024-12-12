@@ -32,7 +32,7 @@ import ThanksYou from './components/ThanksYou';
 
 function App() {
   return (
-    <div className="bg-[#FFFCF4]">
+    <div className="bg-[#FFFCF4] h-screen">
       <Helmet>
         <title>Tanutra Partners 
         </title>
