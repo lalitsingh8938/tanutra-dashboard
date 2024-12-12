@@ -124,6 +124,7 @@ const BusinessProfile = () => {
 
     // Save formData to localStorage
     localStorage.setItem("businessData", JSON.stringify(formData));
+    alert("Data submitted successfully!");
 
     // Navigate to the next page
     navigate("/BusinessDescription"); // Replace with your desired route
@@ -162,11 +163,11 @@ const BusinessProfile = () => {
     );
     console.log(retrievedBusinessFullAddr); // This will log the object
 
-    alert(localStorage.getItem("legal_business_name"));
-    alert(localStorage.getItem("brand_name"));
-    alert(localStorage.getItem("gst_no"));
-    alert(localStorage.getItem("business_id"));
-    alert(localStorage.getItem("business_full_addr"));
+    // alert(localStorage.getItem("legal_business_name"));
+    // alert(localStorage.getItem("brand_name"));
+    // alert(localStorage.getItem("gst_no"));
+    // alert(localStorage.getItem("business_id"));
+    // alert(localStorage.getItem("business_full_addr"));
   };
 
   return (

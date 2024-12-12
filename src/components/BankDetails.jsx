@@ -33,6 +33,8 @@ function BankDetails() {
 
     // Save data to localStorage
     localStorage.setItem("bank_details", JSON.stringify(formData));
+    
+    alert("Data submitted successfully!");
 
     // Navigate to the next page
     navigate("/SocialMedia"); // Update this route with the actual next page
@@ -50,10 +52,10 @@ function BankDetails() {
     localStorage.setItem("account_number", formData.account_number);
     localStorage.setItem("ifsc_code", formData.ifsc_code);
 
-    alert(localStorage.getItem("bank_name"));
-    alert(localStorage.getItem("account_holder_name"));
-    alert(localStorage.getItem("account_number"));
-    alert(localStorage.getItem("ifsc_code"));
+    // alert(localStorage.getItem("bank_name"));
+    // alert(localStorage.getItem("account_holder_name"));
+    // alert(localStorage.getItem("account_number"));
+    // alert(localStorage.getItem("ifsc_code"));
   };
 
   return (

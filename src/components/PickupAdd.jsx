@@ -130,7 +130,7 @@ function PickupAdd() {
     // Save the pickup data in localStorage
     localStorage.setItem("pickupData", JSON.stringify(pickupData));
 
-    alert("Pickup data saved successfully!");
+    alert(" Data saved successfully!");
 
     // Redirect to the next page
     navigate("/KYCDocument"); // Adjust the route as per your requirement
