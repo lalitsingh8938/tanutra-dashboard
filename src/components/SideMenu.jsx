@@ -183,11 +183,11 @@ function SideMenu() {
             icon: "inventory.svg",
           },
           {
-            label: "Catalog Uploads",
-            route: "/Catelog_Uploads",
+            label: "Product Uploads",
+            route: "/ProductUpload",
             icon: "catelogupload.svg",
           },
-          { label: "Payments", route: "/", icon: "payments.svg" },
+          { label: "Payments", route: "/Catelog_uploads", icon: "payments.svg" },
         ].map(({ label, route, icon }) => (
           <div
             key={label}
