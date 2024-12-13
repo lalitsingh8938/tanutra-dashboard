@@ -499,56 +499,108 @@ const ProductUpload = () => {
     setProductImages(files);
   };
 
-  // Handle form submission
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Create the product data object
-   const product_data = {
-    title: formData.title,
-    category: formData.category,
-    description: formData.description,
-    dimensions: {
-      length_cm: formData.length_cm,
-      width_cm: formData.width_cm,
-      height_cm: formData.height_cm,
-      weight_gm: formData.weight_gm,
-    },
-    material_used: formData.material_used.split(","),
-    utility_or_usecase: formData.use_case_or_utility,
-    price_per_unit: formData.price_per_unit,
-    hsn_code: formData.hsn_code,
-    minimum_order_quantity: formData.minimum_order_quantity,
-  }
-    const productData = {
-      product_data: JSON.stringify(product_data),
-      product_images: productImages,
-    };
-
-    // Submit to API (example)
+  
+    // Create FormData object
+    const formData = new FormData();
+  
+    // Add product data as JSON string
+    formData.append("product_data", JSON.stringify({
+      title: formData.title,
+      category: formData.category,
+      description: formData.description,
+      dimensions: {
+        length_cm: formData.length_cm,
+        width_cm: formData.width_cm,
+        height_cm: formData.height_cm,
+        weight_gm: formData.weight_gm,
+      },
+      material_used: formData.material_used.split(","),
+      utility_or_usecase: formData.use_case_or_utility,
+      price_per_unit: formData.price_per_unit,
+      hsn_code: formData.hsn_code,
+      minimum_order_quantity: formData.minimum_order_quantity,
+    }));
+  
+    // Add images to FormData
+    productImages.forEach((image, index) => {
+      formData.append(`product_images`, image);
+    });
+  
     try {
-
-      const response = await fetch(
-        "https://api.tanutra.com/api/product/upload/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: productData,
-        }
-      );
+      const response = await fetch("https://api.tanutra.com/api/product/upload/", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Authorization header
+        },
+        body: formData, // Send FormData
+      });
+  
       if (response.ok) {
         alert("Product uploaded successfully!");
-        navigate("/ThanksYou"); // Navigate after successful upload
+        navigate("/ThanksYou");
       } else {
-        alert("Failed to upload product");
+        const errorData = await response.json();
+        alert(`Failed to upload product: ${errorData.message}`);
       }
     } catch (error) {
       console.error("Error uploading product:", error);
     }
   };
+  
+
+  // Handle form submission
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   // Create the product data object
+
+  //   const productData = {
+  //     product_data: {
+  //       title: formData.title,
+  //       category: formData.category,
+  //       description: formData.description,
+  //       dimensions: {
+  //         length_cm: formData.length_cm,
+  //         width_cm: formData.width_cm,
+  //         height_cm: formData.height_cm,
+  //         weight_gm: formData.weight_gm,
+  //       },
+  //       material_used: formData.material_used.split(","),
+  //       utility_or_usecase: formData.use_case_or_utility,
+  //       price_per_unit: formData.price_per_unit,
+  //       hsn_code: formData.hsn_code,
+  //       minimum_order_quantity: formData.minimum_order_quantity,
+  //     },
+  //     product_images: productImages,
+  //   };
+
+  //   // Submit to API (example)
+  //   try {
+
+  //     const response = await fetch(
+  //       "https://api.tanutra.com/api/product/upload/",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //         body: productData,
+  //       }
+  //     );
+  //     if (response.ok) {
+  //       alert("Product uploaded successfully!");
+  //       navigate("/ThanksYou"); // Navigate after successful upload
+  //     } else {
+  //       alert("Failed to upload product");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error uploading product:", error);
+  //   }
+  // };
 
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center">
