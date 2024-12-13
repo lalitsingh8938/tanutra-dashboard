@@ -504,30 +504,30 @@ const ProductUpload = () => {
     e.preventDefault();
 
     // Create the product data object
-    alert("hello")
+   const product_data = {
+    title: formData.title,
+    category: formData.category,
+    description: formData.description,
+    dimensions: {
+      length_cm: formData.length_cm,
+      width_cm: formData.width_cm,
+      height_cm: formData.height_cm,
+      weight_gm: formData.weight_gm,
+    },
+    material_used: formData.material_used.split(","),
+    utility_or_usecase: formData.use_case_or_utility,
+    price_per_unit: formData.price_per_unit,
+    hsn_code: formData.hsn_code,
+    minimum_order_quantity: formData.minimum_order_quantity,
+  }
     const productData = {
-      product_data: {
-        title: formData.title,
-        category: formData.category,
-        description: formData.description,
-        dimensions: {
-          length_cm: formData.length_cm,
-          width_cm: formData.width_cm,
-          height_cm: formData.height_cm,
-          weight_gm: formData.weight_gm,
-        },
-        material_used: formData.material_used.split(","),
-        utility_or_usecase: formData.use_case_or_utility,
-        price_per_unit: formData.price_per_unit,
-        hsn_code: formData.hsn_code,
-        minimum_order_quantity: formData.minimum_order_quantity,
-      },
-      product_images: productImages.map((image) => image.name),
+      product_data: JSON.stringify(product_data),
+      product_images: productImages,
     };
 
     // Submit to API (example)
     try {
-      alert("hello2")
+
       const response = await fetch(
         "https://api.tanutra.com/api/product/upload/",
         {
@@ -539,7 +539,6 @@ const ProductUpload = () => {
           body: JSON.stringify(productData),
         }
       );
-alert("hello3")
       if (response.ok) {
         alert("Product uploaded successfully!");
         navigate("/ThanksYou"); // Navigate after successful upload
