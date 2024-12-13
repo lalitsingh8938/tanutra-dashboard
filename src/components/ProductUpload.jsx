@@ -536,7 +536,7 @@ const ProductUpload = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
           },
-          body: JSON.stringify(productData),
+          body: productData,
         }
       );
       if (response.ok) {
