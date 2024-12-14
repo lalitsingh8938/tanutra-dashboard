@@ -199,7 +199,7 @@ function ThanksYou() {
   };
 
   return (
-    <div className="relative flex justify-center min-h-screen bg-cover bg-center">
+    <div className="relative flex justify-center min-h-screen bg-cover bg-center ml-[225px]">
       {/* Overlay */}
       <div className="absolute inset-0 bg-[#FFFCF4]"></div>
 

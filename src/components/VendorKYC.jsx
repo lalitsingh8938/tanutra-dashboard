@@ -213,7 +213,7 @@ function VendorKYC() {
 
   return (
     <div
-      className="relative border flex items-center justify-center min-h-screen bg-cover bg-center"
+      className="relative border flex items-center justify-center min-h-screen bg-cover bg-center ml-[225px]"
 
       // backgroundImage: `url("./background.png")`,// Background image
     >
