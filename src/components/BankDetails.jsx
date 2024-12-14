@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaLeftLong } from "react-icons/fa6";
+
 
 function BankDetails() {
   const [formData, setFormData] = useState({
@@ -50,11 +52,6 @@ function BankDetails() {
     localStorage.setItem("account_holder_name", formData.account_holder_name);
     localStorage.setItem("account_number", formData.account_number);
     localStorage.setItem("ifsc_code", formData.ifsc_code);
-
-    // alert(localStorage.getItem("bank_name"));
-    // alert(localStorage.getItem("account_holder_name"));
-    // alert(localStorage.getItem("account_number"));
-    // alert(localStorage.getItem("ifsc_code"));
   };
 
   return (
@@ -74,7 +71,15 @@ function BankDetails() {
 
           <div className="rounded-xl bg-transparent p-2 border">
             {/* Form */}
-            <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
+            <form onSubmit={handleSubmit} className="mt-5 bg-transparent">
+              <button
+                type="submit"
+                className="bg-[#ECB59D] opacity-60 text-black font-semibold mb-5 w-20 h-6 flex justify-center items-center rounded-md hover:bg-green-500"
+                onClick={() => navigate("/BusinessDescription")}
+              >
+                <FaLeftLong className="mr-2" />
+                Back
+              </button>
               {/* Section Title */}
               <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg">
                 <img

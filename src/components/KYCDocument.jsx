@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { FaLeftLong } from "react-icons/fa6";
 
 function KYCForm() {
   const [companyCertificate, setCompanyCertificate] = useState(null);
@@ -147,7 +148,16 @@ function KYCForm() {
             alt="logo"
           />
           <div className="rounded-xl bg-transparent p-2 border  md:max-w-3xl sm:max-w-2xl lg:max-w-4xl ">
-            <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
+            <form onSubmit={handleSubmit} className="mt-5 bg-transparent">
+
+            <button
+                type="submit"
+                className="bg-[#ECB59D] opacity-60 text-black font-semibold mb-5 w-20 h-6 flex justify-center items-center rounded-md hover:bg-green-500"
+                onClick={() => navigate("/PickupAdd")}
+              >
+                <FaLeftLong className="mr-2" />
+                Back
+              </button>
               <div className="flex  items-center mb-4">
                 <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg w-full">
                   <img

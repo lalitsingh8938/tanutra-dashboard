@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaLeftLong } from "react-icons/fa6";
+
 function BusinessDescription() {
   const [formData, setFormData] = useState({
     Tell_us_about_your_journey: "",
@@ -70,7 +72,16 @@ function BusinessDescription() {
 
           <div className="rounded-xl bg-transparent p-2 border">
             {/* Form */}
-            <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
+            <form onSubmit={handleSubmit} className="mt-2 bg-transparent">
+              <button
+                type="submit"
+                className="bg-[#ECB59D] opacity-60 text-black font-semibold mb-5 w-20 h-6 flex justify-center items-center rounded-md hover:bg-green-500"
+                onClick={() => navigate("/BusinessProfile")}
+              >
+                <FaLeftLong className="mr-2" />
+                Back
+              </button>
+
               {/* Section Title */}
               <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg">
                 <img

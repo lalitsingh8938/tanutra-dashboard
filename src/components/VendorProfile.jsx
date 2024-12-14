@@ -394,7 +394,7 @@ function VendorProfile() {
                       alt="Profile Preview"
                       className="w-24 h-24 mt-3 ml-16"
                     />
-                  )}
+                  )}                            
                 </div>
 
                 {/* Submit Button */}
