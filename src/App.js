@@ -35,8 +35,7 @@ function App() {
   return (
     <div className="bg-[#FFFCF4] h-screen">
       <Helmet>
-        <title>Tanutra Partners 
-        </title>
+        
         <meta name="description" content="Helmet application" />
       </Helmet>
      

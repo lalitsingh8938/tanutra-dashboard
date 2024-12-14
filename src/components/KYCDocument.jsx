@@ -137,7 +137,7 @@ function KYCForm() {
   };
 
   return (
-    <div className="relative flex items-center justify-center bg-cover bg-center lg:w-full md:w-1/2 ml-[225px]">
+    <div className="relative flex items-center justify-center bg-cover bg-center  xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[225px] 2xl:ml[300px]">
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
       <div className="relative z-10 w-full max-w-4xl bg-transparent rounded-lg">
         <div className="p-2 mt-20">

@@ -56,7 +56,7 @@ function SocialMedia() {
   };
 
   return (
-    <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center ml-[225px]">
+    <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[200px] 2xl:ml[300px]">
       {/* Overlay */}
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
 
