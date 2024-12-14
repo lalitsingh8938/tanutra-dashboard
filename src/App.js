@@ -62,7 +62,7 @@ function App() {
           <Route path="/KYCDocument" element={<><Header /><SideMenu /><KYCDocument /></>}/>
           <Route path="/PickupAdd" element={<> <Header /><SideMenu /><PickupAdd /></>}/>
           <Route path="/SocialMedia" element={<> <Header /><SideMenu /><SocialMedia /></>}/>
-          <Route path="/ProductUpload" element={<> <Header /><ProductUpload /></>}/>
+          <Route path="/ProductUpload" element={<> <Header /><SideMenu /><ProductUpload /></>}/>
     
         </Routes>
       </Router>
