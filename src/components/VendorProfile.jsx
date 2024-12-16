@@ -130,13 +130,26 @@ function VendorProfile() {
     return new File([u8arr], filename, { type: mime });
   };
 
+  const [formErrors, setFormErrors] = useState({}); // For tracking errors in the form
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!formData.first_name || !formData.last_name || !formData.phone) {
-      setErrorMessage("Please fill in all required fields.");
-      return;
-    }
+  
+    // Validate required fields
+    const errors = {};
+    if (!formData.first_name) errors.first_name = "First Name is required";
+    if (!formData.last_name) errors.last_name = "Last Name is required";
+    if (!formData.phone) errors.phone = "Phone Number is required";
+    if (!formData.DOB) errors.DOB = "Date of Birth is required";
+    if (!formData.gender) errors.gender = "Gender is required";
+    if (!formData.location[0].country)
+      errors.country = "Country is required";
+    if (!formData.location[0].state)
+      errors.state = "State is required";
+    if (!formData.location[0].city)
+      errors.city = "City is required";
+  
+    setFormErrors(errors);
 
     try {
       const accessToken = localStorage.getItem("access_token");
@@ -184,6 +197,7 @@ function VendorProfile() {
         });
         setImage(null);
         setErrorMessage("");
+        
         navigate("/"); // Navigate to home or another page
       }
     } catch (error) {
@@ -191,7 +205,7 @@ function VendorProfile() {
         "Error during profile creation:",
         error.response?.data || error.message
       );
-      setErrorMessage("Profile creation failed. Please try again.");
+      setErrorMessage("Profile  creation failed. Please try again.");
     }
   };
 
@@ -394,7 +408,7 @@ function VendorProfile() {
                       alt="Profile Preview"
                       className="w-24 h-24 mt-3 ml-16"
                     />
-                  )}                            
+                  )}
                 </div>
 
                 {/* Submit Button */}
