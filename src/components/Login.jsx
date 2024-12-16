@@ -50,7 +50,8 @@ function Login() {
         // Save tokens to localStorage
         localStorage.setItem("access_token", access_token);
         localStorage.setItem("refresh_token", refresh_token);
-        alert(access_token, refresh_token);
+        // alert(access_token, refresh_token);
+      
 
         // Reset form data
         setFormData({
@@ -59,6 +60,7 @@ function Login() {
         });
 
         setErrorMessage(""); // Clear any error messages
+        alert ("Logged in Successfully!")
 
         // Navigate to home page
         navigate("/");
