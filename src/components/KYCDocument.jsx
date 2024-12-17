@@ -149,8 +149,7 @@ function KYCForm() {
           />
           <div className="rounded-xl bg-transparent p-2 border  md:max-w-3xl sm:max-w-2xl lg:max-w-4xl ">
             <form onSubmit={handleSubmit} className="mt-5 bg-transparent">
-
-            <button
+              <button
                 type="submit"
                 className="bg-[#ECB59D] opacity-60 text-black font-semibold mb-5 w-20 h-6 flex justify-center items-center rounded-md hover:bg-green-500"
                 onClick={() => navigate("/PickupAdd")}
@@ -162,16 +161,16 @@ function KYCForm() {
                 <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg w-full">
                   <img
                     src="vendor_profile1.png"
-                    className="w-8 h-8 rounded-xl ml-32 cursor-pointer border"
+                    className="w-8 h-8 rounded-xl ml-12 cursor-pointer border"
                     alt="logo"
                   />
-                  <p className="px-5 py-1 flex text-lg  font-semibold text-black w-full">
+                  <p className="px-4 py-1 flex text-lg  font-semibold text-black w-full">
                     KYC Documents
                   </p>
                 </div>
               </div>
 
-              <div className="flex flex-wrap justify-center p-5">
+              <div className="flex flex-wrap justify-center p-5 gap-8">
                 <div className="w-72 flex flex-col items-center bg-white border rounded-lg p-3 m-3">
                   <div className="font-medium text-slate-800 text-center mb-2">
                     <img

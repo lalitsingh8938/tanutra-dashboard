@@ -370,6 +370,17 @@
 
 // export default ProductUpload;
 
+
+
+
+
+
+
+
+
+
+
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -680,7 +691,6 @@ const ProductUpload = () => {
                 </div>
               </div>
 
-              
               {/* Product Images */}
               <div className="flex flex-wrap justify-center items-center gap-8 p-5">
                 {/* Image Box on Left */}
