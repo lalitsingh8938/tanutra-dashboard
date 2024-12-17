@@ -122,6 +122,24 @@ const BusinessProfile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+     // Validation checks for required fields
+  const errors = [];
+  if (!formData.legal_business_name) errors.push("Legal Business Name is required.");
+  if (!formData.brand_name) errors.push("Brand Name is required.");
+  if (!formData.gst_no) errors.push("GST Number is required.");
+  if (!formData.business_id) errors.push("Business ID is required.");
+  if (!selectedCountry) errors.push("Country is required.");
+  if (!selectedState) errors.push("State is required.");
+  if (!formData.business_full_addr.city) errors.push("City is required.");
+  if (!formData.business_full_addr.street_addr) errors.push("Street Address is required.");
+  if (!formData.business_full_addr.pincode) errors.push("Pincode is required.");
+
+  // If there are errors, show an alert and prevent submission
+  if (errors.length > 0) {
+    alert("Please fill all required fields:\n" + errors.join("\n"));
+    return;
+  }
+
     // Save formData to localStorage
     localStorage.setItem("businessData", JSON.stringify(formData));
     alert("Data submitted successfully!");

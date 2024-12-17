@@ -23,20 +23,23 @@ function BusinessDescription() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Check for empty fields
-    const requiredFields = [
-      "Tell_us_about_your_journey",
-      "Business_Description",
-      "Challenges_faced_in_Business",
-      "How_Tanutra_can_help",
-      "Year_in_Business",
-    ];
+    // Validation checks for required fields
+    const errors = [];
+    if (!formData.Tell_us_about_your_journey)
+      errors.push("Tell_us_about_your_journey is required.");
+    if (!formData.Business_Description)
+      errors.push("Business_Description is required.");
+    if (!formData.Challenges_faced_in_Business)
+      errors.push("Challenges_faced_in_Business is required.");
+    if (!formData.How_Tanutra_can_help)
+      errors.push("How_Tanutra_can_help is required.");
+    if (!formData.Year_in_Business)
+      errors.push("Year_in_Business is required.");
 
-    for (let field of requiredFields) {
-      if (!formData[field]) {
-        setErrorMessage("Please fill in all required fields.");
-        return;
-      }
+    // If there are errors, show an alert and prevent submission
+    if (errors.length > 0) {
+      alert("Please fill all required fields:\n" + errors.join("\n"));
+      return;
     }
 
     // Save data to local storage
@@ -176,9 +179,9 @@ function BusinessDescription() {
               </div>
 
               {/* Error Message */}
-              {errorMessage && (
+              {/* {errorMessage && (
                 <p className="text-red-500 text-center mt-4">{errorMessage}</p>
-              )}
+              )} */}
             </form>
           </div>
         </div>

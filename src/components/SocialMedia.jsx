@@ -31,12 +31,12 @@ function SocialMedia() {
       "others",
     ];
 
-    for (let field of requiredFields) {
-      if (!formData[field]) {
-        setErrorMessage("Please fill in all required fields.");
-        return;
-      }
-    }
+    // for (let field of requiredFields) {
+    //   if (!formData[field]) {
+    //     setErrorMessage("Please fill in all required fields.");
+    //     return;
+    //   }
+    // }
 
     // Save data to local storage
     localStorage.setItem("socialMediaData", JSON.stringify(formData)); 
@@ -55,14 +55,13 @@ function SocialMedia() {
     });
     setErrorMessage("");
   };
-
   return (
-    <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[200px] 2xl:ml[300px]">
+    <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[200px] 2xl:ml-[300px]">
       {/* Overlay */}
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
-
+  
       {/* Form Container */}
-      <div className="relative z-10 w-full max-w-4xl bg-transparent rounded-lg">
+      <div className="relative z-10 w-full max-w-3xl bg-transparent rounded-lg">
         <div className="p-2 mt-20">
           {/* Logo */}
           <img
@@ -70,11 +69,11 @@ function SocialMedia() {
             className="w-52 h-24 mx-auto rounded-t-xl cursor-pointer"
             alt="logo"
           />
-
+  
           <div className="rounded-xl bg-transparent p-2 border">
             {/* Form */}
             <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
-            <button
+              <button
                 type="submit"
                 className="bg-[#ECB59D] opacity-60 text-black font-semibold mb-5 w-20 h-6 flex justify-center items-center rounded-md hover:bg-green-500"
                 onClick={() => navigate("/BankDetails")}
@@ -82,9 +81,7 @@ function SocialMedia() {
                 <FaLeftLong className="mr-2" />
                 Back
               </button>
-
-
-
+  
               {/* Section Title */}
               <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg">
                 <img
@@ -96,27 +93,27 @@ function SocialMedia() {
                   Social Media Links :
                 </p>
               </div>
-
+  
               {/* Social Media Links */}
               <div className="flex flex-wrap justify-center items-center gap-8 p-5">
                 {/* Row 1: Instagram and Facebook */}
-                <div className="flex w-full gap-8">
-                  <div className="flex flex-col w-1/2">
+                <div className="flex flex-wrap justify-between gap-8 ">
+                  <div className="flex flex-col w-full sm:w-72">
                     <label className="font-semibold text-slate-800 p-2 flex">
                       Instagram
                       <p className="ml-2 opacity-50">(optional)</p>
                     </label>
                     <input
                       type="text"
-                      name="instagram" 
+                      name="instagram"
                       placeholder="www.instagram.com"
                       value={formData.instagram}
                       onChange={handleChange}
-                      className="w-96 h-10 border rounded-md p-3"
+                      className="w-full h-10 border rounded-md p-3"
                     />
                   </div>
-
-                  <div className="flex flex-col w-1/2">
+  
+                  <div className="flex flex-col w-full sm:w-72">
                     <label className="font-semibold text-slate-800 p-2 flex">
                       Facebook
                       <p className="ml-2 opacity-50">(optional)</p>
@@ -127,14 +124,14 @@ function SocialMedia() {
                       placeholder="www.facebook.com"
                       value={formData.facebook}
                       onChange={handleChange}
-                      className="w-96 h-10 border rounded-md p-3"
+                      className="w-full h-10 border rounded-md p-3"
                     />
                   </div>
                 </div>
-
+  
                 {/* Row 2: LinkedIn and Twitter */}
-                <div className="flex w-full gap-8">
-                  <div className="flex flex-col w-1/2">
+                <div className="flex flex-wrap justify-between gap-8">
+                  <div className="flex flex-col w-full sm:w-72">
                     <label className="font-semibold text-slate-800 p-2 flex">
                       LinkedIn
                       <p className=" ml-2 opacity-50">(optional)</p>
@@ -145,28 +142,28 @@ function SocialMedia() {
                       placeholder="www.linkedin.com"
                       value={formData.linkedIn}
                       onChange={handleChange}
-                      className="w-96 h-10 border rounded-md p-3"
+                      className="w-full h-10 border rounded-md p-3"
                     />
                   </div>
-
-                  <div className="flex flex-col w-1/2">
+  
+                  <div className="flex flex-col w-full sm:w-72">
                     <label className="font-semibold text-slate-800 p-2 flex">
                       Twitter
                       <p className=" ml-2 opacity-50">(optional)</p>
                     </label>
                     <input
                       type="text"
-                      name="twitter" // Corrected name here
+                      name="twitter"
                       placeholder="www.twitter.com"
                       value={formData.twitter}
                       onChange={handleChange}
-                      className="w-96 h-10 border rounded-md p-3"
+                      className="w-full h-10 border rounded-md p-3"
                     />
                   </div>
                 </div>
-
+  
                 {/* Row 3: Others */}
-                <div className="flex flex-col w-full">
+                <div className="flex flex-col w-full sm:w-72">
                   <label className="font-semibold text-slate-800 p-2 flex">
                     Others
                     <p className=" ml-2 opacity-50">(optional)</p>
@@ -176,11 +173,11 @@ function SocialMedia() {
                     name="others"
                     value={formData.others}
                     onChange={handleChange}
-                    className="w-96 h-10 border rounded-md p-3"
+                    className="w-full h-10 border rounded-md p-3"
                   />
                 </div>
               </div>
-
+  
               {/* Submit Button */}
               <div className="flex items-center justify-center mt-10">
                 <button
@@ -190,7 +187,7 @@ function SocialMedia() {
                   Next
                 </button>
               </div>
-
+  
               {/* Error Message */}
               {errorMessage && (
                 <p className="text-red-500 text-center mt-4">{errorMessage}</p>
@@ -201,6 +198,7 @@ function SocialMedia() {
       </div>
     </div>
   );
+  
 }
 
 export default SocialMedia;
