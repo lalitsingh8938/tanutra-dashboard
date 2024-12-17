@@ -63,7 +63,7 @@ function Login() {
         alert ("Logged in Successfully!")
 
         // Navigate to home page
-        navigate("/");
+        navigate("/Dashboard");
       }
     } catch (error) {
       console.error(
@@ -178,3 +178,4 @@ function Login() {
 }
 
 export default Login;
+
