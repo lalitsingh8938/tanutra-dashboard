@@ -33,8 +33,6 @@ import SideMenu from "./components/SideMenu";
 const Dashboard = () => {
   return (
     <div>
-      <h1>Welcome to the Home Page!</h1>
-
       {/* All pages will be rendered here */}
       <Header />
       <List />

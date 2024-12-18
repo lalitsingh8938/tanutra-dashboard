@@ -44,7 +44,7 @@ function SideMenu() {
           className={`${itemWidth} h-11 border flex items-center cursor-pointer ${
             activeItem === "Home" ? "bg-[#1CACBD0A]" : ""
           }`}
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/Dashboard")}
         >
           <BiSupport className="h-5 w-5 ml-5" />
           <p className="text-black text-sm ml-2">Home</p>
