@@ -246,6 +246,7 @@ import Signup from './components/Signup';
 import OTPAuth from './components/OTPAuth';
 import Dashboard from './Dashboard';
 import VendorProfile from './components/VendorProfile';
+import Stepper from './components/Stepper';
 import BusinessProfile from './components/BusinessProfile';
 import BusinessDescription from './components/BusinessDescription';
 import BankDetails from './components/BankDetails';
@@ -297,6 +298,16 @@ function App() {
                   <Header />
                   <SideMenu />
                   <VendorProfile />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/Stepper"
+              element={
+                <PrivateRoute>
+                  <Header />
+                  <SideMenu />
+                  <Stepper />
                 </PrivateRoute>
               }
             />

@@ -205,7 +205,7 @@ function Login() {
 
     // Basic validation
     if (!formData.email || !formData.password) {
-    
+     
       setErrorMessage("Email and password are required.");
       return;
     }
