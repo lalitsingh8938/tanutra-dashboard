@@ -178,13 +178,25 @@
 
 // export default Login;
 
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////
+
+
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext"; // Import useAuth hook
 
 function Login() {
-  const { setIsAuthenticated } = useAuth(); // Access the setter to update auth state
+  const { login } = useAuth(); // Use login function from AuthContext
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -205,7 +217,6 @@ function Login() {
 
     // Basic validation
     if (!formData.email || !formData.password) {
-     
       setErrorMessage("Email and password are required.");
       return;
     }
@@ -220,7 +231,6 @@ function Login() {
         {
           headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`, // Include token in the headers
           },
         }
       );
@@ -231,14 +241,10 @@ function Login() {
         // Extract tokens from the nested data object
         const access_token = response.data?.data?.access;
         const refresh_token = response.data?.data?.refresh;
+        const user = response.data?.data?.user; // Assuming user data is also returned
 
-        // Save tokens to localStorage
-        localStorage.setItem("access_token", access_token);
-        localStorage.setItem("refresh_token", refresh_token);
-        // alert(access_token, refresh_token);
-
-        setIsAuthenticated(true); // Set the authentication state
-
+        // Save tokens and user info to localStorage
+        login({ access_token, refresh_token, user });
 
         // Reset form data
         setFormData({
@@ -249,7 +255,7 @@ function Login() {
         setErrorMessage(""); // Clear any error messages
         alert("Logged in Successfully!");
 
-        // Navigate to home page
+        // Navigate to dashboard
         navigate("/Dashboard");
       }
     } catch (error) {
@@ -274,12 +280,11 @@ function Login() {
     <div
       className="section"
       style={{
-        background: `
-          radial-gradient(68.44% 68.44% at 11.68% 128.28%, rgba(31, 228, 160, 0.38) 0%, rgba(32, 228, 157, 0) 100%),
-          radial-gradient(62.06% 62.06% at 56.94% 1.01%, rgba(33, 159, 248, 0.2) 0%, rgba(30, 159, 252, 0) 100%),
-          radial-gradient(25.75% 98.99% at 94.13% 88.82%, rgba(181, 44, 232, 0.2) 0%, rgba(176, 36, 227, 0) 100%),
-          linear-gradient(256.1deg, #f8f5f5, #d5ebf9 22.92%, #d5e9f5 38.54%, #fbf9e8 73.96%, #f0eded),
-          radial-gradient(112% 112% at 50% -8.08%, #fff 0%, #e4f1fe 100%)`,
+        background: `radial-gradient(68.44% 68.44% at 11.68% 128.28%, rgba(31, 228, 160, 0.38) 0%, rgba(32, 228, 157, 0) 100%),
+        radial-gradient(62.06% 62.06% at 56.94% 1.01%, rgba(33, 159, 248, 0.2) 0%, rgba(30, 159, 252, 0) 100%),
+        radial-gradient(25.75% 98.99% at 94.13% 88.82%, rgba(181, 44, 232, 0.2) 0%, rgba(176, 36, 227, 0) 100%),
+        linear-gradient(256.1deg, #f8f5f5, #d5ebf9 22.92%, #d5e9f5 38.54%, #fbf9e8 73.96%, #f0eded),
+        radial-gradient(112% 112% at 50% -8.08%, #fff 0%, #e4f1fe 100%)`,
       }}
     >
       <div className="flex items-center justify-center w-full h-screen">
@@ -289,12 +294,10 @@ function Login() {
             className="w-48 h-24 mx-auto rounded-t-xl cursor-pointer"
             alt="logo"
           />
-
           <div className="max-w-lg h-[400px] mt-5 mx-auto border rounded-xl bg-white p-6">
             <p className="text-xl text-fuchsia-800 font-semibold text-center">
               Login to your supplier panel
             </p>
-
             <form onSubmit={handleSubmit} className="mt-10 text-center">
               <div className="flex items-center mt-4">
                 <label

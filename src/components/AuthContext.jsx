@@ -1,26 +1,80 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+// AuthContext.js
+
+
+
+
+
+// import React, { createContext, useState, useContext } from 'react';
+
+// const AuthContext = createContext();
+
+// export const AuthProvider = ({ children }) => {
+//   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("access_token") ? true : false); // Check if token exists in localStorage
+
+//   const login = () => setIsLoggedIn(true);
+//   const logout = () => {
+//     setIsLoggedIn(false);
+//     localStorage.removeItem("access_token");
+//     localStorage.removeItem("refresh_token");
+//   };
+
+//   return (
+//     <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+//       {children}
+//     </AuthContext.Provider>
+//   );
+// };
+
+// export const useAuth = () => useContext(AuthContext);
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////
+
+import { createContext, useContext, useState, useEffect } from "react";
 
 // Create the AuthContext
-export const AuthContext = createContext();
+const AuthContext = createContext();
 
-// AuthProvider component to manage authentication state
+// Custom hook to use auth context
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
+
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    // Check if the user has an access token (if they are logged in)
-    const access_token = localStorage.getItem("access_token");
-    if (access_token) {
+    // Check if the access_token exists in localStorage
+    const accessToken = localStorage.getItem("access_token");
+    if (accessToken) {
       setIsAuthenticated(true);
     }
   }, []);
 
+  const login = () => {
+    setIsAuthenticated(true);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    setIsAuthenticated(false);
+  };
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
-
-// Custom hook to use the authentication context
-export const useAuth = () => useContext(AuthContext);
