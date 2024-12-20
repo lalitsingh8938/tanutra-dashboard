@@ -341,10 +341,13 @@
 
 // export default Signup;
 
+
 import React, { useState } from "react";
 import axios from "axios";
 import { FaLeftLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify"; // Import toast for notifications
+import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -382,7 +385,6 @@ function Signup() {
         "https://api.tanutra.com/api/register/",
         {
           email: formData.email,
-
           password: formData.password,
           password2: formData.confirm_password,
         },
@@ -394,7 +396,7 @@ function Signup() {
       );
 
       if (response.status === 200) {
-        alert("OTP sent successfully!");
+        toast.success("OTP sent successfully!"); // Triggering the success toast
 
         // Store email in localStorage
         localStorage.setItem("email", formData.email);
@@ -420,6 +422,7 @@ function Signup() {
       setErrorMessage(
         `Registration failed: ${error.response?.data?.detail || error.message}`
       );
+      toast.error(`Error: ${error.response?.data?.detail || error.message}`); // Triggering the error toast
     }
   };
 
@@ -482,7 +485,7 @@ function Signup() {
           </div>
           <div className="mt-8 items-center justify-between flex">
             <button
-              type="submit"
+              type="button"
               className="text-white font-semibold ml-14 w-20 h-9 bg-blue-500 flex justify-center text-lg items-center rounded-md hover:bg-green-500"
               onClick={() => navigate("/Login")}
             >
