@@ -239,6 +239,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './components/AuthContext';
+import { ToastContainer } from 'react-toastify';  // Import ToastContainer
+
 
 // Import your components
 import Login from './components/Login';
@@ -270,10 +272,23 @@ function App() {
     <AuthProvider>
       <div className="bg-[#FFFCF4] h-screen">
         <Router>
+        <ToastContainer 
+          position="top-center"  // Customize position
+          autoClose={3000}      // 3 seconds ke baad auto-close
+          hideProgressBar={false} 
+          newestOnTop={false}
+          closeOnClick
+          pauseOnHover
+          draggable
+          pauseOnFocusLoss
+        />
           <Routes>
             {/* Public Routes */}
             <Route path="/" element={<Login />} />
             <Route path="/Login" element={<Login />}/>
+
+           
+           
             <Route path="/Signup" element={<Signup />} />
             <Route path="/OTPAuth" element={<OTPAuth />} />
             <Route path="/ForgotPassword" element={<ForgotPassword />} />

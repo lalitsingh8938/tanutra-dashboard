@@ -40,7 +40,7 @@ const Header = () => {
         <IoSearchOutline className="cursor-pointer w-6 h-6 hover:text-orange-600 hover:scale-110" />
         <FaRegUser
           className="cursor-pointer w-6 h-6 hover:text-orange-600 hover:scale-110"
-          onClick={() => navigate("/Login")}
+          onClick={() => navigate("/Dashboard")}
         />
         <IoMdHeartEmpty className="cursor-pointer w-6 h-6 hover:text-orange-600 hover:scale-110" />
         <IoBagOutline className="cursor-pointer w-6 h-6 hover:text-orange-600 hover:scale-110" />

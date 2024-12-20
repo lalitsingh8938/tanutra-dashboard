@@ -629,7 +629,7 @@ function VendorProfile() {
         setImage(null);
         setErrorMessage("");
 
-        navigate("/"); // Navigate to home or another page
+        navigate("/Dashboard"); // Navigate to home or another page
       }
     } catch (error) {
       console.error(

@@ -493,7 +493,7 @@ function Signup() {
               className="w-24 text-center items-end h-9 mr-14 bg-blue-500 text-white cursor-pointer font-medium rounded-md text-lg  hover:bg-green-500"
               type="submit"
             >
-              Sign up
+              Sign Up
             </button>
           </div>
           <div className="mt-8 text-center">
