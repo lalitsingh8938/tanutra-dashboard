@@ -274,7 +274,7 @@ function App() {
         <Router>
         <ToastContainer 
           position="top-center"  // Customize position
-          autoClose={3000}      // 3 seconds ke baad auto-close
+          autoClose={2000}      // 3 seconds ke baad auto-close
           hideProgressBar={false} 
           newestOnTop={false}
           closeOnClick

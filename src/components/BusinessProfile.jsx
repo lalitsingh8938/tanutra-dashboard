@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Country, State, City } from "country-state-city";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify"; // Import toast
 
 const BusinessProfile = () => {
   const [countries, setCountries] = useState([]);
@@ -136,13 +137,13 @@ const BusinessProfile = () => {
 
   // If there are errors, show an alert and prevent submission
   if (errors.length > 0) {
-    alert("Please fill all required fields:\n" + errors.join("\n"));
+    toast.error("Please fill all required fields:\n" + errors.join("\n"));
     return;
   }
 
     // Save formData to localStorage
     localStorage.setItem("businessData", JSON.stringify(formData));
-    alert("Data submitted successfully!");
+    toast.success("Data submitted successfully!");
 
     // Navigate to the next page
     navigate("/BusinessDescription"); // Replace with your desired route

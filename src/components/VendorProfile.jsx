@@ -432,19 +432,12 @@
 
 // export default VendorProfile;
 
-
-
-
-
-
-
-
-
-
 import React, { useState, useEffect } from "react";
 import { Country, State, City } from "country-state-city";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify"; // Import toast
 import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 
 function VendorProfile() {
   const [countries, setCountries] = useState([]);
@@ -619,7 +612,7 @@ function VendorProfile() {
       );
 
       if (response.status === 201) {
-        alert("Profile created successfully!");
+        toast.success("Profile created successfully!");
         setFormData({
           first_name: "",
           last_name: "",
@@ -645,12 +638,14 @@ function VendorProfile() {
         "Error during profile creation:",
         error.response?.data || error.message
       );
-      setErrorMessage("Profile  creation failed. Please try again.");
+      toast.error("Profile creation failed. Please try again.");
     }
   };
 
   return (
     <div className="relative  flex items-center justify-center min-h-screen bg-cover bg-center  xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[200px] 2xl:ml[300px]">
+      <ToastContainer position="top-center" autoClose={3000} theme="colored" />
+
       {/* Overlay */}
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
 
@@ -862,9 +857,9 @@ function VendorProfile() {
                 </div>
               </div>
 
-              {errorMessage && (
+              {/* {errorMessage && (
                 <p className="text-red-500 text-center mt-4">{errorMessage}</p>
-              )}
+              )} */}
             </form>
           </div>
         </div>
