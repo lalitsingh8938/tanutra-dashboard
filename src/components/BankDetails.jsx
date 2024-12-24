@@ -196,10 +196,11 @@
 
 // export default BankDetails;
 
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaLeftLong } from "react-icons/fa6";
+import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 
 function BankDetails() {
   const [formData, setFormData] = useState({
@@ -230,13 +231,13 @@ function BankDetails() {
 
     // If there are errors, show an alert and prevent submission
     if (errors.length > 0) {
-      alert(`Please fill the following fields:\n${errors.join("\n")}`);
+      toast.error(`Please fill the following fields:\n${errors.join("\n")}`);
       return;
     }
 
     // Save data to localStorage
     localStorage.setItem("bank_details", JSON.stringify(formData));
-    alert("Data submitted successfully!");
+    toast.success("Data submitted successfully!");
 
     // Navigate to the next page
     navigate("/SocialMedia");
@@ -245,6 +246,17 @@ function BankDetails() {
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[200px] 2xl:ml[300px]">
       {/* Overlay */}
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
 
       {/* Form Container */}

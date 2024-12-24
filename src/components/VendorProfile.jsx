@@ -435,9 +435,9 @@
 import React, { useState, useEffect } from "react";
 import { Country, State, City } from "country-state-city";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify"; // Import toast
-import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify"; // Import toast
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 function VendorProfile() {
   const [countries, setCountries] = useState([]);
@@ -638,13 +638,24 @@ function VendorProfile() {
         "Error during profile creation:",
         error.response?.data || error.message
       );
-      toast.error("Profile creation failed. Please try again.");
+      toast.error("Profile already exits.");
+      // toast.error("Profile creation failed. Please try again.");
     }
   };
 
   return (
     <div className="relative  flex items-center justify-center min-h-screen bg-cover bg-center  xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[200px] 2xl:ml[300px]">
-      <ToastContainer position="top-center" autoClose={3000} theme="colored" />
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>

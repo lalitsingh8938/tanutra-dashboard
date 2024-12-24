@@ -180,7 +180,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify"; // Import toast
+import { ToastContainer, toast } from "react-toastify"; // Import toast
 import { useAuth } from "./AuthContext"; // Import useAuth hook
 
 function Login({ isAuth }) {
@@ -251,7 +251,10 @@ function Login({ isAuth }) {
         navigate("/Dashboard");
       }
     } catch (error) {
-      console.error("Error during login:", error.response?.data || error.message);
+      console.error(
+        "Error during login:",
+        error.response?.data || error.message
+      );
 
       if (error.response) {
         const errorMessage =
@@ -259,7 +262,9 @@ function Login({ isAuth }) {
         setErrorMessage(errorMessage);
         toast.error(errorMessage); // Show error toast
       } else {
-        setErrorMessage("An unexpected error occurred. Please try again later.");
+        setErrorMessage(
+          "An unexpected error occurred. Please try again later."
+        );
         toast.error("An unexpected error occurred. Please try again later.");
       }
     } finally {

@@ -306,6 +306,8 @@ import React, { useState, useEffect } from "react";
 import { Country, State, City } from "country-state-city";
 import { useNavigate } from "react-router-dom";
 import { FaLeftLong } from "react-icons/fa6";
+import { ToastContainer, toast } from "react-toastify"; // Import toast
+import "react-toastify/dist/ReactToastify.css";
 
 function PickupAdd() {
   const [countries, setCountries] = useState([]);
@@ -434,7 +436,7 @@ function PickupAdd() {
     }
 
     if (errors.length > 0) {
-      alert(`Please fill the following fields:\n${errors.join("\n")}`);
+      toast.error(`Please fill the following fields:\n${errors.join("\n")}`);
       return;
     }
 
@@ -456,7 +458,7 @@ function PickupAdd() {
     // Save the pickup data in localStorage
     localStorage.setItem("pickupData", JSON.stringify(pickupData));
 
-    alert("Data saved successfully!");
+    toast.success("Data saved successfully!");
 
     // Redirect to the next page
     navigate("/KYCDocument"); // Adjust the route as per your requirement
@@ -464,6 +466,17 @@ function PickupAdd() {
 
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[200px] 2xl:ml[300px]">
+       <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       {/* Overlay */}
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
 

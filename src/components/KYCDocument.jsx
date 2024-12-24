@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FaLeftLong } from "react-icons/fa6";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function KYCForm() {
   const [companyCertificate, setCompanyCertificate] = useState(null);
@@ -32,7 +34,7 @@ function KYCForm() {
       !kycDocuments.gstCertificate ||
       !kycDocuments.brandLogo
     ) {
-      alert("Please upload all required documents.");
+      toast.error("Please upload all required documents.");
       return;
     }
 
@@ -123,22 +125,33 @@ function KYCForm() {
       );
 
       if (response.status === 201) {
-        alert("Data submitted successfully!");
+        toast.success("Data submitted successfully!");
         navigate("/ThanksYou");
       } else {
-        alert(`Error: ${response.data.message || "Something went wrong!"}`);
+        toast.error(`Error: ${response.data.message || "Something went wrong!"}`);
       }
     } catch (error) {
       console.error(
         "Error during API call:",
         error.response?.data || error.message
       );
-      alert(`Error: ${error.message}`);
+      toast.error(`Error: ${error.message}`);
     }
   };
 
   return (
     <div className="relative flex items-center justify-center bg-cover bg-center  xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[225px] 2xl:ml[300px]">
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
       <div className="relative z-10 w-full max-w-4xl bg-transparent rounded-lg">
         <div className="p-2 mt-20">

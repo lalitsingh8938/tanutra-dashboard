@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaLeftLong } from "react-icons/fa6";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function BusinessDescription() {
   const [formData, setFormData] = useState({
@@ -38,13 +40,13 @@ function BusinessDescription() {
 
     // If there are errors, show an alert and prevent submission
     if (errors.length > 0) {
-      alert("Please fill all required fields:\n" + errors.join("\n"));
+      toast.error("Please fill all required fields:\n" + errors.join("\n"));
       return;
     }
 
     // Save data to local storage
     localStorage.setItem("businessDescriptionData", JSON.stringify(formData));
-    alert("Data saved successfully!");
+    toast.success("Data saved successfully!");
     navigate("/BankDetails"); // Replace with your desired route
 
     // Clear the form
@@ -61,6 +63,18 @@ function BusinessDescription() {
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[200px] 2xl:ml[300px]">
       {/* Overlay */}
+
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
 
       {/* Form Container */}

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaLeftLong } from "react-icons/fa6";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function SocialMedia() {
   const navigate = useNavigate();
@@ -39,8 +41,8 @@ function SocialMedia() {
     // }
 
     // Save data to local storage
-    localStorage.setItem("socialMediaData", JSON.stringify(formData)); 
-    alert("Data saved successfully!");
+    localStorage.setItem("socialMediaData", JSON.stringify(formData));
+    toast.success("Data saved successfully!");
 
     // Navigate to the next page
     navigate("/PickupAdd");
@@ -57,9 +59,20 @@ function SocialMedia() {
   };
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[200px] 2xl:ml-[300px]">
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       {/* Overlay */}
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
-  
+
       {/* Form Container */}
       <div className="relative z-10 w-full max-w-3xl bg-transparent rounded-lg">
         <div className="p-2 mt-20">
@@ -69,7 +82,7 @@ function SocialMedia() {
             className="w-52 h-24 mx-auto rounded-t-xl cursor-pointer"
             alt="logo"
           />
-  
+
           <div className="rounded-xl bg-transparent p-2 border">
             {/* Form */}
             <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
@@ -81,7 +94,7 @@ function SocialMedia() {
                 <FaLeftLong className="mr-2" />
                 Back
               </button>
-  
+
               {/* Section Title */}
               <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg">
                 <img
@@ -93,7 +106,7 @@ function SocialMedia() {
                   Social Media Links :
                 </p>
               </div>
-  
+
               {/* Social Media Links */}
               <div className="flex flex-wrap justify-center items-center gap-8 p-5">
                 {/* Row 1: Instagram and Facebook */}
@@ -112,7 +125,7 @@ function SocialMedia() {
                       className="w-full h-10 border rounded-md p-3"
                     />
                   </div>
-  
+
                   <div className="flex flex-col w-full sm:w-72">
                     <label className="font-semibold text-slate-800 p-2 flex">
                       Facebook
@@ -128,7 +141,7 @@ function SocialMedia() {
                     />
                   </div>
                 </div>
-  
+
                 {/* Row 2: LinkedIn and Twitter */}
                 <div className="flex flex-wrap justify-between gap-8">
                   <div className="flex flex-col w-full sm:w-72">
@@ -145,7 +158,7 @@ function SocialMedia() {
                       className="w-full h-10 border rounded-md p-3"
                     />
                   </div>
-  
+
                   <div className="flex flex-col w-full sm:w-72">
                     <label className="font-semibold text-slate-800 p-2 flex">
                       Twitter
@@ -161,7 +174,7 @@ function SocialMedia() {
                     />
                   </div>
                 </div>
-  
+
                 {/* Row 3: Others */}
                 <div className="flex flex-col w-full sm:w-72">
                   <label className="font-semibold text-slate-800 p-2 flex">
@@ -177,7 +190,7 @@ function SocialMedia() {
                   />
                 </div>
               </div>
-  
+
               {/* Submit Button */}
               <div className="flex items-center justify-center mt-10">
                 <button
@@ -187,7 +200,7 @@ function SocialMedia() {
                   Next
                 </button>
               </div>
-  
+
               {/* Error Message */}
               {errorMessage && (
                 <p className="text-red-500 text-center mt-4">{errorMessage}</p>
@@ -198,7 +211,6 @@ function SocialMedia() {
       </div>
     </div>
   );
-  
 }
 
 export default SocialMedia;

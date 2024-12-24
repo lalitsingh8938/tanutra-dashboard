@@ -266,6 +266,7 @@ import ProductUpload from './components/ProductUpload';
 import Header from './components/Header';
 import SideMenu from './components/SideMenu';
 import PrivateRoute from './components/PrivateRoute';
+import FormPage from './FormPage';
 
 function App() {
   return (
@@ -274,7 +275,7 @@ function App() {
         <Router>
         <ToastContainer 
           position="top-center"  // Customize position
-          autoClose={2000}      // 3 seconds ke baad auto-close
+          autoClose={3000}      // 3 seconds ke baad auto-close
           hideProgressBar={false} 
           newestOnTop={false}
           closeOnClick
@@ -286,9 +287,6 @@ function App() {
             {/* Public Routes */}
             <Route path="/" element={<Login />} />
             <Route path="/Login" element={<Login />}/>
-
-           
-           
             <Route path="/Signup" element={<Signup />} />
             <Route path="/OTPAuth" element={<OTPAuth />} />
             <Route path="/ForgotPassword" element={<ForgotPassword />} />
@@ -321,8 +319,8 @@ function App() {
               element={
                 <PrivateRoute>
                   <Header />
-                  <SideMenu />
                   <Stepper />
+                  <SideMenu />
                 </PrivateRoute>
               }
             />
@@ -331,8 +329,12 @@ function App() {
               element={
                 <PrivateRoute>
                   <Header />
+                  {/* <Stepper /> */}
                   <SideMenu />
+                  {/* <FormPage /> */}
+           
                   <BusinessProfile />
+                 
                 </PrivateRoute>
               }
             />
@@ -342,6 +344,7 @@ function App() {
                 <PrivateRoute>
                   <Header />
                   <SideMenu />
+                  <Stepper />
                   <BusinessDescription />
                 </PrivateRoute>
               }
@@ -352,6 +355,7 @@ function App() {
                 <PrivateRoute>
                   <Header />
                   <SideMenu />
+                  <Stepper />
                   <BankDetails />
                 </PrivateRoute>
               }
@@ -362,6 +366,7 @@ function App() {
                 <PrivateRoute>
                   <Header />
                   <SideMenu />
+                  <Stepper />
                   <ThanksYou />
                 </PrivateRoute>
               }
@@ -402,6 +407,7 @@ function App() {
                 <PrivateRoute>
                   <Header />
                   <SideMenu />
+                  <Stepper />
                   <KYCDocument />
                 </PrivateRoute>
               }
@@ -412,6 +418,7 @@ function App() {
                 <PrivateRoute>
                   <Header />
                   <SideMenu />
+                  <Stepper />
                   <PickupAdd />
                 </PrivateRoute>
               }
@@ -422,6 +429,7 @@ function App() {
                 <PrivateRoute>
                   <Header />
                   <SideMenu />
+                  <Stepper />
                   <SocialMedia />
                 </PrivateRoute>
               }

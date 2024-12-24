@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Country, State, City } from "country-state-city";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify"; // Import toast
+import "react-toastify/dist/ReactToastify.css";
 
 const BusinessProfile = () => {
   const [countries, setCountries] = useState([]);
@@ -123,23 +124,27 @@ const BusinessProfile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-     // Validation checks for required fields
-  const errors = [];
-  if (!formData.legal_business_name) errors.push("Legal Business Name is required.");
-  if (!formData.brand_name) errors.push("Brand Name is required.");
-  if (!formData.gst_no) errors.push("GST Number is required.");
-  if (!formData.business_id) errors.push("Business ID is required.");
-  if (!selectedCountry) errors.push("Country is required.");
-  if (!selectedState) errors.push("State is required.");
-  if (!formData.business_full_addr.city) errors.push("City is required.");
-  if (!formData.business_full_addr.street_addr) errors.push("Street Address is required.");
-  if (!formData.business_full_addr.pincode) errors.push("Pincode is required.");
+    // Validation checks for required fields
+    const errors = [];
+    if (!formData.legal_business_name)
+      errors.push("Legal Business Name is required.");
+    if (!formData.brand_name) errors.push("Brand Name is required.");
+    if (!formData.gst_no) errors.push("GST Number is required.");
+    if (!formData.business_id) errors.push("Business ID is required.");
+    if (!selectedCountry) errors.push("Country is required.");
+    if (!selectedState) errors.push("State is required.");
+    if (!formData.business_full_addr.city) errors.push("City is required.");
+    if (!formData.business_full_addr.street_addr)
+      errors.push("Street Address is required.");
+    if (!formData.business_full_addr.pincode)
+      errors.push("Pincode is required.");
 
-  // If there are errors, show an alert and prevent submission
-  if (errors.length > 0) {
-    toast.error("Please fill all required fields:\n" + errors.join("\n"));
-    return;
-  }
+    // If there are errors, show an alert and prevent submission
+    if (errors.length > 0) {
+      toast.error("Please fill all required fields:\n" + errors.join("\n"));
+
+      return;
+    }
 
     // Save formData to localStorage
     localStorage.setItem("businessData", JSON.stringify(formData));
@@ -191,6 +196,18 @@ const BusinessProfile = () => {
 
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[200px] 2xl:ml[300px]">
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+    
       {/* Overlay */}
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
 
