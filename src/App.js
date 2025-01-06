@@ -248,7 +248,7 @@ import Signup from './components/Signup';
 import OTPAuth from './components/OTPAuth';
 import Dashboard from './Dashboard';
 import VendorProfile from './components/VendorProfile';
-import Stepper from './components/Stepper';
+// import Stepper from './components/Stepper';
 import BusinessProfile from './components/BusinessProfile';
 import BusinessDescription from './components/BusinessDescription';
 import BankDetails from './components/BankDetails';
@@ -314,7 +314,7 @@ function App() {
                 </PrivateRoute>
               }
             />
-            <Route
+            {/* <Route
               path="/Stepper"
               element={
                 <PrivateRoute>
@@ -323,7 +323,7 @@ function App() {
                   <SideMenu />
                 </PrivateRoute>
               }
-            />
+            /> */}
             <Route
               path="/BusinessProfile"
               element={
@@ -344,7 +344,7 @@ function App() {
                 <PrivateRoute>
                   <Header />
                   <SideMenu />
-                  <Stepper />
+                  {/* <Stepper /> */}
                   <BusinessDescription />
                 </PrivateRoute>
               }
@@ -355,7 +355,7 @@ function App() {
                 <PrivateRoute>
                   <Header />
                   <SideMenu />
-                  <Stepper />
+                  {/* <Stepper /> */}
                   <BankDetails />
                 </PrivateRoute>
               }
@@ -366,7 +366,7 @@ function App() {
                 <PrivateRoute>
                   <Header />
                   <SideMenu />
-                  <Stepper />
+                  {/* <Stepper /> */}
                   <ThanksYou />
                 </PrivateRoute>
               }
@@ -407,7 +407,7 @@ function App() {
                 <PrivateRoute>
                   <Header />
                   <SideMenu />
-                  <Stepper />
+                  {/* <Stepper /> */}
                   <KYCDocument />
                 </PrivateRoute>
               }
@@ -418,7 +418,7 @@ function App() {
                 <PrivateRoute>
                   <Header />
                   <SideMenu />
-                  <Stepper />
+                  {/* <Stepper /> */}
                   <PickupAdd />
                 </PrivateRoute>
               }
@@ -429,7 +429,7 @@ function App() {
                 <PrivateRoute>
                   <Header />
                   <SideMenu />
-                  <Stepper />
+                  {/* <Stepper /> */}
                   <SocialMedia />
                 </PrivateRoute>
               }

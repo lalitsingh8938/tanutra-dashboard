@@ -95,7 +95,7 @@ function List() {
       <div className="lg:w-[400px] sm:w-80 md:w-96 h-44 bg-white p-4 ml-2 rounded-lg mt-5">
         <p className="font-semibold text-base cursor-pointer">Useful Links</p>
         <p className="font-semibold opacity-65 text-xs mt-1">
-          Learn to operate and grow your business on meesho.
+          Learn to operate and grow your business on tanutra.
         </p>
 
         <div className="flex items-center gap-3 mt-6">

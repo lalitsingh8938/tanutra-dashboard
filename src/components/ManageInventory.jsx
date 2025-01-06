@@ -1,4 +1,6 @@
 import React from "react";
+import { TiArrowUpThick } from "react-icons/ti";
+import { GoChevronDown } from "react-icons/go";
 
 function ManageInventory() {
   return (
@@ -32,30 +34,85 @@ function ManageInventory() {
         </div>
 
         {/* Buttons Section */}
-        <div className="bg-white py-4 shadow mt-4 flex flex-wrap gap-4 items-center">
+        <div className="bg-white py-2 shadow mt-4 flex flex-wrap gap-4 items-center">
           <button
-            className="hover:text-orange-600 hover:scale-105 px-4 py-2 text-slate-600 font-semibold rounded-md text-sm"
+            className="hover:text-blue-600 hover:scale-105 px-4 py-2 text-slate-600 font-semibold rounded-md text-sm"
             type="button"
           >
             Active (30)
           </button>
           <button
-            className="hover:text-orange-600 hover:scale-105 px-6 py-2 text-slate-600 font-semibold rounded-md text-sm"
+            className="hover:text-blue-600 hover:scale-105 px-6 py-2 text-slate-600 font-semibold rounded-md text-sm"
             type="button"
           >
             Activation Pending (0)
           </button>
           <button
-            className="hover:text-orange-600 hover:scale-105 px-4 py-2 text-slate-600 font-semibold rounded-md text-sm"
+            className="hover:text-blue-600 hover:scale-105 px-4 py-2 text-slate-600 font-semibold rounded-md text-sm"
             type="button"
           >
             Blocked (0)
           </button>
           <button
-            className="hover:text-orange-600 hover:scale-105 px-4 py-2 text-slate-600 font-semibold rounded-md text-sm"
+            className="hover:text-blue-600 hover:scale-105 px-4 py-2 text-slate-600 font-semibold rounded-md text-sm"
             type="button"
           >
             Paused (0)
+          </button>
+
+          <button
+            className="w-36 h-10 mt-2 ml-auto mr-10 bg-blue-700 cursor-pointer text-white font-semibold flex items-center justify-center rounded-md text-md gap-2"
+            type="button"
+
+            // onClick={() => navigate("/Login")}
+          >
+            <TiArrowUpThick className="items-center w-5 h-6 border-t-2" />
+            Add Catelog
+          </button>
+        </div>
+
+        <div className="bg-white py-2  border flex flex-wrap gap-4 items-center">
+          <button
+            className="hover:text-blue-600 hover:scale-105 px-4 py-2 text-slate-600 font-semibold rounded-md text-sm"
+            type="button"
+          >
+            All Stock (4)
+          </button>
+          <button
+            className="hover:text-blue-600 hover:scale-105 px-6 py-2 text-slate-600 font-semibold rounded-md text-sm"
+            type="button"
+          >
+            Out of Stock (0)
+          </button>
+          <button
+            className="hover:text-blue-600 hover:scale-105 px-4 py-2 text-slate-600 font-semibold rounded-md text-sm"
+            type="button"
+          >
+            Low Stock (0)
+          </button>
+
+          <button className="text-blue-700 text-sm font-semibold ml-auto mr-10">
+            Bulk Stock Update
+          </button>
+        </div>
+
+        <div className="bg-white py-2 border flex flex-wrap items-center gap-4">
+          <p className="ml-3 opacity-75">Filter by :</p>
+          <button
+            className="w-40 h-10 cursor-pointer text-black font-normal opacity-70 border flex items-center justify-center rounded-md text-md gap-2"
+            type="button"
+          >
+            Select Category
+            <GoChevronDown className="w-5 h-6" />
+          </button>
+
+          <p className="opacity-75 ml-auto">Filter by :</p>
+          <button
+            className="mr-10 w-72 px-3 h-10 cursor-pointer text-black font-normal opacity-70 border flex items-center justify-between rounded-md text-md gap-2"
+            type="button"
+          >
+            Highest Estimanted Orders
+            <GoChevronDown className="w-5 h-6" />
           </button>
         </div>
       </main>

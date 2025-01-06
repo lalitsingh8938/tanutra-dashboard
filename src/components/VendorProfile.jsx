@@ -432,6 +432,21 @@
 
 // export default VendorProfile;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React, { useState, useEffect } from "react";
 import { Country, State, City } from "country-state-city";
 import axios from "axios";
@@ -647,7 +662,7 @@ function VendorProfile() {
     <div className="relative  flex items-center justify-center min-h-screen bg-cover bg-center  xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[200px] 2xl:ml[300px]">
       <ToastContainer
         position="top-center"
-        autoClose={1000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -880,3 +895,50 @@ function VendorProfile() {
 }
 
 export default VendorProfile;
+
+
+
+
+
+// import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom";
+
+// function VendorProfile() {
+//   const [image, setImage] = useState(null);
+//   const navigate = useNavigate();
+
+//   const handleProfileImageUpload = (event) => {
+//     const file = event.target.files[0];
+//     const reader = new FileReader();
+
+//     reader.onloadend = () => {
+//       const uploadedImageURL = reader.result;
+//       localStorage.setItem("vendorProfileImage", uploadedImageURL); // Save to localStorage
+//       setImage(uploadedImageURL); // Optionally update local state for immediate display
+//     };
+
+//     if (file) {
+//       reader.readAsDataURL(file);
+//     }
+//   };
+
+//   return (
+//     <div className="flex flex-col items-center">
+//       <h1 className="text-2xl font-semibold mb-4">Vendor Profile</h1>
+//       <input
+//         type="file"
+//         onChange={handleProfileImageUpload}
+//         className="mt-20"
+//       />
+//       {image && <img src={image} alt="Profile Image" className="w-40 h-40 rounded-full" />}
+//       <button
+//         onClick={() => navigate("/Dashboard")}
+//         className="bg-blue-500 text-white py-2 px-4 rounded mt-4"
+//       >
+//         Save Profile
+//       </button>
+//     </div>
+//   );
+// }
+
+// export default VendorProfile;
