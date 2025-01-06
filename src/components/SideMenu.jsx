@@ -249,7 +249,7 @@ function SideMenu() {
   return (
     <aside
       ref={sidebarRef}
-      className={`${menuWidth} h-screen fixed top-20 left-0 bg-slate-100 overflow-y-hidden transition-transform duration-500 z-40 md:block ${
+      className={`${menuWidth} h-screen fixed top-20 left-0 bg-slate-100 shadow-md overflow-y-hidden transition-transform duration-500 z-40 md:block ${
         isOpen ? "block" : "hidden"
       }`}
     >

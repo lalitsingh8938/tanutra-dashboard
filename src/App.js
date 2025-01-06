@@ -267,6 +267,7 @@ import Header from './components/Header';
 import SideMenu from './components/SideMenu';
 import PrivateRoute from './components/PrivateRoute';
 import FormPage from './FormPage';
+import ProductPage from './components/ProductPage';
 
 function App() {
   return (
@@ -388,6 +389,7 @@ function App() {
                   <Header />
                   <SideMenu />
                   <ManageInventory />
+                  {/* <ProductPage /> */}
                 </PrivateRoute>
               }
             />
