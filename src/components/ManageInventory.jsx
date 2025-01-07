@@ -106,6 +106,8 @@
 import { React, useState, useEffect } from "react";
 import { TiArrowUpThick } from "react-icons/ti";
 import { GoChevronDown } from "react-icons/go";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import DeleteProducts from ".//DeleteProducts"; // Import DeleteProducts component
 
 function ManageInventory() {
   return (
@@ -121,7 +123,7 @@ function ManageInventory() {
           </div>
 
           {/* Buttons Section */}
-          <div className="bg-white py-2 shadow mt-4 flex flex-wrap gap-4 items-center justify-between">
+          <div className="bg-white py-2 shadow mt-4 flex flex-wrap gap-4">
             <button
               className="hover:text-blue-600 hover:scale-105 px-4 py-2 text-slate-600 font-semibold rounded-md text-sm"
               type="button"
@@ -152,11 +154,11 @@ function ManageInventory() {
               type="button"
             >
               <TiArrowUpThick className="w-5 h-6 border-t-2" />
-              Add Catalog
+              Add Product
             </button>
           </div>
 
-          <div className="bg-white py-2 border flex flex-wrap gap-4 items-center justify-between">
+          <div className="bg-white py-2 border flex flex-wrap gap-4 items-center">
             <button
               className="hover:text-blue-600 hover:scale-105 px-4 py-2 text-slate-600 font-semibold rounded-md text-sm"
               type="button"
@@ -210,14 +212,17 @@ function ManageInventory() {
 }
 
 function ProductPage() {
-  const [products, setProducts] = useState([]); // State to store product data
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); // State for errors
+  const [error, setError] = useState(null);
+  const [popupProductIndex, setPopupProductIndex] = useState(null);
+  const [selectedProductImages, setSelectedProductImages] = useState([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchProductData = async () => {
-      const token = localStorage.getItem("access_token"); // Fetch token from localStorage
-
+      const token = localStorage.getItem("access_token");
       try {
         const response = await fetch(
           "https://api.tanutra.com/api/product/get/",
@@ -225,7 +230,7 @@ function ProductPage() {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`, // Include token in Authorization header
+              Authorization: `Bearer ${token}`,
             },
           }
         );
@@ -236,16 +241,16 @@ function ProductPage() {
 
         const data = await response.json();
 
-        // Parse products data to extract relevant fields
         const parsedProducts = data.results.data.map((product) => ({
-          title: product.title, // Assuming the API provides a 'title' field
-          hsnCode: product.hsn_code, // Assuming the API provides an 'hsn_code' field
-          category: product.category, // Product category
-          materialUsed: product.material_used, // Material used
-          pricePerUnit: product.price_per_unit, // Price per unit
-          minimumOrderQuantity: product.minimum_order_quantity, // Minimum Order Quantity (MOQ)
-          quantityAvailable: product.quantity_available, // Quantity available
-          images: product.product_images.map((image) => image.url), // Extract image URLs
+          id: product.id,
+          title: product.title,
+          hsnCode: product.hsn_code,
+          category: product.category,
+          materialUsed: product.material_used,
+          pricePerUnit: product.price_per_unit,
+          minimumOrderQuantity: product.minimum_order_quantity,
+          quantityAvailable: product.quantity_available,
+          images: product.product_images.map((image) => image.url),
         }));
         setProducts(parsedProducts);
       } catch (error) {
@@ -258,6 +263,45 @@ function ProductPage() {
 
     fetchProductData();
   }, []);
+
+  // Function to handle image click
+  const handleImageClick = (images, index) => {
+    setSelectedProductImages(images);
+    setCurrentImageIndex(index);
+    setIsModalOpen(true);
+  };
+
+  // Function to close modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedProductImages([]);
+    setCurrentImageIndex(0);
+  };
+
+  // Navigate to next image
+  const viewNextImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex < selectedProductImages.length - 1 ? prevIndex + 1 : 0
+    );
+  };
+
+  // Navigate to previous image
+  const viewPrevImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex > 0 ? prevIndex - 1 : selectedProductImages.length - 1
+    );
+  };
+
+  // Handle popup open/close
+  const togglePopup = (index) => {
+    setPopupProductIndex(popupProductIndex === index ? null : index);
+  };
+
+  const handleDeleteSuccess = (productId) => {
+    setProducts((prevProducts) =>
+      prevProducts.filter((product) => product.id !== productId)
+    );
+  };
 
   return (
     <div className="flex bg-slate-100 w-full mt-4">
@@ -273,36 +317,96 @@ function ProductPage() {
             <table className="w-full border-collapse border border-gray-200 text-left">
               <thead>
                 <tr>
-                  <th className="border border-gray-300 px-4 py-2 text-center">HSN Code</th>
-                  <th className="border border-gray-300 px-4 py-2 text-center">Title</th>
-                  <th className="border border-gray-300 px-4 py-2 text-center">Category</th>
-                  <th className="border border-gray-300 px-4 py-2 text-center">Material Used</th>
-                  <th className="border border-gray-300 px-4 py-2 text-center">Price per Unit</th>
-                  <th className="border border-gray-300 px-4 py-2 text-center">M.O.Q</th>
-                  <th className="border border-gray-300 px-4 py-2 text-center">Q.T Available</th>
-                  <th className="border border-gray-300 px-4 py-2 text-center">Product Images</th>
+                  <th className="border border-gray-300 px-4 py-2 text-center">
+                    S.No.
+                  </th>
+                  <th className="border border-gray-300 px-4 py-2 text-center">
+                    Product Images
+                  </th>
+                  <th className="border border-gray-300 px-4 py-2 text-center">
+                    Title
+                  </th>
+                  <th className="border border-gray-300 px-4 py-2 text-center">
+                    Category
+                  </th>
+                  <th className="border border-gray-300 px-4 py-2 text-center">
+                    HSN Code
+                  </th>
+                  <th className="border border-gray-300 px-4 py-2 text-center">
+                    Material Used
+                  </th>
+                  <th className="border border-gray-300 px-4 py-2 text-center">
+                    Price per Unit
+                  </th>
+                  <th className="border border-gray-300 px-4 py-2 text-center">
+                    M.O.Q
+                  </th>
+                  <th className="border border-gray-300 py-2 text-center">
+                    Q.T Available
+                  </th>
+                  <th className="border border-gray-300 px-2 py-2 text-center items-center">
+                    Action
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {products.map((product, index) => (
                   <tr key={index}>
-                    <td className="border border-gray-300 px-4 py-2 text-center">{product.hsnCode}</td>
-                    <td className="border border-gray-300 px-4 py-2 text-center">{product.title}</td>
-                    <td className="border border-gray-300 px-4 py-2 text-center">{product.category}</td>
-                    <td className="border border-gray-300 px-4 py-2 text-center">{product.materialUsed}</td>
-                    <td className="border border-gray-300 px-4 py-2 text-center">{product.pricePerUnit}</td>
-                    <td className="border border-gray-300 px-4 py-2 text-center">{product.minimumOrderQuantity}</td>
-                    <td className="border border-gray-300 px-4 py-2 text-center">{product.quantityAvailable}</td>
-                    <td className="border border-gray-300 px-4 py-2">
+                    <td className="border border-gray-300 px-4 py-2 text-center">
+                      {product.id}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2 cursor-pointer">
                       <div className="flex gap-2 justify-center flex-wrap">
-                        {product.images.slice(0, 5).map((image, imgIndex) => (
+                        {product.images.slice(0, 1).map((image, imgIndex) => (
                           <img
                             key={imgIndex}
-                            src={image} // Image URL
+                            src={image}
                             alt={`Product-${index}-${imgIndex}`}
                             className="w-16 h-16 object-cover rounded"
+                            onClick={() => handleImageClick(product.images, 0)}
                           />
                         ))}
+                      </div>
+                    </td>
+
+                    <td className="border border-gray-300 px-4 py-2 text-center">
+                      {product.title}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">
+                      {product.category}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">
+                      {product.hsnCode}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">
+                      {product.materialUsed}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">
+                      {product.pricePerUnit}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">
+                      {product.minimumOrderQuantity}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">
+                      {product.quantityAvailable}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      <div className="relative flex justify-center items-center cursor-pointer">
+                        <BsThreeDotsVertical
+                          onClick={() => togglePopup(index)}
+                          className="h-5 w-5"
+                        />
+                        {popupProductIndex === index && (
+                          <div className="absolute top-6 right-0 bg-white border shadow-lg p-2 rounded z-10">
+                            <button className="block px-4 py-2 text-sm text-blue-600 font-semibold hover:bg-gray-100 w-full">
+                              Edit
+                            </button>
+                            <DeleteProducts
+                              productId={product.id}
+                              onDeleteSuccess={handleDeleteSuccess} // Pass the success callback to DeleteProducts
+                            />
+                          </div>
+                        )}
                       </div>
                     </td>
                   </tr>
@@ -314,8 +418,42 @@ function ProductPage() {
           )}
         </div>
       </main>
+
+      {/* Modal for Image Preview */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+          <div className="relative bg-white rounded shadow-lg p-4">
+            <img
+              src={selectedProductImages[currentImageIndex]}
+              alt="Preview"
+              className="max-w-full max-h-[70vh] object-contain mb-4"
+            />
+            <div className="flex justify-between items-center">
+              <button
+                className="bg-gray-700 text-white px-4 py-2 rounded"
+                onClick={viewPrevImage}
+              >
+                Previous
+              </button>
+              <button
+                className="bg-gray-700 text-white px-4 py-2 rounded"
+                onClick={viewNextImage}
+              >
+                Next
+              </button>
+              <button
+                className="bg-red-600 text-white px-4 py-2 rounded"
+                onClick={closeModal}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+
 
 export default ManageInventory;
