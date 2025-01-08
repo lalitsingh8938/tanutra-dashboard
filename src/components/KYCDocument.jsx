@@ -287,7 +287,7 @@ function KYCForm() {
               <div className="flex items-center justify-center mt-10">
                 <button
                   type="submit"
-                  className="bg-green-500 font-bold text-white py-2 w-48 px-8 mb-5 rounded-md hover:bg-indigo-600"
+                  className="bg-green-500 font-bold text-white py-2 w-48 px-8 mb-5 rounded-md"
                   disabled={isLoading}
                 >
                   {isLoading ? "Submitting..." : "Submit"}

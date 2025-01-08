@@ -42,7 +42,10 @@ const LogoutButton = () => {
         // Redirect to login page
         navigate("/");
       } else {
-        console.error("Logout failed:", responseData.message || "Unknown error");
+        console.error(
+          "Logout failed:",
+          responseData.message || "Unknown error"
+        );
       }
     } catch (error) {
       console.error("Error during logout:", error);
@@ -61,7 +64,3 @@ const LogoutButton = () => {
 };
 
 export default LogoutButton;
-
-
-
-

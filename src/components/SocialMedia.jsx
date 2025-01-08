@@ -10,7 +10,7 @@ function SocialMedia() {
     instagram: "",
     facebook: "",
     linkedIn: "",
-    twitter: "", // Corrected name to match formData key
+    twitter: "",
     others: "",
   });
 
@@ -32,13 +32,6 @@ function SocialMedia() {
       "twitter",
       "others",
     ];
-
-    // for (let field of requiredFields) {
-    //   if (!formData[field]) {
-    //     setErrorMessage("Please fill in all required fields.");
-    //     return;
-    //   }
-    // }
 
     // Save data to local storage
     localStorage.setItem("socialMediaData", JSON.stringify(formData));
@@ -117,7 +110,7 @@ function SocialMedia() {
                       <p className="ml-2 opacity-50">(optional)</p>
                     </label>
                     <input
-                      type="text"
+                      type="url"
                       name="instagram"
                       placeholder="www.instagram.com"
                       value={formData.instagram}
@@ -132,7 +125,7 @@ function SocialMedia() {
                       <p className="ml-2 opacity-50">(optional)</p>
                     </label>
                     <input
-                      type="text"
+                      type="url"
                       name="facebook"
                       placeholder="www.facebook.com"
                       value={formData.facebook}
@@ -150,7 +143,7 @@ function SocialMedia() {
                       <p className=" ml-2 opacity-50">(optional)</p>
                     </label>
                     <input
-                      type="text"
+                      type="url"
                       name="linkedIn"
                       placeholder="www.linkedin.com"
                       value={formData.linkedIn}
@@ -165,7 +158,7 @@ function SocialMedia() {
                       <p className=" ml-2 opacity-50">(optional)</p>
                     </label>
                     <input
-                      type="text"
+                      type="url"
                       name="twitter"
                       placeholder="www.twitter.com"
                       value={formData.twitter}
@@ -182,7 +175,7 @@ function SocialMedia() {
                     <p className=" ml-2 opacity-50">(optional)</p>
                   </label>
                   <input
-                    type="text"
+                    type="url"
                     name="others"
                     value={formData.others}
                     onChange={handleChange}
@@ -195,16 +188,11 @@ function SocialMedia() {
               <div className="flex items-center justify-center mt-10">
                 <button
                   type="submit"
-                  className="bg-green-500 justify-end mr-5 font-bold text-white py-2 w-24 mb-5 rounded-md hover:bg-pink-500"
+                  className="bg-green-500 justify-end mr-5 font-bold text-white py-2 w-24 mb-5 rounded-md"
                 >
                   Next
                 </button>
               </div>
-
-              {/* Error Message */}
-              {errorMessage && (
-                <p className="text-red-500 text-center mt-4">{errorMessage}</p>
-              )}
             </form>
           </div>
         </div>

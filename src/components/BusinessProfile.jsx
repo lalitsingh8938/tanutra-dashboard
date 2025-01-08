@@ -14,7 +14,6 @@ const BusinessProfile = () => {
   const [formData, setFormData] = useState({
     legal_business_name: "",
     brand_name: "",
-    // brand_logo: "",
     gst_no: "",
     business_id: "",
     business_full_addr: {
@@ -186,12 +185,6 @@ const BusinessProfile = () => {
       localStorage.getItem("business_full_addr")
     );
     console.log(retrievedBusinessFullAddr); // This will log the object
-
-    // alert(localStorage.getItem("legal_business_name"));
-    // alert(localStorage.getItem("brand_name"));
-    // alert(localStorage.getItem("gst_no"));
-    // alert(localStorage.getItem("business_id"));
-    // alert(localStorage.getItem("business_full_addr"));
   };
 
   return (
@@ -207,7 +200,7 @@ const BusinessProfile = () => {
         draggable
         pauseOnHover
       />
-    
+
       {/* Overlay */}
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
 
@@ -273,7 +266,7 @@ const BusinessProfile = () => {
                     GST Number
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     name="gst_no"
                     placeholder="123axxxx4567"
                     value={formData.gst_no}
@@ -287,7 +280,7 @@ const BusinessProfile = () => {
                     Business ID
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     name="business_id"
                     placeholder="business_id"
                     value={formData.business_id}
@@ -377,7 +370,7 @@ const BusinessProfile = () => {
                     Pincode
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     name="pincode"
                     placeholder="Pincode"
                     value={formData.business_full_addr.pincode}
@@ -391,7 +384,7 @@ const BusinessProfile = () => {
               <div className="mt-6 flex justify-center">
                 <button
                   type="submit"
-                  className="bg-green-500 text-white py-2 px-10 rounded-lg hover:bg-pink-500 transition duration-200"
+                  className="bg-green-500 text-white py-2 px-10 rounded-lg  transition duration-200"
                 >
                   Next
                 </button>

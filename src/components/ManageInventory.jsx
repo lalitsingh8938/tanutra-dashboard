@@ -1,108 +1,3 @@
-// import React from "react";
-// import { TiArrowUpThick } from "react-icons/ti";
-// import { GoChevronDown } from "react-icons/go";
-
-// function ManageInventory() {
-//   return (
-//     <div className="flex bg-slate-100 min-h-screen">
-//       {/* Main Content */}
-//       <main className="ml-60 flex-1 px-4 sm:px-6 lg:px-8">
-//         {/* Header Section */}
-//         <div className="bg-white py-4 shadow-md flex items-center">
-//           <div className="text-xl text-slate-700 font-bold">
-//             Manage Inventory
-//           </div>
-//         </div>
-
-//         {/* Buttons Section */}
-//         <div className="bg-white py-2 shadow mt-4 flex flex-wrap gap-4 items-center">
-//           <button
-//             className="hover:text-blue-600 hover:scale-105 px-4 py-2 text-slate-600 font-semibold rounded-md text-sm"
-//             type="button"
-//           >
-//             Active (30)
-//           </button>
-//           <button
-//             className="hover:text-blue-600 hover:scale-105 px-6 py-2 text-slate-600 font-semibold rounded-md text-sm"
-//             type="button"
-//           >
-//             Activation Pending (0)
-//           </button>
-//           <button
-//             className="hover:text-blue-600 hover:scale-105 px-4 py-2 text-slate-600 font-semibold rounded-md text-sm"
-//             type="button"
-//           >
-//             Blocked (0)
-//           </button>
-//           <button
-//             className="hover:text-blue-600 hover:scale-105 px-4 py-2 text-slate-600 font-semibold rounded-md text-sm"
-//             type="button"
-//           >
-//             Paused (0)
-//           </button>
-
-//           <button
-//             className="w-36 h-10 mt-2 ml-auto mr-10 bg-blue-700 cursor-pointer text-white font-semibold flex items-center justify-center rounded-md text-md gap-2"
-//             type="button"
-
-//             // onClick={() => navigate("/Login")}
-//           >
-//             <TiArrowUpThick className="items-center w-5 h-6 border-t-2" />
-//             Add Catelog
-//           </button>
-//         </div>
-
-//         <div className="bg-white py-2  border flex flex-wrap gap-4 items-center">
-//           <button
-//             className="hover:text-blue-600 hover:scale-105 px-4 py-2 text-slate-600 font-semibold rounded-md text-sm"
-//             type="button"
-//           >
-//             All Stock (4)
-//           </button>
-//           <button
-//             className="hover:text-blue-600 hover:scale-105 px-6 py-2 text-slate-600 font-semibold rounded-md text-sm"
-//             type="button"
-//           >
-//             Out of Stock (0)
-//           </button>
-//           <button
-//             className="hover:text-blue-600 hover:scale-105 px-4 py-2 text-slate-600 font-semibold rounded-md text-sm"
-//             type="button"
-//           >
-//             Low Stock (0)
-//           </button>
-
-//           <button className="text-blue-700 text-sm font-semibold ml-auto mr-10">
-//             Bulk Stock Update
-//           </button>
-//         </div>
-
-//         <div className="bg-white py-2 border flex flex-wrap items-center gap-4">
-//           <p className="ml-3 opacity-75">Filter by :</p>
-//           <button
-//             className="w-40 h-10 cursor-pointer text-black font-normal opacity-70 border flex items-center justify-center rounded-md text-md gap-2"
-//             type="button"
-//           >
-//             Select Category
-//             <GoChevronDown className="w-5 h-6" />
-//           </button>
-
-//           <p className="opacity-75 ml-auto">Filter by :</p>
-//           <button
-//             className="mr-10 w-72 px-3 h-10 cursor-pointer text-black font-normal opacity-70 border flex items-center justify-between rounded-md text-md gap-2"
-//             type="button"
-//           >
-//             Highest Estimanted Orders
-//             <GoChevronDown className="w-5 h-6" />
-//           </button>
-//         </div>
-//       </main>
-//     </div>
-//   );
-// }
-
-// export default ManageInventory;
-
 import React, { useState, useEffect, useRef } from "react";
 import { TiArrowUpThick } from "react-icons/ti";
 import { GoChevronDown } from "react-icons/go";
@@ -301,24 +196,24 @@ function ProductPage() {
   const togglePopup = (index) => {
     setPopupProductIndex(popupProductIndex === index ? null : index);
   };
- 
-// Ref for the popup
-const popupRef = useRef(null);
 
-// Handle clicks outside the popup to close it
-useEffect(() => {
-  const handleOutsideClick = (event) => {
-    if (popupRef.current && !popupRef.current.contains(event.target)) {
-      setPopupProductIndex(null);
-    }
-  };
+  // Ref for the popup
+  const popupRef = useRef(null);
 
-  document.addEventListener("mousedown", handleOutsideClick);
+  // Handle clicks outside the popup to close it
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        setPopupProductIndex(null);
+      }
+    };
 
-  return () => {
-    document.removeEventListener("mousedown", handleOutsideClick);
-  };
-}, []);
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
   const handleDeleteSuccess = (productId) => {
     setProducts((prevProducts) =>
       prevProducts.filter((product) => product.id !== productId)
@@ -419,9 +314,10 @@ useEffect(() => {
                           className="h-5 w-5"
                         />
                         {popupProductIndex === index && (
-                          <div 
-                          ref={popupRef} // Attach the ref here
-                          className="absolute top-6 right-0 bg-white border shadow-lg p-2 rounded z-10">
+                          <div
+                            ref={popupRef} // Attach the ref here
+                            className="absolute top-6 right-0 bg-white border shadow-lg p-2 rounded z-10"
+                          >
                             <button className="block px-4 py-2 text-sm text-blue-600 font-semibold hover:bg-gray-100 w-full">
                               Edit
                             </button>

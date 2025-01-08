@@ -173,7 +173,7 @@ function BusinessDescription() {
                     Year in Business
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     name="Year_in_Business"
                     value={formData.Year_in_Business}
                     onChange={handleChange}
@@ -186,16 +186,11 @@ function BusinessDescription() {
               <div className="flex items-center justify-center">
                 <button
                   type="submit"
-                  className="bg-green-500 justify-end mr-5 text-white font-bold py-2 w-32 mb-2 rounded-md hover:bg-pink-500"
+                  className="bg-green-500 justify-end mr-5 text-white font-bold py-2 w-32 mb-2 rounded-md"
                 >
                   Next
                 </button>
               </div>
-
-              {/* Error Message */}
-              {/* {errorMessage && (
-                <p className="text-red-500 text-center mt-4">{errorMessage}</p>
-              )} */}
             </form>
           </div>
         </div>
