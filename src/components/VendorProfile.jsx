@@ -432,21 +432,6 @@
 
 // export default VendorProfile;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useState, useEffect } from "react";
 import { Country, State, City } from "country-state-city";
 import axios from "axios";
@@ -461,6 +446,7 @@ function VendorProfile() {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [image, setImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); // Loading state
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -614,6 +600,7 @@ function VendorProfile() {
         const file = dataURLtoFile(image, "profile-picture.jpg");
         formDataWithFile.append("vendor_profile_picture", file);
       }
+      setIsLoading(true); // Start loading
 
       const response = await axios.post(
         "https://api.tanutra.com/api/create-vendor-profile/",
@@ -655,6 +642,8 @@ function VendorProfile() {
       );
       toast.error("Profile already exits.");
       // toast.error("Profile creation failed. Please try again.");
+    } finally {
+      setIsLoading(false); // Stop loading
     }
   };
 
@@ -743,7 +732,7 @@ function VendorProfile() {
                     Phone Number
                   </label>
                   <input
-                    type="tel"
+                    type="number"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
@@ -876,16 +865,13 @@ function VendorProfile() {
                 <div className="flex justify-center mt-14">
                   <button
                     type="submit"
-                    className="bg-green-500 text-white font-semibold py-2 w-44 px-8 rounded-md hover:bg-indigo-600"
+                    className="bg-green-500 text-white font-semibold py-2 w-48 px-8 rounded-md hover:bg-indigo-600"
+                    disabled={isLoading}
                   >
-                    Submit
+                    {isLoading ? "Submitting..." : "Submit"}
                   </button>
                 </div>
               </div>
-
-              {/* {errorMessage && (
-                <p className="text-red-500 text-center mt-4">{errorMessage}</p>
-              )} */}
             </form>
           </div>
         </div>
@@ -895,10 +881,6 @@ function VendorProfile() {
 }
 
 export default VendorProfile;
-
-
-
-
 
 // import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";

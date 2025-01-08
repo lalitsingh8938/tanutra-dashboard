@@ -12,6 +12,9 @@ function KYCForm() {
   const [brandLogo, setBrandLogo] = useState(null);
   const [kycDocuments, setKycDocuments] = useState({});
   const [image, setImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [errorMessage, setErrorMessage] = useState("");
+
   const navigate = useNavigate();
 
   const handleFileChange = (e, fileKey) => {
@@ -111,6 +114,7 @@ function KYCForm() {
     dataToSend.append("GST_certificate_image", kycDocuments.gstCertificate);
 
     console.log("Payload to send:", dataToSend);
+    setIsLoading(true); // Start loading
 
     try {
       const response = await axios.post(
@@ -128,7 +132,9 @@ function KYCForm() {
         toast.success("Data submitted successfully!");
         navigate("/ThanksYou");
       } else {
-        toast.error(`Error: ${response.data.message || "Something went wrong!"}`);
+        toast.error(
+          `Error: ${response.data.message || "Something went wrong!"}`
+        );
       }
     } catch (error) {
       console.error(
@@ -136,6 +142,8 @@ function KYCForm() {
         error.response?.data || error.message
       );
       toast.error(`Error: ${error.message}`);
+    } finally {
+      setIsLoading(false); // Stop loading
     }
   };
 
@@ -279,9 +287,10 @@ function KYCForm() {
               <div className="flex items-center justify-center mt-10">
                 <button
                   type="submit"
-                  className="bg-green-500 font-bold text-white py-2 w-24 mb-5 rounded-md hover:bg-indigo-600"
+                  className="bg-green-500 font-bold text-white py-2 w-48 px-8 mb-5 rounded-md hover:bg-indigo-600"
+                  disabled={isLoading}
                 >
-                  Next
+                  {isLoading ? "Submitting..." : "Submit"}
                 </button>
               </div>
             </form>
