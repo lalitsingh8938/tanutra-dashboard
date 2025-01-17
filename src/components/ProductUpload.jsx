@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify"; // Import toast
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ProductUpload = () => {
   // const [categories, setCategories] = useState([]);
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [productImages, setProductImages] = useState([]);
   const [formData, setFormData] = useState({
     title: "",
     category: "",
@@ -25,6 +27,39 @@ const ProductUpload = () => {
     weight_gm: "",
     use_case_or_utility: "",
   });
+
+  const [isKYCApproved, setIsKYCApproved] = useState(false); // Track KYC status
+
+  const accessToken = localStorage.getItem("access_token");
+
+  // Fetch KYC status on component mount
+  useEffect(() => {
+    const fetchKYCStatus = async () => {
+      try {
+        const response = await fetch(
+          "https://api.tanutra.com/api/get/kyc-status/",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          setIsKYCApproved(data.is_kyc_approved); // Assuming API returns a boolean
+        } else {
+          toast.error("Failed to fetch KYC status. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error fetching KYC status:", error);
+        toast.error("Error fetching KYC status. Please try again.");
+      }
+    };
+
+    fetchKYCStatus();
+  }, [accessToken]);
 
   const categories = [
     {
@@ -182,9 +217,10 @@ const ProductUpload = () => {
       ],
     },
   ];
+  // const accessToken = localStorage.getItem("access_token");
 
-  const [productImages, setProductImages] = useState([]);
-  const navigate = useNavigate();
+  // const [productImages, setProductImages] = useState([]);
+  // const navigate = useNavigate();
   const handleCategoryChange = (event) => {
     const selectedCat = categories.find(
       (cat) => cat.category === event.target.value
@@ -218,7 +254,7 @@ const ProductUpload = () => {
   };
 
   // Get access token from localStorage
-  const accessToken = localStorage.getItem("access_token");
+  // const accessToken = localStorage.getItem("access_token");
 
   // Handle form input change
   const handleChange = (e) => {
@@ -245,6 +281,11 @@ const ProductUpload = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // if (!isKYCApproved) {
+    //   toast.error("Please complete your KYC first to upload products.");
+    //   return;
+    // }
 
     // Create FormData object
     const data = new FormData();
@@ -298,10 +339,11 @@ const ProductUpload = () => {
         navigate("/ThanksYou");
       } else {
         const errorData = await response.json();
-        toast.error(`Failed to upload product: ${errorData.message}`);
+        toast.error(`Error: ${errorData.message}`);
       }
     } catch (error) {
       console.error("Error uploading product:", error);
+      toast.error("Error uploading product. Please try again.");
     } finally {
       setIsLoading(false); // Stop loading
     }
@@ -337,6 +379,7 @@ const ProductUpload = () => {
             {/* Form */}
             <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
               {/* Product Data Section */}
+
               <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg">
                 <img
                   src="vendor_profile1.png"

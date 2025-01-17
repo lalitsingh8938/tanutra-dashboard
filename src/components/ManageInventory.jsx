@@ -119,7 +119,7 @@ function ProductPage() {
   const [selectedProductImages, setSelectedProductImages] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  console.log("products", products);
   useEffect(() => {
     const fetchProductData = async () => {
       const token = localStorage.getItem("access_token");
@@ -228,8 +228,6 @@ function ProductPage() {
         <div className="bg-white py-4 px-8 shadow mt-4">
           {loading ? (
             <p>Loading data...</p>
-          ) : error ? (
-            <p className="text-red-600">{error}</p>
           ) : products.length > 0 ? (
             <table className="w-full border-collapse border border-gray-200 text-left">
               <thead>

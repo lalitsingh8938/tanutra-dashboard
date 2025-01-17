@@ -12,6 +12,7 @@ function VendorProfile() {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [image, setImage] = useState(null);
+  const [isVendorProfileDone, setisVendorProfileDone] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // Loading state
 
   const navigate = useNavigate();
@@ -112,17 +113,18 @@ function VendorProfile() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
+  // Image select karte waqt, Data URL ko save karna
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImage(reader.result);
+        setImage(reader.result); // Save image Data URL
+        localStorage.setItem("vendor_profile_picture", reader.result); // Save image in localStorage
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file); // Convert image to Data URL
     }
   };
-
   const dataURLtoFile = (dataurl, filename) => {
     const arr = dataurl.split(",");
     const mime = arr[0].match(/:(.*?);/)[1];
@@ -179,44 +181,57 @@ function VendorProfile() {
         }
       );
 
-      if (response.status === 201) {
-        toast.success("Profile created successfully!");
-        setFormData({
-          first_name: "",
-          last_name: "",
-          phone: "",
-          DOB: "",
-          gender: "",
-          location: [
-            {
-              city: "",
-              state: "",
-              country: "",
-            },
-          ],
-          profile_pic: "",
-        });
-        setImage(null);
-        setErrorMessage("");
+      // console.log("final",JSON.parse(localStorage.getItem("user_data")));
+      setFormData({
+        first_name: "",
+        last_name: "",
+        phone: "",
+        DOB: "",
+        gender: "",
+        location: [
+          {
+            city: "",
+            state: "",
+            country: "",
+          },
+        ],
+        profile_pic: "",
+      });
+      setImage(null);
+      setErrorMessage("");
 
-        navigate("/Dashboard"); // Navigate to home or another page
-      }
-    } catch (error) {
-      console.error(
-        "Error during profile creation:",
-        error.response?.data || error.message
-      );
-      toast.error("Profile already exits.");
-    } finally {
-      setIsLoading(false); // Stop loading
-    }
-  };
+      // Set profile as completed
+      setisVendorProfileDone(true);
+      localStorage.setItem("isVendorProfileDone", "true"); // Mark profile as done
+
+      navigate("/Dashboard"); // Navigate to home or another page
+
+    
+  } catch (error) {
+    console.error(
+      "Error during profile creation:",
+      error.response?.data || error.message
+    );
+    toast.error("Profile already exits.");
+  } finally {
+    setIsLoading(false); // Stop loading
+  }
+};
+useEffect(() => {
+  // Check if vendor profile is already done
+  const profileStatus = localStorage.getItem("isVendorProfileDone");
+  if (profileStatus === "true") {
+    setisVendorProfileDone(true);
+  }
+}, []);
+
+  
 
   return (
     <div className="relative  flex items-center justify-center min-h-screen bg-cover bg-center  xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[200px] 2xl:ml[300px]">
       <ToastContainer
         position="top-center"
-        autoClose={2000}
+        autoClose={1000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

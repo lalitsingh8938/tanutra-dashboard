@@ -46,6 +46,7 @@ function BusinessDescription() {
 
     // Save data to local storage
     localStorage.setItem("businessDescriptionData", JSON.stringify(formData));
+    
     toast.success("Data saved successfully!");
     navigate("/BankDetails"); // Replace with your desired route
 

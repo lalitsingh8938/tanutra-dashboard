@@ -7,50 +7,36 @@ const LogoutButton = () => {
 
   const handleLogout = async () => {
     try {
-      // Fetch tokens from localStorage
       const accessToken = localStorage.getItem("access_token");
       const refreshToken = localStorage.getItem("refresh_token");
-
+      
+  
       if (!accessToken || !refreshToken) {
-        console.warn("Tokens are missing. Redirecting to login.");
-        navigate("/"); // Redirect to login if tokens are missing
+        navigate("/");
         return;
       }
-
-      // Call the logout API
+  
       const response = await fetch("https://api.tanutra.com/api/logout/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
-        body: JSON.stringify({
-          refresh_token: refreshToken,
-        }),
+        body: JSON.stringify({ refresh_token: refreshToken }),
       });
-
-      // Parse the response
-      const responseData = await response.json();
-
+  
       if (response.ok) {
-        console.log("Logout successful:", responseData);
-
-        // Clear tokens from localStorage
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("refresh_token");
-
-        // Redirect to login page
+        // Clear localStorage
+        localStorage.clear();
         navigate("/");
       } else {
-        console.error(
-          "Logout failed:",
-          responseData.message || "Unknown error"
-        );
+        console.error("Logout failed.");
       }
     } catch (error) {
       console.error("Error during logout:", error);
     }
   };
+  
 
   return (
     <div

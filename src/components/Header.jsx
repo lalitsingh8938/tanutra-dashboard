@@ -4,6 +4,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa6";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoBagOutline } from "react-icons/io5";
+import VendorKYC from "./VendorKYC";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -37,12 +38,14 @@ const Header = () => {
 
       {/* Icons */}
       <div className="flex items-center gap-4">
+      <VendorKYC  />
         <IoSearchOutline className="cursor-pointer w-6 h-6 hover:text-orange-600 hover:scale-110" />
         <FaRegUser
           className="cursor-pointer w-6 h-6 hover:text-orange-600 hover:scale-110"
           onClick={() => navigate("/Dashboard")}
         />
-        <IoMdHeartEmpty className="cursor-pointer w-6 h-6 hover:text-orange-600 hover:scale-110" />
+     
+        <IoMdHeartEmpty className="cursor-pointer w-6 h-6 hover:text-orange-600 hover:scale-110" />  
         <IoBagOutline className="cursor-pointer w-6 h-6 hover:text-orange-600 hover:scale-110" />
       </div>
     </header>

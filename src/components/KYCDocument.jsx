@@ -131,6 +131,8 @@ function KYCForm() {
       if (response.status === 201) {
         toast.success("Data submitted successfully!");
         navigate("/ThanksYou");
+        // Example of setting KYC to true after successful KYC submission
+        localStorage.setItem("isKYCDone", "true"); // KYC completed
       } else {
         toast.error(
           `Error: ${response.data.message || "Something went wrong!"}`
