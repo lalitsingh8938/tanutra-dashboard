@@ -12,7 +12,7 @@ function VendorProfile() {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [image, setImage] = useState(null);
-  const [isVendorProfileDone, setisVendorProfileDone] = useState(false);
+  // const [isVendorProfileDone, setisVendorProfileDone] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // Loading state
 
   const navigate = useNavigate();
@@ -153,6 +153,8 @@ function VendorProfile() {
 
     setFormErrors(errors);
 
+   
+
     try {
       const accessToken = localStorage.getItem("access_token");
 
@@ -200,10 +202,6 @@ function VendorProfile() {
       setImage(null);
       setErrorMessage("");
 
-      // Set profile as completed
-      setisVendorProfileDone(true);
-      localStorage.setItem("isVendorProfileDone", "true"); // Mark profile as done
-
       navigate("/Dashboard"); // Navigate to home or another page
 
     
@@ -217,14 +215,6 @@ function VendorProfile() {
     setIsLoading(false); // Stop loading
   }
 };
-useEffect(() => {
-  // Check if vendor profile is already done
-  const profileStatus = localStorage.getItem("isVendorProfileDone");
-  if (profileStatus === "true") {
-    setisVendorProfileDone(true);
-  }
-}, []);
-
   
 
   return (

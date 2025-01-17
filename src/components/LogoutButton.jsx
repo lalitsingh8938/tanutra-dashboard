@@ -9,7 +9,7 @@ const LogoutButton = () => {
     try {
       const accessToken = localStorage.getItem("access_token");
       const refreshToken = localStorage.getItem("refresh_token");
-      
+      const vendorProfilePicture = localStorage.getItem("vendor_profile_picture");
   
       if (!accessToken || !refreshToken) {
         navigate("/");

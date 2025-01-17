@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify"; // Import toast
 import { useAuth } from "./AuthContext"; // Import useAuth hook
 
-
 function Login({ isAuth }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -80,6 +79,9 @@ function Login({ isAuth }) {
         // Save tokens and user data to localStorage
         localStorage.setItem("access_token", access_token);
         localStorage.setItem("refresh_token", refresh_token);
+        localStorage.setItem("user_data", JSON.stringify(user_data));
+        localStorage.setItem("vendor_profile_picture", user_data.vendor_profile_picture);
+        localStorage.setItem("isVendorProfileDone", user_data.isVendorProfileDone);
         localStorage.setItem("KYCStatus", KYCStatus || "Unknown");
         localStorage.setItem("rejection_reason", rejection_reason || "");
 
