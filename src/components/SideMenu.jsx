@@ -64,7 +64,7 @@ function SideMenu() {
         {/* Dynamic Profile Image */}
         <img
           src={profileImage || "vendor.webp"} // Fallback if profileImage is empty
-          className="w-10 h-10 rounded-full ml-32 opacity-90 cursor-pointer"
+          className="w-10 h-10 rounded-full ml-32 opacity-60 cursor-pointer"
           alt="Vendor Profile"
           onClick={() => navigate("/VendorProfile")}
         />
@@ -109,7 +109,7 @@ function SideMenu() {
             icon: "inventory.svg",
           },
           {
-            label: "Business Profile",
+            label: "Business Profile (KYC)",
             route: "/BusinessProfile",
             icon: "inventory.svg",
           },
@@ -127,7 +127,7 @@ function SideMenu() {
           <div
             key={label}
             className={`flex items-center cursor-pointer w-full p-1 h-10 ${
-              activeItem === label ? "bg-neutral-500 text-black" : ""
+              activeItem === label ? "bg-neutral-300 text-black" : ""
             }`}
             onClick={() => {
               setActiveItem(label);

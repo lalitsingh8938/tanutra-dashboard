@@ -12,7 +12,9 @@ function Login({ isAuth }) {
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [kycStatus, setKycStatus] = useState(localStorage.getItem("KYCStatus") || "Unknown");
+  const [kycStatus, setKycStatus] = useState(
+    localStorage.getItem("KYCStatus") || "Unknown"
+  );
 
   // Handle Input Change
   const handleChange = (e) => {
@@ -23,11 +25,14 @@ function Login({ isAuth }) {
   // Fetch KYC status from backend
   const fetchKycStatus = async () => {
     try {
-      const response = await axios.get("https://api.tanutra.com/api/get/kyc-status/", {
-        headers: {
-          "Authorization": `Bearer ${localStorage.getItem("access_token")}`
+      const response = await axios.get(
+        "https://api.tanutra.com/api/get/kyc-status/",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
         }
-      });
+      );
       if (response.status === 200) {
         const { KYCStatus } = response.data?.data || {};
         setKycStatus(KYCStatus || "Unknown");
@@ -80,8 +85,14 @@ function Login({ isAuth }) {
         localStorage.setItem("access_token", access_token);
         localStorage.setItem("refresh_token", refresh_token);
         localStorage.setItem("user_data", JSON.stringify(user_data));
-        localStorage.setItem("vendor_profile_picture", user_data.vendor_profile_picture);
-        localStorage.setItem("isVendorProfileDone", user_data.isVendorProfileDone);
+        localStorage.setItem(
+          "vendor_profile_picture",
+          user_data.vendor_profile_picture
+        );
+        localStorage.setItem(
+          "isVendorProfileDone",
+          user_data.isVendorProfileDone
+        );
         localStorage.setItem("KYCStatus", KYCStatus || "Unknown");
         localStorage.setItem("rejection_reason", rejection_reason || "");
 
@@ -99,7 +110,9 @@ function Login({ isAuth }) {
 
         switch (KYCStatus) {
           case "Unknown":
-            toast.info("You have not applied for KYC yet. Please complete your KYC.");
+            toast.info(
+              "You have not applied for KYC yet. Please complete your KYC."
+            );
             navigate("/Dashboard");
             break;
           case "Applied":
@@ -124,14 +137,20 @@ function Login({ isAuth }) {
         }
       }
     } catch (error) {
-      console.error("Error during login:", error.response?.data || error.message);
+      console.error(
+        "Error during login:",
+        error.response?.data || error.message
+      );
 
       if (error.response) {
-        const errorMessage = error.response.data?.message || "Login failed. Please try again.";
+        const errorMessage =
+          error.response.data?.message || "Login failed. Please try again.";
         setErrorMessage(errorMessage);
         toast.error(errorMessage);
       } else {
-        setErrorMessage("An unexpected error occurred. Please try again later.");
+        setErrorMessage(
+          "An unexpected error occurred. Please try again later."
+        );
         toast.error("An unexpected error occurred. Please try again later.");
       }
     } finally {
@@ -143,7 +162,6 @@ function Login({ isAuth }) {
   useEffect(() => {
     fetchKycStatus(); // Fetch KYC status when the component mounts
   }, []);
-
 
   return (
     <div
@@ -157,6 +175,17 @@ function Login({ isAuth }) {
           radial-gradient(112% 112% at 50% -8.08%, #fff 0%, #e4f1fe 100%)`,
       }}
     >
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="flex items-center justify-center w-full h-screen">
         <div className="p-5">
           <img
@@ -204,9 +233,9 @@ function Login({ isAuth }) {
                 />
               </div>
 
-              {errorMessage && (
+              {/* {errorMessage && (
                 <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
-              )}
+              )} */}
 
               <div className="mt-8 text-center">
                 <button
