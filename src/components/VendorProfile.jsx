@@ -121,6 +121,7 @@ function VendorProfile() {
       reader.onloadend = () => {
         setImage(reader.result); // Save image Data URL
         localStorage.setItem("vendor_profile_picture", reader.result); // Save image in localStorage
+        localStorage.setItem("isVendorProfileDone", "true");
       };
       reader.readAsDataURL(file); // Convert image to Data URL
     }

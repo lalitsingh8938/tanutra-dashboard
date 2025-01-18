@@ -1,52 +1,44 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { BiSupport } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
 
 function SideMenu() {
   const [activeItem, setActiveItem] = useState("");
   const [isOpen, setIsOpen] = useState(true);
-  const [isVendorProfileDone, setIsVendorProfileDone] = useState(false);
-  const [profileImage, setProfileImage] = useState(""); // State for the profile image
-  const sidebarRef = useRef(null);
+  const [profileImage, setProfileImage] = useState(""); // State for profile image
   const navigate = useNavigate();
+  const location = useLocation(); // Detect route changes
+  const sidebarRef = useRef(null);
 
-  // Initialize profile image from localStorage and handle changes
+  // Function to update profile image
   const updateProfileImage = () => {
     const storedImage = localStorage.getItem("vendor_profile_picture");
     const profileStatus = localStorage.getItem("isVendorProfileDone");
 
-    // Check if the vendor profile is done
-    if (profileStatus === "true") {
-      setIsVendorProfileDone(true);
-    }
-
-    if (storedImage) {
-      setProfileImage(storedImage); // Load from localStorage if available
+    if (profileStatus === "true" && storedImage) {
+      setProfileImage(storedImage); // Set profile image if profile is complete
+    } else {
+      setProfileImage(""); // Fallback to empty if no valid profile
     }
   };
 
+  // Update profile image on mount and route changes
   useEffect(() => {
-    // Call the function initially to load profile image
-    updateProfileImage();
-
-    // Listen for localStorage changes
-    window.addEventListener("storage", updateProfileImage);
-
-    // Clean up the event listener
-    return () => {
-      window.removeEventListener("storage", updateProfileImage);
-    };
+    updateProfileImage(); // Call on initial render
   }, []);
 
-  const handleLogout = () => {
-  localStorage.removeItem("vendor_profile_picture"); // Clear only the profile image on logout
-  localStorage.removeItem("isVendorProfileDone"); // Optionally clear other session data
-  setProfileImage(""); // Reset profile image in state on logout
-  navigate("/login"); // Redirect to login page or home
-};
+  useEffect(() => {
+    updateProfileImage(); // Call on route change
+  }, [location]);
 
+  const handleLogout = () => {
+    localStorage.removeItem("vendor_profile_picture"); // Clear profile image
+    localStorage.removeItem("isVendorProfileDone"); // Clear profile status
+    setProfileImage(""); // Reset profile image in state
+    navigate("/login"); // Redirect to login page
+  };
 
   const menuWidth = "w-[231px]";
   const itemWidth = "w-[108px]";
@@ -60,21 +52,21 @@ function SideMenu() {
     >
       {/* Profile Section */}
       <div className="flex items-center mt-4">
-        {/* Left Profile Image (Static or Fallback) */}
+        {/* Fallback Profile Image */}
         <div>
           <img
-            src= "1629896997118.webp" // Fallback image if profileImage is empty
+            src="1629896997118.webp"
             className="w-10 h-10 rounded-full border-2"
             alt="Vendor Profile"
           />
         </div>
 
-        {/* Right Profile Image (Dynamic and Clickable) */}
+        {/* Dynamic Profile Image */}
         <img
-          src={profileImage || "vendor.webp"} // Fallback image if profileImage is empty
+          src={profileImage || "vendor.webp"} // Fallback if profileImage is empty
           className="w-10 h-10 rounded-full ml-32 opacity-90 cursor-pointer"
           alt="Vendor Profile"
-          onClick={() => navigate("/VendorProfile")} // Navigate to Vendor Profile
+          onClick={() => navigate("/VendorProfile")}
         />
       </div>
 
@@ -84,7 +76,10 @@ function SideMenu() {
           className={`${itemWidth} h-11 border flex items-center cursor-pointer ${
             activeItem === "Home" ? "bg-[#1CACBD0A]" : ""
           }`}
-          onClick={() => navigate("/Dashboard")}
+          onClick={() => {
+            setActiveItem("Home");
+            navigate("/Dashboard");
+          }}
         >
           <BiSupport className="h-5 w-5 ml-5" />
           <p className="text-black text-sm ml-2">Home</p>
@@ -93,7 +88,10 @@ function SideMenu() {
           className={`${itemWidth} h-11 border flex items-center cursor-pointer ${
             activeItem === "Notifications" ? "bg-black text-white" : ""
           }`}
-          onClick={() => navigate("/Notifications")}
+          onClick={() => {
+            setActiveItem("Notifications");
+            navigate("/Notifications");
+          }}
         >
           <IoIosNotificationsOutline className="h-5 w-5 ml-1" />
           <p className="text-black text-sm ml-0">Notifications</p>
@@ -102,20 +100,39 @@ function SideMenu() {
 
       {/* Business Management Links */}
       <div className="text-black mt-4 text-sm ml-3">
-        <p className="opacity-45 p-2 ml- mt-3 text-xs">Manage Business</p>
-        {[ 
+        <p className="opacity-45 p-2 mt-3 text-xs">Manage Business</p>
+        {[
           { label: "My Orders", route: "/MyOrders", icon: "orders.svg" },
-          { label: "Manage Inventory", route: "/ManageInventory", icon: "inventory.svg" },
-          { label: "Business Profile", route: "/BusinessProfile", icon: "inventory.svg" },
-          { label: "Product Uploads", route: "/ProductUpload", icon: "catelogupload.svg" },
-          { label: "Payments", route: "/Catelog_uploads", icon: "payments.svg" },
+          {
+            label: "Manage Inventory",
+            route: "/ManageInventory",
+            icon: "inventory.svg",
+          },
+          {
+            label: "Business Profile",
+            route: "/BusinessProfile",
+            icon: "inventory.svg",
+          },
+          {
+            label: "Product Uploads",
+            route: "/ProductUpload",
+            icon: "catelogupload.svg",
+          },
+          {
+            label: "Payments",
+            route: "/Catelog_uploads",
+            icon: "payments.svg",
+          },
         ].map(({ label, route, icon }) => (
           <div
             key={label}
             className={`flex items-center cursor-pointer w-full p-1 h-10 ${
               activeItem === label ? "bg-neutral-500 text-black" : ""
             }`}
-            onClick={() => navigate(route)}
+            onClick={() => {
+              setActiveItem(label);
+              navigate(route);
+            }}
           >
             <img
               src={icon}
