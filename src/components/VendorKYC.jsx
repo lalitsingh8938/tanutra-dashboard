@@ -87,8 +87,8 @@ const KYCStatusButton = ({
     } else if (kycStatus === "Accepted") {
       toast.success("KYC Accepted! You can now upload your products.");
       window.location.href = "/ProductUpload"; // Redirect to product upload page
-    } else if (kycStatus === "Rejected") {
-      toast.info(`KYC Rejected: ${rejectionReasonState}`);
+    // } else if (kycStatus === "Rejected") {
+    //   toast.info(`KYC Rejected: ${rejectionReasonState}`);
       window.location.href = "/BusinessProfile"; // Redirect to KYC resubmission page
     } else {
       toast.info("Unable to fetch KYC status. Please try again later.");
@@ -120,8 +120,8 @@ const KYCStatusButton = ({
             ? "bg-gray-400 cursor-not-allowed"
             : kycStatus === "Accepted"
             ? "bg-green-500"
-            : kycStatus === "Rejected"
-            ? "bg-red-500"
+            // : kycStatus === "Rejected"
+            // ? "bg-red-500"
             : kycStatus === "Under Review"
             ? "bg-orange-500"
             : kycStatus === "Not Applied"
@@ -133,8 +133,8 @@ const KYCStatusButton = ({
       >
         {isLoading
           ? "Checking Status..."
-          : kycStatus === "Rejected"
-          ? `Rejected: ${rejectionReasonState}`
+          // : kycStatus === "Rejected"
+          // ? `Rejected: ${rejectionReasonState}`
           : `KYC Status: ${kycStatus}`}
       </button>
 

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Country, State, City } from "country-state-city";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify"; // Import toast
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
 
 function VendorProfile() {
@@ -154,8 +155,6 @@ function VendorProfile() {
 
     setFormErrors(errors);
 
-   
-
     try {
       const accessToken = localStorage.getItem("access_token");
 
@@ -203,26 +202,11 @@ function VendorProfile() {
       setImage(null);
       setErrorMessage("");
 
-      navigate("/Dashboard"); // Navigate to home or another page
-
-    
-  } catch (error) {
-    console.error(
-      "Error during profile creation:",
-      error.response?.data || error.message
-    );
-    toast.error("Profile already exits.");
-  } finally {
-    setIsLoading(false); // Stop loading
-  }
-};
-  
-
-  return (
-    <div className="relative  flex items-center justify-center min-h-screen bg-cover bg-center  xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[200px] 2xl:ml[300px]">
+      // Show success toast
+      toast.success("Vendor profile created successfully!");
       <ToastContainer
         position="top-center"
-        autoClose={1000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -232,6 +216,21 @@ function VendorProfile() {
         pauseOnHover
       />
 
+      navigate("/Dashboard"); // Navigate to home or another page
+    } catch (error) {
+      console.error(
+        "Error during profile creation:",
+        error.response?.data || error.message
+      );
+      toast.error("Profile already exits.");
+    } finally {
+      setIsLoading(false); // Stop loading
+    }
+  };
+
+  return (
+    <div className="relative  flex items-center justify-center min-h-screen bg-cover bg-center  xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[200px] 2xl:ml[300px]">
+      
       {/* Overlay */}
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
 

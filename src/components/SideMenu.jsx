@@ -64,7 +64,7 @@ function SideMenu() {
         {/* Dynamic Profile Image */}
         <img
           src={profileImage || "vendor.webp"} // Fallback if profileImage is empty
-          className="w-10 h-10 rounded-full ml-32 opacity-60 cursor-pointer"
+          className="w-10 h-10 rounded-full ml-32 opacity-90 cursor-pointer"
           alt="Vendor Profile"
           onClick={() => navigate("/VendorProfile")}
         />
