@@ -49,7 +49,7 @@ function ManageInventory() {
             </div>
 
             <button
-              className="w-36 h-10 bg-blue-700 cursor-pointer text-white font-semibold flex items-center justify-center rounded-md text-md gap-2 mr-10"
+              className="w-36 h-10 bg-blue-700 cursor-pointer mt-1 text-white font-semibold flex items-center justify-center rounded-md text-md gap-2 mr-10"
               type="button"
               onClick={() => navigate("/ProductUpload")}
             >

@@ -7,7 +7,7 @@ const KYCStatusButton = ({
   rejectionReason = "",
 }) => {
   const [kycStatus, setKycStatus] = useState(initialKYCStatus);
-  const [rejectionReasonState, setRejectionReason] = useState(rejectionReason);
+  // const [rejectionReasonState, setRejectionReason] = useState(rejectionReason);
   const [isLoading, setIsLoading] = useState(false);
 
   // Function to fetch KYC status from the API
@@ -52,9 +52,9 @@ const KYCStatusButton = ({
 
         if (status === "Accepted") {
           setKycStatus("Accepted");
-        } else if (status === "Rejected") {
-          setKycStatus("Rejected");
-          setRejectionReason(reason || "No reason provided.");
+        // } else if (status === "Rejected") {
+        //   setKycStatus("Rejected");
+        //   setRejectionReason(reason || "No reason provided.");
         } else if (status === "Applied") {
           setKycStatus("Under Review");
         } else {
