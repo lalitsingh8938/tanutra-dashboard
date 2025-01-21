@@ -361,7 +361,7 @@ const EditProducts = () => {
             {/* Form */}
             <form onSubmit={handleSubmit} className="mt-2 bg-transparent">
               {/* Title Name and Category Name */}
-              <p className="items-center px-5 py-1 rounded-lg flex text-lg font-semibold text-black w-52 text-center opacity-60 bg-[#ECB59D]">
+              <p className="items-center px-5 py-1 ml-2 rounded-lg text-lg font-semibold text-black w-72 text-center opacity-60 bg-[#ECB59D]">
                 Product Attributes:
               </p>
               <div className="flex flex-wrap justify-center items-center gap-8 p-2">
@@ -481,39 +481,39 @@ const EditProducts = () => {
                   </div>
                 </div>
 
-                <div className=" w-full ml-28">
-                  <p className="font-semibold text-lg border-b-2">
+                <div className=" w-full">
+                  <p className="items-center px-5 py-1 rounded-lg text-lg font-semibold text-black w-72 text-center opacity-60 bg-[#ECB59D]">
                     Product, Size and Inventory
                   </p>
                 </div>
 
                 {/* Description and Use Case */}
                 {/* <div className="flex flex-wrap justify-center items-center gap-8 p-1"> */}
-                  <div className="flex flex-col w-72">
-                    <label className="font-semibold text-slate-800 p-0.5">
-                      Product Description
-                    </label>
-                    <textarea
-                      name="description"
-                      placeholder="abc..."
-                      value={formData.description}
-                      onChange={handleChange}
-                      className="w-full h-16 border rounded-md p-1"
-                    />
-                  </div>
+                <div className="flex flex-col w-72">
+                  <label className="font-semibold text-slate-800 p-0.5">
+                    Product Description
+                  </label>
+                  <textarea
+                    name="description"
+                    placeholder="abc..."
+                    value={formData.description}
+                    onChange={handleChange}
+                    className="w-full h-20 border rounded-md p-1"
+                  />
+                </div>
 
-                  <div className="flex flex-col w-72">
-                    <label className="font-semibold text-slate-800 p-1">
-                      Product Use Case or Utility
-                    </label>
-                    <textarea
-                      name="use_case_or_utility"
-                      placeholder="abc..."
-                      value={formData.use_case_or_utility}
-                      onChange={handleChange}
-                      className="w-full h-16 border rounded-md p-1"
-                    />
-                  </div>
+                <div className="flex flex-col w-72">
+                  <label className="font-semibold text-slate-800 p-0.5">
+                    Product Use Case or Utility
+                  </label>
+                  <textarea
+                    name="use_case_or_utility"
+                    placeholder="abc..."
+                    value={formData.use_case_or_utility}
+                    onChange={handleChange}
+                    className="w-full h-20 border rounded-md p-1"
+                  />
+                </div>
                 {/* </div> */}
 
                 <div className="flex flex-wrap justify-center items-center gap-8 p-1">
