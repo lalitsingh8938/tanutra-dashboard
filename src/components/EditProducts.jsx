@@ -372,7 +372,6 @@ const EditProducts = () => {
                   <input
                     type="text"
                     name="title"
-                    placeholder="Golden Brass Ganesha"
                     value={formData.title}
                     onChange={handleChange}
                     className="w-full h-9 border rounded-md p-1"
@@ -386,7 +385,6 @@ const EditProducts = () => {
                   <input
                     type="text"
                     name="material_used"
-                    placeholder="Copper, Brass..."
                     value={formData.material_used}
                     onChange={handleChange}
                     className="w-full h-9 border rounded-md p-1"
@@ -457,9 +455,8 @@ const EditProducts = () => {
                       Price per unit
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       name="price_per_unit"
-                      placeholder="200 per product"
                       value={formData.price_per_unit}
                       onChange={handleChange}
                       className="w-full h-9 border rounded-md p-1"
@@ -471,9 +468,8 @@ const EditProducts = () => {
                       HSN Code
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       name="hsn_code"
-                      placeholder="1234"
                       value={formData.hsn_code}
                       onChange={handleChange}
                       className="w-full h-9 border rounded-md p-1"
@@ -495,7 +491,6 @@ const EditProducts = () => {
                   </label>
                   <textarea
                     name="description"
-                    placeholder="abc..."
                     value={formData.description}
                     onChange={handleChange}
                     className="w-full h-20 border rounded-md p-1"
@@ -508,7 +503,6 @@ const EditProducts = () => {
                   </label>
                   <textarea
                     name="use_case_or_utility"
-                    placeholder="abc..."
                     value={formData.use_case_or_utility}
                     onChange={handleChange}
                     className="w-full h-20 border rounded-md p-1"
@@ -523,9 +517,8 @@ const EditProducts = () => {
                     </label>
                     <input
                       type="number"
-                      name="length_cm"
-                      placeholder="20"
-                      value={formData.length_cm}
+                      name="height_cm"
+                      value={formData.height_cm}
                       onChange={handleChange}
                       className="w-full h-9 border rounded-md p-1"
                     />
@@ -538,7 +531,6 @@ const EditProducts = () => {
                     <input
                       type="number"
                       name="width_cm"
-                      placeholder="15"
                       value={formData.width_cm}
                       onChange={handleChange}
                       className="w-full h-9 border rounded-md p-1"
@@ -551,9 +543,8 @@ const EditProducts = () => {
                     </label>
                     <input
                       type="number"
-                      name="height_cm"
-                      placeholder="10"
-                      value={formData.height_cm}
+                      name="length_cm"
+                      value={formData.length_cm}
                       onChange={handleChange}
                       className="w-full h-9 border rounded-md p-1"
                     />
@@ -566,7 +557,6 @@ const EditProducts = () => {
                     <input
                       type="number"
                       name="weight_gm"
-                      placeholder="500"
                       value={formData.weight_gm}
                       onChange={handleChange}
                       className="w-full h-9 border rounded-md p-1"
@@ -580,9 +570,8 @@ const EditProducts = () => {
                       Product Minimum Order Quantity
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       name="minimum_order_quantity"
-                      placeholder="20"
                       value={formData.minimum_order_quantity}
                       onChange={handleChange}
                       className="w-full h-9 border rounded-md p-1"
@@ -594,9 +583,8 @@ const EditProducts = () => {
                       Product Quantity Available
                     </label>
                     <input
-                      type="integer"
+                      type="number"
                       name="quantity_available"
-                      placeholder="20"
                       value={formData.quantity_available}
                       onChange={handleChange}
                       className="w-full h-9 border rounded-md p-1"
