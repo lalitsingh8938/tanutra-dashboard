@@ -345,7 +345,7 @@ function ProductPage() {
               src={selectedProductImages[currentImageIndex]}
               alt="Preview"
               className="max-w-full max-h-[70vh] object-contain mb-4"
-            />
+            />                
             <div className="flex justify-between items-center">
               <button
                 className="bg-gray-700 text-white px-4 py-2 rounded"

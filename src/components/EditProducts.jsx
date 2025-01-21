@@ -360,6 +360,54 @@ const EditProducts = () => {
           <div className="rounded-xl bg-transparent p-2 border">
             {/* Form */}
             <form onSubmit={handleSubmit} className="mt-2 bg-transparent">
+              {/* <tr key={product.id}>
+                    <td className="border border-gray-300 px-4 py-2 text-center">
+                      {index + 1}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2 cursor-pointer">
+                      <div className="flex gap-2 justify-center flex-wrap">
+                        {product.images.slice(0, 1).map((image, imgIndex) => (
+                          <img
+                            key={imgIndex}
+                            src={image}
+                            alt={`Product-${index}-${imgIndex}`}
+                            className="w-16 h-16 object-cover rounded"
+                            onClick={() => handleImageClick(product.images, 0)}
+                          />
+                        ))}
+                      </div>
+                    </td>
+                    </tr> */}
+
+              {/* <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"> */}
+              {/* <div className="relative bg-white rounded shadow-lg p-4">
+            <img
+              // src={selectedProductImages[currentImageIndex]}
+              alt="Preview"
+              className="max-w-full max-h-[70vh] object-contain mb-4"
+            /> */}
+              {/* <div className="flex justify-between items-center">
+              <button
+                className="bg-gray-700 text-white px-4 py-2 rounded"
+                // onClick={viewPrevImage}
+              >
+                Previous
+              </button>
+              <button
+                className="bg-gray-700 text-white px-4 py-2 rounded"
+                // onClick={viewNextImage}
+              >
+                Next
+              </button>
+              <button
+                className="bg-red-600 text-white px-4 py-2 rounded"
+                // onClick={closeModal}
+              >
+                Close
+              </button>
+            </div> */}
+              {/* </div> */}
+              {/* </div> */}
               {/* Title Name and Category Name */}
               <p className="items-center px-5 py-1 ml-2 rounded-lg text-lg font-semibold text-black w-72 text-center opacity-60 bg-[#ECB59D]">
                 Product Attributes
