@@ -3,10 +3,10 @@ import React from "react";
 function Catelog_uploads() {
   return (
     <div className="">
-      <div className=" ml-60 bg-white w-[1200px] border flex items-center">
+      <div className=" ml-60 bg-white w-full border flex items-center justify-center">
         <div className="ml-2 p-4 text-xl font-bold">Upload Catelog</div>
       </div>
-      <div className="ml-60 w-[1250px] mt-4 bg-white border h-52">
+      <div className="ml-60 w-full mt-4 bg-white border h-52">
         <div className="p-3">
           <p className="text-xs opacity-80">
             Have unique products to sell? Choose from the options below

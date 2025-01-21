@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function ForgotPassword() {
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
   });
-  const [errorMessage, setErrorMessage] = useState("");
 
   // Handle Input Change
   const handleChange = (e) => {
@@ -17,16 +21,17 @@ function ForgotPassword() {
   // Handle Form Submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Start loading
 
     // Basic validation
     if (!formData.email) {
-      setErrorMessage("Email is required.");
+      toast.error("Email is required.");
       return;
     }
 
     try {
       const response = await axios.post(
-        "http://44.214.216.34:8008/api/forgot-password/",
+        "https://api.tanutra.com/api/forgot-password/",
         {
           email: formData.email,
         },
@@ -46,6 +51,7 @@ function ForgotPassword() {
           email: "",
         });
         setErrorMessage("");
+        toast.success("OTP sent successfully!");
 
         // Navigate to OTP authentication page
         navigate("/Otp");
@@ -71,6 +77,8 @@ function ForgotPassword() {
           "An unexpected error occurred. Please try again later."
         );
       }
+    } finally {
+      setIsLoading(false); // Stop loading
     }
   };
 
@@ -86,11 +94,22 @@ function ForgotPassword() {
           radial-gradient(112% 112% at 50% -8.08%, #fff 0%, #e4f1fe 100%)`,
       }}
     >
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="flex items-center justify-center w-full h-screen">
         <div className="p-5">
           <img
             src="Tanutra_Mobile_Logo.avif"
-            className="w-56 h-24 mx-auto rounded-t-xl cursor-pointer"
+            className="w-48 h-24 mx-auto rounded-t-xl cursor-pointer"
             alt="logo"
           />
 
@@ -118,16 +137,26 @@ function ForgotPassword() {
                 />
               </div>
 
-              {errorMessage && (
+              {/* {errorMessage && (
                 <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
-              )}
+              )} */}
 
               <div className="mt-8 text-center">
                 <button
-                  className="w-full md:w-[356px] h-10 bg-green-500 cursor-pointer text-white font-semibold rounded-md text-md"
+                  className={`w-full md:w-[356px] h-10 bg-green-500 text-white font-semibold rounded-md text-md ${
+                    isLoading || !formData.email
+                      ? "opacity-50 cursor-not-allowed"
+                      : "cursor-pointer"
+                  }`}
                   type="submit"
+                  disabled={isLoading || !formData.email}
+                  onClick={() => {
+                    if (!formData.email) {
+                      toast.error("Email is required.");
+                    }
+                  }}
                 >
-                  Send OTP
+                  {isLoading ? "Sending..." : "Send OTP"}
                 </button>
               </div>
             </form>

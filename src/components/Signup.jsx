@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { FaLeftLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify"; // Import toast for notifications
-import "react-toastify/dist/ReactToastify.css"; // Import Toastify CSS
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -92,12 +92,26 @@ function Signup() {
         linear-gradient(256.1deg, #f8f5f5, #d5ebf9 22.92%, #d5e9f5 38.54%, #fbf9e8 73.96%, #f0eded),
         radial-gradient(112% 112% at 50% -8.08%, #fff 0%, #e4f1fe 100%)`,
       }}
+
+      
     >
+        <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+    
       <div className="max-w-lg w-full p-6 rounded-xl shadow-lg bg-white">
         <div className="flex justify-center mb-5">
           <img
             src="Tanutra_Mobile_Logo.avif"
-            className="w-56 h-24 rounded-t-xl cursor-pointer"
+            className="w-48 h-24 rounded-t-xl cursor-pointer"
             alt="logo"
           />
         </div>

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify"; // Import toast
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useAuth } from "./AuthContext"; // Import useAuth hook
 
 function Login({ isAuth }) {
@@ -47,17 +48,17 @@ function Login({ isAuth }) {
   // Handle Form Submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true); // Start loading
+  
     // Basic validation
     if (!formData.email || !formData.password) {
       isAuth(false); // User is not authenticated
       setErrorMessage("Email and password are required.");
       toast.error("Email and password are required.");
+      setIsLoading(false); // Stop loading on validation failure
       return;
     }
-
-    setIsLoading(true); // Start loading
-
+  
     try {
       const response = await axios.post(
         "https://api.tanutra.com/api/login/",
@@ -71,54 +72,41 @@ function Login({ isAuth }) {
           },
         }
       );
-
+  
       if (response.status === 200) {
+        // Login successful
         console.log("Login successful:", response.data);
-
-        // Extract tokens and user data
-        const access_token = response.data?.data?.access;
-        const refresh_token = response.data?.data?.refresh;
-        const user_data = response.data?.data?.user_data;
-        const { KYCStatus, rejection_reason } = user_data || {};
-
+  
+        const { access, refresh, user_data } = response.data.data || {};
+        const { KYCStatus, rejection_reason, vendor_profile_picture, isVendorProfileDone } = user_data || {};
+  
         // Save tokens and user data to localStorage
-        localStorage.setItem("access_token", access_token);
-        localStorage.setItem("refresh_token", refresh_token);
+        localStorage.setItem("access_token", access);
+        localStorage.setItem("refresh_token", refresh);
         localStorage.setItem("user_data", JSON.stringify(user_data));
-        localStorage.setItem(
-          "vendor_profile_picture",
-          user_data.vendor_profile_picture
-        );
-        localStorage.setItem(
-          "isVendorProfileDone",
-          user_data.isVendorProfileDone
-        );
+        localStorage.setItem("vendor_profile_picture", vendor_profile_picture);
+        localStorage.setItem("isVendorProfileDone", isVendorProfileDone);
         localStorage.setItem("KYCStatus", KYCStatus || "Unknown");
         localStorage.setItem("rejection_reason", rejection_reason || "");
-
+  
         // Reset form data
         setFormData({
           email: "",
           password: "",
         });
-
-        setErrorMessage(""); // Clear any error messages
+  
+        setErrorMessage(""); // Clear error messages
         toast.success("Logged in successfully!");
-
-        // Update KYC status and redirect based on KYC status
+  
+        // Update KYC status and handle redirection
         setKycStatus(KYCStatus || "Unknown");
-
+  
         switch (KYCStatus) {
           case "Unknown":
-            toast.info(
-              "You have not applied for KYC yet. Please complete your KYC."
-            );
+            toast.info("You have not applied for KYC yet. Please complete your KYC.");
             navigate("/Dashboard");
             break;
           case "Applied":
-            toast.info("Your KYC is under review. Please wait for approval.");
-            navigate("/Dashboard");
-            break;
           case "Under Review":
             toast.info("Your KYC is under review. Please wait for approval.");
             navigate("/Dashboard");
@@ -137,27 +125,31 @@ function Login({ isAuth }) {
         }
       }
     } catch (error) {
-      console.error(
-        "Error during login:",
-        error.response?.data || error.message
-      );
-
+      console.error("Error during login:", error.response?.data || error.message);
+  
       if (error.response) {
-        const errorMessage =
-          error.response.data?.message || "Login failed. Please try again.";
-        setErrorMessage(errorMessage);
-        toast.error(errorMessage);
+        const errorCode = error.response.data?.code;
+  
+        if (errorCode === "INVALID_PASSWORD") {
+          setErrorMessage("Incorrect password. Please try again.");
+          toast.error("Incorrect password. Please check and try again.");
+        } else if (errorCode === "USER_NOT_FOUND") {
+          setErrorMessage("User not found.");
+          toast.error("User not found. Please sign up first.");
+        } else {
+          const genericErrorMessage = error.response.data?.message || "Login failed. Please try again.";
+          setErrorMessage(genericErrorMessage);
+          toast.error(genericErrorMessage);
+        }
       } else {
-        setErrorMessage(
-          "An unexpected error occurred. Please try again later."
-        );
+        setErrorMessage("An unexpected error occurred. Please try again later.");
         toast.error("An unexpected error occurred. Please try again later.");
       }
     } finally {
       setIsLoading(false); // Stop loading
     }
   };
-
+  
   // This hook checks the local storage for KYC status on component mount
   useEffect(() => {
     fetchKycStatus(); // Fetch KYC status when the component mounts
@@ -239,7 +231,9 @@ function Login({ isAuth }) {
 
               <div className="mt-8 text-center">
                 <button
-                  className="w-full md:w-[356px] h-10 bg-green-500 cursor-pointer text-white font-semibold rounded-md text-md"
+                  className={`w-full md:w-[356px] h-10 bg-green-500 cursor-pointer text-white font-semibold rounded-md text-md ${
+                    isLoading ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
                   type="submit"
                   disabled={isLoading}
                 >

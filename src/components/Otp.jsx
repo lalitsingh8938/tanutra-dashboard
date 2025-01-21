@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 axios.defaults.withCredentials = true;
 
 function Otp() {
@@ -43,7 +44,7 @@ function Otp() {
       );
 
       if (response.status === 200) {
-        alert("OTP verified successfully!");
+        toast.success("OTP verified successfully!");
         const receivedToken = response.data.data.token; // Assuming token is in response.data.token
         setToken(receivedToken); // Save token in state
         localStorage.setItem("token", receivedToken); // Optionally store token in localStorage
@@ -88,7 +89,7 @@ function Otp() {
       );
 
       if (response.status === 200) {
-        alert("Next request successful!");
+        toast.success("Next request successful!");
         // Handle success response
       }
     } catch (error) {
@@ -110,11 +111,22 @@ function Otp() {
           radial-gradient(112% 112% at 50% -8.08%, #fff 0%, #e4f1fe 100%)`,
       }}
     >
+        <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="flex justify-center items-center h-screen">
         <div className="text-center">
           <img
             src="Tanutra_Mobile_Logo.avif"
-            className="mx-auto w-56 h-24 rounded-t-xl cursor-pointer"
+            className="mx-auto w-48 h-24 rounded-t-xl cursor-pointer"
             alt="logo"
           />
 
@@ -130,8 +142,8 @@ function Otp() {
                   type="text"
                   value={otp}
                   name="otp"
-                  placeholder="Enter your OTP"
-                  onChange={handleChange}
+                  placeholder="  Enter your OTP"
+                  onChange={handleChange} 
                   required
                 />
               </div>

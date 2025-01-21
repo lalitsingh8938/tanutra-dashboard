@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const ProductUpload = () => {
+const EditProducts = () => {
   // const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -369,33 +369,37 @@ const ProductUpload = () => {
       <div className="relative z-10 w-full max-w-4xl bg-transparent rounded-lg">
         <div className="p-2 mt-20">
           {/* Logo */}
-          <img
+          {/* <img
             src="Tanutra_Mobile_Logo.avif"
             className="w-52 h-24 mx-auto rounded-t-xl cursor-pointer"
             alt="logo"
-          />
+          /> */}
 
           <div className="rounded-xl bg-transparent p-2 border">
             {/* Form */}
-            <form onSubmit={handleSubmit} className="mt-12 bg-transparent">
+            <form onSubmit={handleSubmit} className="mt-2 bg-transparent">
               {/* Product Data Section */}
 
               <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg">
-                <img
+                {/* <img
                   src="vendor_profile1.png"
                   className="w-8 h-8 rounded-xl ml-6 cursor-pointer border"
                   alt="logo"
-                />
-                <p className="px-5 py-1 flex text-lg font-semibold text-black w-full">
-                  Product Data:
+                /> */}
+                <p className="px-5 py-1 flex text-xl font-semibold text-black w-full">
+                  Product Details:
                 </p>
               </div>
 
               {/* Title Name and Category Name */}
-              <div className="flex flex-wrap justify-center items-center gap-8 p-5">
+              <p className="items-center px-5 py-1 mt-3 rounded-lg flex text-lg font-semibold text-black w-52 text-center opacity-60 bg-[#ECB59D]">
+                Product Attributes:
+              </p>
+              {/* <p className="border mt-2"></p> */}
+              <div className="flex flex-wrap justify-center items-center gap-16 p-5">
                 <div className="flex flex-col w-72">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Title
+                  <label className="font-semibold text-slate-800 p-1">
+                    Product Title
                   </label>
                   <input
                     type="text"
@@ -408,65 +412,7 @@ const ProductUpload = () => {
                 </div>
 
                 <div className="flex flex-col w-72">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Category
-                  </label>
-                  <select
-                    value={formData.category}
-                    placeholder="Home Decor"
-                    onChange={handleCategoryChange}
-                    className="w-full h-9 p-1 border-none rounded-l-md focus:outline-none"
-                  >
-                    <option value="">Select Category</option>
-                    {categories.map((cat) => (
-                      <option key={cat.category} value={cat.category}>
-                        {cat.category}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {formData.category && (
-                  <div className="flex flex-col mb-4">
-                    <label className="font-semibold">Subcategory</label>
-                    <select
-                      value={formData.subcategory}
-                      onChange={handleSubcategoryChange}
-                      className="border rounded-md p-2 w-72"
-                    >
-                      <option value="">Select Subcategory</option>
-                      {selectedCategory?.subcategories.map((sub) => (
-                        <option key={sub.name} value={sub.name}>
-                          {sub.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-
-                {formData.subcategory && (
-                  <div className="flex flex-col mb-4">
-                    <label className="font-semibold">Mini Category</label>
-                    <select
-                      value={formData.miniCategory}
-                      onChange={handleMiniCategoryChange}
-                      className="border rounded-md p-2 w-72"
-                    >
-                      <option value="">Select Mini Category</option>
-                      {selectedSubcategory?.miniCategories.map((mini) => (
-                        <option key={mini} value={mini}>
-                          {mini}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-              </div>
-
-              {/* Material Used and HSN Code */}
-              <div className="flex flex-wrap justify-center items-center gap-8 p-5">
-                <div className="flex flex-col w-72">
-                  <label className="font-semibold text-slate-800 p-2">
+                  <label className="font-semibold text-slate-800 p-1">
                     Material Used
                   </label>
                   <input
@@ -479,23 +425,72 @@ const ProductUpload = () => {
                   />
                 </div>
 
-                <div className="flex flex-col w-72">
-                  <label className="font-semibold text-slate-800 p-2">
-                    HSN Code
-                  </label>
-                  <input
-                    type="text"
-                    name="hsn_code"
-                    placeholder="1234"
-                    value={formData.hsn_code}
-                    onChange={handleChange}
-                    className="w-full h-9 border rounded-md p-3"
-                  />
-                </div>
-              </div>
+                {/* Render Category */}
+                <div className="flex flex-col w-72 space-y-2">
+                  {/* Category Dropdown */}
+                  <div className="flex flex-col">
+                    <label className="font-semibold text-slate-800 p-1">
+                      Category
+                    </label>
+                    <select
+                      value={formData.category}
+                      onChange={handleCategoryChange}
+                      className="w-full h-9 p-1 border border-gray-300 rounded-md focus:outline-none"
+                    >
+                      <option value="">Select Category</option>
+                      {categories.map((cat) => (
+                        <option key={cat.category} value={cat.category}>
+                          {cat.category}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
-              {/* Price and Minimum Order Quantity */}
-              <div className="flex flex-wrap justify-center items-center gap-8 p-5">
+                  {/* Subcategory Dropdown */}
+                  {formData.category &&
+                    selectedCategory?.subcategories.length > 0 && (
+                      <div className="flex flex-col">
+                        <label className="font-semibold text-semibold text-slate-800 p-1">
+                          Subcategory
+                        </label>
+                        <select
+                          value={formData.subcategory}
+                          onChange={handleSubcategoryChange}
+                          className="w-full h-9 p-1 border border-gray-300 rounded-md focus:outline-none"
+                        >
+                          <option value="">Select Subcategory</option>
+                          {selectedCategory.subcategories.map((sub) => (
+                            <option key={sub.name} value={sub.name}>
+                              {sub.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
+
+                  {/* Mini Category Dropdown */}
+                  {formData.subcategory &&
+                    selectedSubcategory?.miniCategories.length > 0 && (
+                      <div className="flex flex-col">
+                        <label className="font-semibold text-semibold text-slate-800">
+                          Mini Category 
+                        </label>
+                        <select
+                          value={formData.miniCategory}
+                          onChange={handleMiniCategoryChange}
+                          className="w-full h-9 p-1 border border-gray-300 rounded-md focus:outline-none"
+                        >
+                          <option value="">Select Mini Category</option>
+                          {selectedSubcategory.miniCategories.map((mini) => (
+                            <option key={mini} value={mini}>
+                              {mini}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
+                </div>
+                
                 <div className="flex flex-col w-72">
                   <label className="font-semibold text-slate-800 p-2">
                     Price per unit
@@ -509,7 +504,25 @@ const ProductUpload = () => {
                     className="w-full h-9 border rounded-md p-3"
                   />
                 </div>
+              </div>
 
+              
+              {/* Material Used and HSN Code */}
+              <div className="flex flex-wrap justify-center items-center gap-16 p-5">
+                
+                <div className="flex flex-col w-72">
+                  <label className="font-semibold text-slate-800 p-2">
+                    HSN Code
+                  </label>
+                  <input
+                    type="text"
+                    name="hsn_code"
+                    placeholder="1234"
+                    value={formData.hsn_code}
+                    onChange={handleChange}
+                    className="w-full h-9 border rounded-md p-3"
+                  />
+                </div>
                 <div className="flex flex-col w-72">
                   <label className="font-semibold text-slate-800 p-2">
                     Minimum Order Quantity
@@ -523,6 +536,42 @@ const ProductUpload = () => {
                     className="w-full h-9 border rounded-md p-3"
                   />
                 </div>
+              </div>
+
+              {/* Description and Use Case */}
+              <div className="flex flex-wrap justify-center items-center gap-16 p-5">
+                <div className="flex flex-col w-72">
+                  <label className="font-semibold text-slate-800 p-2">
+                    Description
+                  </label>
+                  <textarea
+                    name="description"
+                    placeholder="abc..."
+                    value={formData.description}
+                    onChange={handleChange}
+                    className="w-full h-16 border rounded-md p-1"
+                  />
+                </div>
+
+                <div className="flex flex-col w-72">
+                  <label className="font-semibold text-slate-800 p-2">
+                    Use Case or Utility
+                  </label>
+                  <textarea
+                    name="use_case_or_utility"
+                    placeholder="abc..."
+                    value={formData.use_case_or_utility}
+                    onChange={handleChange}
+                    className="w-full h-16 border rounded-md p-1"
+                  />
+                </div>
+              </div>
+
+              {/* Price and Minimum Order Quantity */}
+              <div className="flex flex-wrap justify-center items-center gap-8 p-5">
+               
+
+               
               </div>
 
               <div className="flex flex-col w-72 ml-32">
@@ -598,34 +647,7 @@ const ProductUpload = () => {
                 </div>
               </div>
 
-              {/* Description and Use Case */}
-              <div className="flex flex-wrap justify-center items-center gap-8 p-5">
-                <div className="flex flex-col w-72">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Description
-                  </label>
-                  <textarea
-                    name="description"
-                    placeholder="abc..."
-                    value={formData.description}
-                    onChange={handleChange}
-                    className="w-full h-16 border rounded-md p-1"
-                  />
-                </div>
-
-                <div className="flex flex-col w-72">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Use Case or Utility
-                  </label>
-                  <textarea
-                    name="use_case_or_utility"
-                    placeholder="abc..."
-                    value={formData.use_case_or_utility}
-                    onChange={handleChange}
-                    className="w-full h-16 border rounded-md p-1"
-                  />
-                </div>
-              </div>
+              
 
               {/* Product Images */}
               <div className="flex flex-wrap justify-center items-center gap-8 p-5">
@@ -696,4 +718,4 @@ const ProductUpload = () => {
   );
 };
 
-export default ProductUpload;
+export default EditProducts;

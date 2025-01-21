@@ -30,6 +30,7 @@ import PrivateRoute from './components/PrivateRoute';
 import FormPage from './FormPage';
 import ProductPage from './components/ProductPage';
 import VendorKYC from './components/VendorKYC';
+import EditProducts from './components/EditProducts';
 
 function App() {
   return (
@@ -109,6 +110,18 @@ function App() {
                   <SideMenu />
                   {/* <Stepper /> */}
                   <BusinessDescription />
+                </PrivateRoute>
+              }
+            />
+
+             <Route
+              path="/EditProducts"
+              element={
+                <PrivateRoute>
+                  <Header />
+                  <SideMenu />
+                  {/* <Stepper /> */}
+                  <EditProducts />
                 </PrivateRoute>
               }
             />

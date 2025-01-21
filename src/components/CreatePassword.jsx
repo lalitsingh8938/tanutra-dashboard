@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
 function CreatePassword() {
@@ -8,7 +10,7 @@ function CreatePassword() {
     password: "",
     password2: "",
   });
-  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   // Retrieve token and email from localStorage
   const email = localStorage.getItem("email");
@@ -20,24 +22,32 @@ function CreatePassword() {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  // Form Validation
+  const isFormValid =
+    formData.password.trim() !== "" &&
+    formData.password2.trim() !== "" &&
+    formData.password === formData.password2;
+
   // Handle Form Submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Start loading
 
     // Validate password fields
-    if (!formData.password || formData.password !== formData.confirm_password) {
-      setErrorMessage("Passwords do not match.");
+    if (!isFormValid) {
+      toast.error("Passwords do not match.");
+      setIsLoading(false); // Stop loading on validation failure
       return;
     }
 
     try {
       const response = await axios.patch(
-        "http://44.214.216.34:8008/api/reset-password/",
+        "https://api.tanutra.com/api/reset-password/",
         {
           email: email,
-          token: token, // Correct key name
+          token: token,
           password: formData.password,
-          password2: formData.confirm_password,
+          password2: formData.password2,
         },
         {
           headers: {
@@ -47,28 +57,22 @@ function CreatePassword() {
       );
 
       if (response.status === 200) {
-        alert("Password reset successful!");
+        toast.success("Password reset successful!");
         // Clear form data
-        setFormData({
-          password: "",
-          password2: "",
-        });
-        setErrorMessage(""); // Clear any error messages
+        setFormData({ password: "", password2: "" });
         // Navigate to the login page
-        navigate("/");
+        navigate("/Login");
       }
     } catch (error) {
-      console.error(
-        "Error during password reset:",
-        error.response?.data || error.message
-      );
+      console.error("Error during password reset:", error.response?.data || error.message);
       if (error.response?.data?.message === "token missing or expired") {
-        setErrorMessage(
-          "Your session has expired. Please request a new reset link."
-        );
+        toast.error("Your session has expired. Please request a new OTP.");
       } else {
-        setErrorMessage("An error occurred. Please try again.");
+        toast.error("User NOT Found !. Please Signup First.");
+        // toast.error("An error occurred. Please try again.");
       }
+    } finally {
+      setIsLoading(false); // Stop loading
     }
   };
 
@@ -84,11 +88,22 @@ function CreatePassword() {
           radial-gradient(112% 112% at 50% -8.08%, #fff 0%, #e4f1fe 100%)`,
       }}
     >
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="flex items-center justify-center w-full h-screen">
         <div className="p-5">
           <img
             src="Tanutra_Mobile_Logo.avif"
-            className="w-56 h-24 mx-auto rounded-t-xl cursor-pointer"
+            className="w-48 h-24 mx-auto rounded-t-xl cursor-pointer"
             alt="logo"
           />
 
@@ -99,10 +114,7 @@ function CreatePassword() {
 
             <form onSubmit={handleSubmit} className="mt-10 text-center">
               <div className="flex flex-col mt-4">
-                <label
-                  className="font-semibold text-slate-800 mb-2"
-                  htmlFor="password"
-                >
+                <label className="font-semibold text-slate-800 mb-2" htmlFor="password">
                   Enter Password
                 </label>
                 <input
@@ -115,32 +127,28 @@ function CreatePassword() {
                 />
               </div>
               <div className="flex flex-col mt-4">
-                <label
-                  className="font-semibold text-slate-800 mb-2"
-                  htmlFor="confirm_password"
-                >
+                <label className="font-semibold text-slate-800 mb-2" htmlFor="password2">
                   Confirm Password
                 </label>
                 <input
                   className="w-full h-9 border rounded-md"
                   type="password"
-                  id="confirm_password"
-                  name="confirm_password"
-                  value={formData.confirm_password}
+                  id="password2"
+                  name="password2"
+                  value={formData.password2}
                   onChange={handleChange}
                 />
               </div>
 
-              {errorMessage && (
-                <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
-              )}
-
               <div className="mt-8 text-center">
                 <button
-                  className="w-full md:w-[356px] h-10 bg-green-500 cursor-pointer text-white font-semibold rounded-md text-md"
+                  className={`w-full md:w-[356px] h-10 bg-green-500 text-white font-semibold rounded-md text-md ${
+                    isLoading || !isFormValid ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+                  }`}
                   type="submit"
+                  disabled={isLoading || !isFormValid}
                 >
-                  Send
+                  {isLoading ? "Sending..." : "Send"}
                 </button>
               </div>
             </form>
