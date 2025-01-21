@@ -362,7 +362,7 @@ const EditProducts = () => {
             <form onSubmit={handleSubmit} className="mt-2 bg-transparent">
               {/* Title Name and Category Name */}
               <p className="items-center px-5 py-1 ml-2 rounded-lg text-lg font-semibold text-black w-72 text-center opacity-60 bg-[#ECB59D]">
-                Product Attributes:
+                Product Attributes
               </p>
               <div className="flex flex-wrap justify-center items-center gap-8 p-2">
                 <div className="flex flex-col w-72">
@@ -392,7 +392,7 @@ const EditProducts = () => {
                 </div>
 
                 {/* Render Category */}
-                <div className="flex flex-col w-72 space-y-3">
+                <div className="flex flex-col w-72 space-y-2 ">
                   <div className="flex flex-col">
                     <label className="font-semibold text-slate-800 p-0.5">
                       Category
@@ -418,7 +418,7 @@ const EditProducts = () => {
                     <select
                       value={formData.subcategory}
                       onChange={handleSubcategoryChange}
-                      className="w-full h-8 p-1 border border-gray-300 rounded-md focus:outline-none"
+                      className="w-full h-9 p-1 border border-gray-300 rounded-md focus:outline-none"
                     >
                       <option value="">Select Subcategory</option>
                       {selectedCategory?.subcategories.map((sub) => (
@@ -436,7 +436,7 @@ const EditProducts = () => {
                     <select
                       value={formData.miniCategory}
                       onChange={handleMiniCategoryChange}
-                      className="w-full h-8 p-1 border border-gray-300 rounded-md focus:outline-none"
+                      className="w-full h-9 p-1 border border-gray-300 rounded-md focus:outline-none"
                     >
                       <option value="">Sub-subcategory</option>
                       {selectedSubcategory?.miniCategories.map((mini) => (
