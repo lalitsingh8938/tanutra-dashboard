@@ -110,7 +110,7 @@ function OTPAuth() {
                   type="text"
                   value={otp}
                   name="otp"
-                  placeholder="Enter your OTP"
+                  placeholder=" Enter your OTP"
                   onChange={handleChange}
                   required
                 />

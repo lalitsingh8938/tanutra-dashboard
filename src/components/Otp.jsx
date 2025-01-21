@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FaLeftLong } from "react-icons/fa6";
 axios.defaults.withCredentials = true;
 
 function Otp() {
@@ -111,7 +112,7 @@ function Otp() {
           radial-gradient(112% 112% at 50% -8.08%, #fff 0%, #e4f1fe 100%)`,
       }}
     >
-        <ToastContainer
+      <ToastContainer
         position="top-center"
         autoClose={3000}
         hideProgressBar={false}
@@ -143,7 +144,7 @@ function Otp() {
                   value={otp}
                   name="otp"
                   placeholder="  Enter your OTP"
-                  onChange={handleChange} 
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -159,14 +160,24 @@ function Otp() {
                   {loading ? "Verifying..." : "Verify"}
                 </button>
               </div>
+              <div className="justify-between flex mt-5">
+                <button
+                  type="button"
+                  className="text-white font-bold ml-11 w-20 h-9 bg-blue-500 flex justify-center text-lg items-center rounded-md"
+                  onClick={() => navigate("/ForgotPassword")}
+                >
+                  <FaLeftLong className="mr-2" />
+                  Back
+                </button>
+              </div>
             </form>
           </div>
         </div>
       </div>
 
-      {errorMessage && (
+      {/* {errorMessage && (
         <div className="text-red-500 text-center mt-4">{errorMessage}</div>
-      )}
+      )} */}
     </div>
   );
 }

@@ -217,10 +217,7 @@ const EditProducts = () => {
       ],
     },
   ];
-  // const accessToken = localStorage.getItem("access_token");
 
-  // const [productImages, setProductImages] = useState([]);
-  // const navigate = useNavigate();
   const handleCategoryChange = (event) => {
     const selectedCat = categories.find(
       (cat) => cat.category === event.target.value
@@ -253,9 +250,6 @@ const EditProducts = () => {
     });
   };
 
-  // Get access token from localStorage
-  // const accessToken = localStorage.getItem("access_token");
-
   // Handle form input change
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -281,11 +275,6 @@ const EditProducts = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // if (!isKYCApproved) {
-    //   toast.error("Please complete your KYC first to upload products.");
-    //   return;
-    // }
 
     // Create FormData object
     const data = new FormData();
@@ -368,37 +357,16 @@ const EditProducts = () => {
       {/* Form Container */}
       <div className="relative z-10 w-full max-w-4xl bg-transparent rounded-lg">
         <div className="p-2 mt-20">
-          {/* Logo */}
-          {/* <img
-            src="Tanutra_Mobile_Logo.avif"
-            className="w-52 h-24 mx-auto rounded-t-xl cursor-pointer"
-            alt="logo"
-          /> */}
-
           <div className="rounded-xl bg-transparent p-2 border">
             {/* Form */}
             <form onSubmit={handleSubmit} className="mt-2 bg-transparent">
-              {/* Product Data Section */}
-
-              <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg">
-                {/* <img
-                  src="vendor_profile1.png"
-                  className="w-8 h-8 rounded-xl ml-6 cursor-pointer border"
-                  alt="logo"
-                /> */}
-                <p className="px-5 py-1 flex text-xl font-semibold text-black w-full">
-                  Product Details:
-                </p>
-              </div>
-
               {/* Title Name and Category Name */}
-              <p className="items-center px-5 py-1 mt-3 rounded-lg flex text-lg font-semibold text-black w-52 text-center opacity-60 bg-[#ECB59D]">
+              <p className="items-center px-5 py-1 rounded-lg flex text-lg font-semibold text-black w-52 text-center opacity-60 bg-[#ECB59D]">
                 Product Attributes:
               </p>
-              {/* <p className="border mt-2"></p> */}
-              <div className="flex flex-wrap justify-center items-center gap-16 p-5">
+              <div className="flex flex-wrap justify-center items-center gap-8 p-2">
                 <div className="flex flex-col w-72">
-                  <label className="font-semibold text-slate-800 p-1">
+                  <label className="font-semibold text-slate-800 p-0.5">
                     Product Title
                   </label>
                   <input
@@ -407,12 +375,12 @@ const EditProducts = () => {
                     placeholder="Golden Brass Ganesha"
                     value={formData.title}
                     onChange={handleChange}
-                    className="w-full h-9 border rounded-md p-3"
+                    className="w-full h-9 border rounded-md p-1"
                   />
                 </div>
 
                 <div className="flex flex-col w-72">
-                  <label className="font-semibold text-slate-800 p-1">
+                  <label className="font-semibold text-slate-800 p-0.5">
                     Material Used
                   </label>
                   <input
@@ -421,15 +389,14 @@ const EditProducts = () => {
                     placeholder="Copper, Brass..."
                     value={formData.material_used}
                     onChange={handleChange}
-                    className="w-full h-9 border rounded-md p-3"
+                    className="w-full h-9 border rounded-md p-1"
                   />
                 </div>
 
                 {/* Render Category */}
-                <div className="flex flex-col w-72 space-y-2">
-                  {/* Category Dropdown */}
+                <div className="flex flex-col w-72 space-y-3">
                   <div className="flex flex-col">
-                    <label className="font-semibold text-slate-800 p-1">
+                    <label className="font-semibold text-slate-800 p-0.5">
                       Category
                     </label>
                     <select
@@ -446,210 +413,198 @@ const EditProducts = () => {
                     </select>
                   </div>
 
-                  {/* Subcategory Dropdown */}
-                  {formData.category &&
-                    selectedCategory?.subcategories.length > 0 && (
-                      <div className="flex flex-col">
-                        <label className="font-semibold text-semibold text-slate-800 p-1">
-                          Subcategory
-                        </label>
-                        <select
-                          value={formData.subcategory}
-                          onChange={handleSubcategoryChange}
-                          className="w-full h-9 p-1 border border-gray-300 rounded-md focus:outline-none"
-                        >
-                          <option value="">Select Subcategory</option>
-                          {selectedCategory.subcategories.map((sub) => (
-                            <option key={sub.name} value={sub.name}>
-                              {sub.name}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    )}
+                  <div className="flex flex-col">
+                    <label className="font-semibold text-slate-800 p-0.5">
+                      Subcategory
+                    </label>
+                    <select
+                      value={formData.subcategory}
+                      onChange={handleSubcategoryChange}
+                      className="w-full h-8 p-1 border border-gray-300 rounded-md focus:outline-none"
+                    >
+                      <option value="">Select Subcategory</option>
+                      {selectedCategory?.subcategories.map((sub) => (
+                        <option key={sub.name} value={sub.name}>
+                          {sub.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
-                  {/* Mini Category Dropdown */}
-                  {formData.subcategory &&
-                    selectedSubcategory?.miniCategories.length > 0 && (
-                      <div className="flex flex-col">
-                        <label className="font-semibold text-semibold text-slate-800">
-                          Mini Category 
-                        </label>
-                        <select
-                          value={formData.miniCategory}
-                          onChange={handleMiniCategoryChange}
-                          className="w-full h-9 p-1 border border-gray-300 rounded-md focus:outline-none"
-                        >
-                          <option value="">Select Mini Category</option>
-                          {selectedSubcategory.miniCategories.map((mini) => (
-                            <option key={mini} value={mini}>
-                              {mini}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    )}
-                </div>
-                
-                <div className="flex flex-col w-72">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Price per unit
-                  </label>
-                  <input
-                    type="text"
-                    name="price_per_unit"
-                    placeholder="200 per product"
-                    value={formData.price_per_unit}
-                    onChange={handleChange}
-                    className="w-full h-9 border rounded-md p-3"
-                  />
-                </div>
-              </div>
-
-              
-              {/* Material Used and HSN Code */}
-              <div className="flex flex-wrap justify-center items-center gap-16 p-5">
-                
-                <div className="flex flex-col w-72">
-                  <label className="font-semibold text-slate-800 p-2">
-                    HSN Code
-                  </label>
-                  <input
-                    type="text"
-                    name="hsn_code"
-                    placeholder="1234"
-                    value={formData.hsn_code}
-                    onChange={handleChange}
-                    className="w-full h-9 border rounded-md p-3"
-                  />
-                </div>
-                <div className="flex flex-col w-72">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Minimum Order Quantity
-                  </label>
-                  <input
-                    type="text"
-                    name="minimum_order_quantity"
-                    placeholder="20"
-                    value={formData.minimum_order_quantity}
-                    onChange={handleChange}
-                    className="w-full h-9 border rounded-md p-3"
-                  />
-                </div>
-              </div>
-
-              {/* Description and Use Case */}
-              <div className="flex flex-wrap justify-center items-center gap-16 p-5">
-                <div className="flex flex-col w-72">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Description
-                  </label>
-                  <textarea
-                    name="description"
-                    placeholder="abc..."
-                    value={formData.description}
-                    onChange={handleChange}
-                    className="w-full h-16 border rounded-md p-1"
-                  />
+                  <div className="flex flex-col">
+                    <label className="font-semibold text-slate-800 p-0.5">
+                      Sub-subcategory
+                    </label>
+                    <select
+                      value={formData.miniCategory}
+                      onChange={handleMiniCategoryChange}
+                      className="w-full h-8 p-1 border border-gray-300 rounded-md focus:outline-none"
+                    >
+                      <option value="">Sub-subcategory</option>
+                      {selectedSubcategory?.miniCategories.map((mini) => (
+                        <option key={mini} value={mini}>
+                          {mini}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
-                <div className="flex flex-col w-72">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Use Case or Utility
-                  </label>
-                  <textarea
-                    name="use_case_or_utility"
-                    placeholder="abc..."
-                    value={formData.use_case_or_utility}
-                    onChange={handleChange}
-                    className="w-full h-16 border rounded-md p-1"
-                  />
-                </div>
-              </div>
+                {/* Price per unit and HSN Code combined */}
+                <div className="flex flex-col w-72 space-y-20">
+                  <div className="flex flex-col">
+                    <label className="font-semibold text-slate-800 p-0.5">
+                      Price per unit
+                    </label>
+                    <input
+                      type="text"
+                      name="price_per_unit"
+                      placeholder="200 per product"
+                      value={formData.price_per_unit}
+                      onChange={handleChange}
+                      className="w-full h-9 border rounded-md p-1"
+                    />
+                  </div>
 
-              {/* Price and Minimum Order Quantity */}
-              <div className="flex flex-wrap justify-center items-center gap-8 p-5">
-               
-
-               
-              </div>
-
-              <div className="flex flex-col w-72 ml-32">
-                <label className="font-semibold text-slate-800 p-2">
-                  Quantity Available:
-                </label>
-                <input
-                  type="integer"
-                  name="quantity_available"
-                  placeholder="20"
-                  value={formData.quantity_available}
-                  onChange={handleChange}
-                  className="w-full h-9 border rounded-md p-3"
-                />
-              </div>
-
-              {/* Dimensions Section */}
-              <div className="flex flex-wrap justify-center items-center gap-8 p-5">
-                <div className="flex flex-col w-72">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Length (cm)
-                  </label>
-                  <input
-                    type="number"
-                    name="length_cm"
-                    placeholder="20"
-                    value={formData.length_cm}
-                    onChange={handleChange}
-                    className="w-full h-9 border rounded-md p-3"
-                  />
+                  <div className="flex flex-col">
+                    <label className="font-semibold text-slate-800 p-0.5">
+                      HSN Code
+                    </label>
+                    <input
+                      type="text"
+                      name="hsn_code"
+                      placeholder="1234"
+                      value={formData.hsn_code}
+                      onChange={handleChange}
+                      className="w-full h-9 border rounded-md p-1"
+                    />
+                  </div>
                 </div>
 
-                <div className="flex flex-col w-72">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Width (cm)
-                  </label>
-                  <input
-                    type="number"
-                    name="width_cm"
-                    placeholder="15"
-                    value={formData.width_cm}
-                    onChange={handleChange}
-                    className="w-full h-9 border rounded-md p-3"
-                  />
+                <div className=" w-full ml-28">
+                  <p className="font-semibold text-lg border-b-2">
+                    Product, Size and Inventory
+                  </p>
                 </div>
 
-                <div className="flex flex-col w-72">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Height (cm)
-                  </label>
-                  <input
-                    type="number"
-                    name="height_cm"
-                    placeholder="10"
-                    value={formData.height_cm}
-                    onChange={handleChange}
-                    className="w-full h-9 border rounded-md p-3"
-                  />
+                {/* Description and Use Case */}
+                {/* <div className="flex flex-wrap justify-center items-center gap-8 p-1"> */}
+                  <div className="flex flex-col w-72">
+                    <label className="font-semibold text-slate-800 p-0.5">
+                      Product Description
+                    </label>
+                    <textarea
+                      name="description"
+                      placeholder="abc..."
+                      value={formData.description}
+                      onChange={handleChange}
+                      className="w-full h-16 border rounded-md p-1"
+                    />
+                  </div>
+
+                  <div className="flex flex-col w-72">
+                    <label className="font-semibold text-slate-800 p-1">
+                      Product Use Case or Utility
+                    </label>
+                    <textarea
+                      name="use_case_or_utility"
+                      placeholder="abc..."
+                      value={formData.use_case_or_utility}
+                      onChange={handleChange}
+                      className="w-full h-16 border rounded-md p-1"
+                    />
+                  </div>
+                {/* </div> */}
+
+                <div className="flex flex-wrap justify-center items-center gap-8 p-1">
+                  <div className="flex flex-col w-72">
+                    <label className="font-semibold text-slate-800 p-0.5">
+                      Product Height (cm)
+                    </label>
+                    <input
+                      type="number"
+                      name="length_cm"
+                      placeholder="20"
+                      value={formData.length_cm}
+                      onChange={handleChange}
+                      className="w-full h-9 border rounded-md p-1"
+                    />
+                  </div>
+
+                  <div className="flex flex-col w-72">
+                    <label className="font-semibold text-slate-800 p-0.5">
+                      Product Width (cm)
+                    </label>
+                    <input
+                      type="number"
+                      name="width_cm"
+                      placeholder="15"
+                      value={formData.width_cm}
+                      onChange={handleChange}
+                      className="w-full h-9 border rounded-md p-1"
+                    />
+                  </div>
+
+                  <div className="flex flex-col w-72">
+                    <label className="font-semibold text-slate-800 p-0.5">
+                      Length (cm)
+                    </label>
+                    <input
+                      type="number"
+                      name="height_cm"
+                      placeholder="10"
+                      value={formData.height_cm}
+                      onChange={handleChange}
+                      className="w-full h-9 border rounded-md p-1"
+                    />
+                  </div>
+
+                  <div className="flex flex-col w-72">
+                    <label className="font-semibold text-slate-800 p-0.5">
+                      Product Weight (gm)
+                    </label>
+                    <input
+                      type="number"
+                      name="weight_gm"
+                      placeholder="500"
+                      value={formData.weight_gm}
+                      onChange={handleChange}
+                      className="w-full h-9 border rounded-md p-1"
+                    />
+                  </div>
                 </div>
 
-                <div className="flex flex-col w-72">
-                  <label className="font-semibold text-slate-800 p-2">
-                    Weight (gm)
-                  </label>
-                  <input
-                    type="number"
-                    name="weight_gm"
-                    placeholder="500"
-                    value={formData.weight_gm}
-                    onChange={handleChange}
-                    className="w-full h-9 border rounded-md p-3"
-                  />
+                <div className="flex flex-wrap justify-center items-center gap-8 p-1">
+                  <div className="flex flex-col w-72">
+                    <label className="font-semibold text-slate-800 p-0.5">
+                      Product Minimum Order Quantity
+                    </label>
+                    <input
+                      type="text"
+                      name="minimum_order_quantity"
+                      placeholder="20"
+                      value={formData.minimum_order_quantity}
+                      onChange={handleChange}
+                      className="w-full h-9 border rounded-md p-1"
+                    />
+                  </div>
+
+                  <div className="flex flex-col w-72">
+                    <label className="font-semibold text-slate-800 p-0.5">
+                      Product Quantity Available
+                    </label>
+                    <input
+                      type="integer"
+                      name="quantity_available"
+                      placeholder="20"
+                      value={formData.quantity_available}
+                      onChange={handleChange}
+                      className="w-full h-9 border rounded-md p-1"
+                    />
+                  </div>
                 </div>
               </div>
 
-              
-
-              {/* Product Images */}
               <div className="flex flex-wrap justify-center items-center gap-8 p-5">
                 {/* Image Box on Left */}
                 <div className="flex flex-col w-72 ">
@@ -699,15 +654,14 @@ const EditProducts = () => {
                   </div>
                 </div>
               </div>
-
               {/* Submit Button */}
-              <div className="flex justify-center p-5">
+              <div className="flex justify-center p-1">
                 <button
                   type="submit"
-                  className="text-white font-semibold bg-green-500 py-2 px-6 rounded-lg"
+                  className="text-white font-bold bg-green-500 py-2 px-6 rounded-lg"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Uploading ..." : "Upload Product"}
+                  {isLoading ? "Updating..." : "Update"}
                 </button>
               </div>
             </form>
