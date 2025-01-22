@@ -127,7 +127,7 @@ function ProductPage() {
       const token = localStorage.getItem("access_token");
       try {
         const response = await fetch(
-          "https://api.tanutra.com/api/product/get/",
+          "https://api.tanutra.com/api/product/get/all/",
           {
             method: "GET",
             headers: {

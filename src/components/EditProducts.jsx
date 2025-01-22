@@ -664,7 +664,6 @@
 // export default EditProducts;
 
 
-
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -697,27 +696,6 @@ const EditProducts = () => {
   });
 
   const accessToken = localStorage.getItem("access_token");
-
-  useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem("formData"));
-    if (savedData) {
-      setFormData(savedData); // Populate form with saved data
-      // You may need to update category and subcategory values based on saved data.
-      const selectedCat = categories.find(cat => cat.category === savedData.category);
-      setSelectedCategory(selectedCat);
-      const selectedSubcat = selectedCat?.subcategories?.find(sub => sub.name === savedData.subcategory);
-      setSelectedSubcategory(selectedSubcat);
-    }
-  }, []);
-  
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
 
   // Fetch product details on component mount
   useEffect(() => {
@@ -757,7 +735,9 @@ const EditProducts = () => {
   ];
 
   const handleCategoryChange = (event) => {
-    const selectedCat = categories.find(cat => cat.category === event.target.value);
+    const selectedCat = categories.find(
+      (cat) => cat.category === event.target.value
+    );
     setSelectedCategory(selectedCat);
     setFormData({
       ...formData,
@@ -766,9 +746,11 @@ const EditProducts = () => {
       miniCategory: "",
     });
   };
-  
+
   const handleSubcategoryChange = (e) => {
-    const selectedSubcat = selectedCategory.subcategories.find(sub => sub.name === e.target.value);
+    const selectedSubcat = selectedCategory.subcategories.find(
+      (sub) => sub.name === e.target.value
+    );
     setSelectedSubcategory(selectedSubcat);
     setFormData({
       ...formData,
@@ -776,27 +758,22 @@ const EditProducts = () => {
       miniCategory: "",
     });
   };
-  
+
   const handleMiniCategoryChange = (e) => {
     setFormData({
       ...formData,
       miniCategory: e.target.value,
     });
   };
-  useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem("formData"));
-    if (savedData) {
-      setFormData(savedData);
-  
-      // Find the selected category and subcategory
-      const selectedCat = categories.find(cat => cat.category === savedData.category);
-      setSelectedCategory(selectedCat);
-      const selectedSubcat = selectedCat?.subcategories?.find(sub => sub.name === savedData.subcategory);
-      setSelectedSubcategory(selectedSubcat);
-    }
-  }, []);
-  
-  
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     setProductImages((prevImages) => [...prevImages, ...files]);
@@ -1145,6 +1122,7 @@ const EditProducts = () => {
                 </div>
               </div>
 
+             
               {/* Submit Button */}
               <div className="flex justify-center p-1">
                 <button

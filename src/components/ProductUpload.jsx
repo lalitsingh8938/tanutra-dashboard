@@ -274,8 +274,6 @@ const ProductUpload = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    localStorage.setItem('formData', JSON.stringify(formData));
-    
     // Create FormData object
     const data = new FormData();
 
