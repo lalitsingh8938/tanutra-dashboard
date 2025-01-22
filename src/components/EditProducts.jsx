@@ -358,56 +358,9 @@
 //       <div className="relative z-10 w-full max-w-4xl bg-transparent rounded-lg">
 //         <div className="p-2 mt-20">
 //           <div className="rounded-xl bg-transparent p-2 border">
+
 //             {/* Form */}
 //             <form onSubmit={handleSubmit} className="mt-2 bg-transparent">
-//               {/* <tr key={product.id}>
-//                     <td className="border border-gray-300 px-4 py-2 text-center">
-//                       {index + 1}
-//                     </td>
-//                     <td className="border border-gray-300 px-4 py-2 cursor-pointer">
-//                       <div className="flex gap-2 justify-center flex-wrap">
-//                         {product.images.slice(0, 1).map((image, imgIndex) => (
-//                           <img
-//                             key={imgIndex}
-//                             src={image}
-//                             alt={`Product-${index}-${imgIndex}`}
-//                             className="w-16 h-16 object-cover rounded"
-//                             onClick={() => handleImageClick(product.images, 0)}
-//                           />
-//                         ))}
-//                       </div>
-//                     </td>
-//                     </tr> */}
-
-//               {/* <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"> */}
-//               {/* <div className="relative bg-white rounded shadow-lg p-4">
-//             <img
-//               // src={selectedProductImages[currentImageIndex]}
-//               alt="Preview"
-//               className="max-w-full max-h-[70vh] object-contain mb-4"
-//             /> */}
-//               {/* <div className="flex justify-between items-center">
-//               <button
-//                 className="bg-gray-700 text-white px-4 py-2 rounded"
-//                 // onClick={viewPrevImage}
-//               >
-//                 Previous
-//               </button>
-//               <button
-//                 className="bg-gray-700 text-white px-4 py-2 rounded"
-//                 // onClick={viewNextImage}
-//               >
-//                 Next
-//               </button>
-//               <button
-//                 className="bg-red-600 text-white px-4 py-2 rounded"
-//                 // onClick={closeModal}
-//               >
-//                 Close
-//               </button>
-//             </div> */}
-//               {/* </div> */}
-//               {/* </div> */}
 //               {/* Title Name and Category Name */}
 //               <p className="items-center px-5 py-1 ml-2 rounded-lg text-lg font-semibold text-black w-72 text-center opacity-60 bg-[#ECB59D]">
 //                 Product Attributes
@@ -710,17 +663,20 @@
 
 // export default EditProducts;
 
+
+
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const EditProducts = () => {
-  // const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
+  const { productId } = useParams(); // Retrieve productId from URL
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
-  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [uploadedImages, setUploadedImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [productImages, setProductImages] = useState([]);
   const [formData, setFormData] = useState({
     title: "",
@@ -740,229 +696,21 @@ const EditProducts = () => {
     use_case_or_utility: "",
   });
 
-  const [isKYCApproved, setIsKYCApproved] = useState(false); // Track KYC status
-
   const accessToken = localStorage.getItem("access_token");
 
-  // Fetch KYC status on component mount
   useEffect(() => {
-    const fetchKYCStatus = async () => {
-      try {
-        const response = await fetch(
-          "https://api.tanutra.com/api/get/kyc-status/",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        );
+    const savedData = JSON.parse(localStorage.getItem("formData"));
+    if (savedData) {
+      setFormData(savedData); // Populate form with saved data
+      // You may need to update category and subcategory values based on saved data.
+      const selectedCat = categories.find(cat => cat.category === savedData.category);
+      setSelectedCategory(selectedCat);
+      const selectedSubcat = selectedCat?.subcategories?.find(sub => sub.name === savedData.subcategory);
+      setSelectedSubcategory(selectedSubcat);
+    }
+  }, []);
+  
 
-        if (response.ok) {
-          const data = await response.json();
-          setIsKYCApproved(data.is_kyc_approved); // Assuming API returns a boolean
-        } else {
-          toast.error("Failed to fetch KYC status. Please try again.");
-        }
-      } catch (error) {
-        console.error("Error fetching KYC status:", error);
-        toast.error("Error fetching KYC status. Please try again.");
-      }
-    };
-
-    fetchKYCStatus();
-  }, [accessToken]);
-
-  const categories = [
-    {
-      category: "Home Decor",
-      subcategories: [
-        {
-          name: "Wall Decor",
-          miniCategories: ["Wall Art", "Wall Hangings", "Clocks", "Mirrors"],
-        },
-        {
-          name: "Lighting",
-          miniCategories: [
-            "Table Lamps",
-            "Floor Lamps",
-            "Pendant Lights",
-            "Chandeliers",
-          ],
-        },
-        {
-          name: "Furniture",
-          miniCategories: ["Tables", "Chairs", "Shelves", "Stools"],
-        },
-        {
-          name: "Textiles & Cushions",
-          miniCategories: [
-            "Curtains",
-            "Cushion Covers",
-            "Throws",
-            "Rugs & Carpets",
-          ],
-        },
-        {
-          name: "Tableware",
-          miniCategories: ["Table Runners", "Placemats", "Coasters"],
-        },
-        {
-          name: "Vases & Planters",
-          miniCategories: [
-            "Decorative Vases",
-            "Indoor Planters",
-            "Outdoor Planters",
-          ],
-        },
-      ],
-    },
-    {
-      category: "Handicrafts",
-      subcategories: [
-        {
-          name: "Wooden Crafts",
-          miniCategories: [],
-        },
-        {
-          name: "Terracotta Items",
-          miniCategories: [],
-        },
-        {
-          name: "Metalware",
-          miniCategories: [
-            "Brass Decor",
-            "Copper Crafts",
-            "Stone & Marble Crafts",
-          ],
-        },
-        {
-          name: "Sculptures",
-          miniCategories: [],
-        },
-        {
-          name: "Decorative Bowls",
-          miniCategories: [],
-        },
-        {
-          name: "Paper Mache Products",
-          miniCategories: [],
-        },
-        {
-          name: "Embroidered Textiles",
-          miniCategories: [],
-        },
-        {
-          name: "Bamboo & Cane Products",
-          miniCategories: [],
-        },
-        {
-          name: "Tribal Art & Crafts",
-          miniCategories: [],
-        },
-      ],
-    },
-    {
-      category: "Giftware",
-      subcategories: [
-        {
-          name: "Personalized Gifts",
-          miniCategories: [],
-        },
-        {
-          name: "Festive Gifts",
-          miniCategories: ["Diwali Hampers", "Christmas Gifts"],
-        },
-        {
-          name: "Corporate Gifts",
-          miniCategories: [],
-        },
-        {
-          name: "Office Decor",
-          miniCategories: ["Desk Accessories"],
-        },
-        {
-          name: "Wedding & Anniversary Gifts",
-          miniCategories: [],
-        },
-        {
-          name: "Handmade Journals & Stationery",
-          miniCategories: [],
-        },
-        {
-          name: "Jewelry Boxes",
-          miniCategories: [],
-        },
-        {
-          name: "Candle Holders",
-          miniCategories: [],
-        },
-        {
-          name: "Gift Baskets",
-          miniCategories: [],
-        },
-      ],
-    },
-    {
-      category: "Seasonal/Theme-Based",
-      subcategories: [
-        {
-          name: "Eco-Friendly Decor",
-          miniCategories: [],
-        },
-        {
-          name: "Vintage & Antique Items",
-          miniCategories: [],
-        },
-        {
-          name: "Minimalist Design Items",
-          miniCategories: [],
-        },
-        {
-          name: "Bohemian Style Decor",
-          miniCategories: [],
-        },
-        {
-          name: "Traditional Indian Crafts",
-          miniCategories: [],
-        },
-      ],
-    },
-  ];
-
-  const handleCategoryChange = (event) => {
-    const selectedCat = categories.find(
-      (cat) => cat.category === event.target.value
-    );
-    setSelectedCategory(selectedCat);
-    setFormData({
-      ...formData,
-      category: event.target.value,
-      subcategory: "",
-      miniCategory: "",
-    });
-  };
-
-  const handleSubcategoryChange = (e) => {
-    const selectedSubcat = selectedCategory.subcategories.find(
-      (sub) => sub.name === e.target.value
-    );
-    setSelectedSubcategory(selectedSubcat);
-    setFormData({
-      ...formData,
-      subcategory: e.target.value,
-      miniCategory: "",
-    });
-  };
-
-  const handleMiniCategoryChange = (e) => {
-    setFormData({
-      ...formData,
-      miniCategory: e.target.value,
-    });
-  };
-
-  // Handle form input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -971,11 +719,89 @@ const EditProducts = () => {
     });
   };
 
-  // Handle image input change
+  // Fetch product details on component mount
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      try {
+        const response = await fetch(
+          `https://api.tanutra.com/product/${productId}/`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setFormData({
+            ...data,
+            material_used: data.material_used.join(","), // Adjust if necessary
+          });
+        } else {
+          toast.error("Failed to fetch product details. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error fetching product details:", error);
+        toast.error("Error fetching product details. Please try again.");
+      }
+    };
+
+    if (productId) {
+      fetchProductDetails();
+    }
+  }, [accessToken, productId]);
+
+  const categories = [
+    // Define your categories here as per the original code...
+  ];
+
+  const handleCategoryChange = (event) => {
+    const selectedCat = categories.find(cat => cat.category === event.target.value);
+    setSelectedCategory(selectedCat);
+    setFormData({
+      ...formData,
+      category: event.target.value,
+      subcategory: "",
+      miniCategory: "",
+    });
+  };
+  
+  const handleSubcategoryChange = (e) => {
+    const selectedSubcat = selectedCategory.subcategories.find(sub => sub.name === e.target.value);
+    setSelectedSubcategory(selectedSubcat);
+    setFormData({
+      ...formData,
+      subcategory: e.target.value,
+      miniCategory: "",
+    });
+  };
+  
+  const handleMiniCategoryChange = (e) => {
+    setFormData({
+      ...formData,
+      miniCategory: e.target.value,
+    });
+  };
+  useEffect(() => {
+    const savedData = JSON.parse(localStorage.getItem("formData"));
+    if (savedData) {
+      setFormData(savedData);
+  
+      // Find the selected category and subcategory
+      const selectedCat = categories.find(cat => cat.category === savedData.category);
+      setSelectedCategory(selectedCat);
+      const selectedSubcat = selectedCat?.subcategories?.find(sub => sub.name === savedData.subcategory);
+      setSelectedSubcategory(selectedSubcat);
+    }
+  }, []);
+  
+  
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     setProductImages((prevImages) => [...prevImages, ...files]);
   };
+
   const validateForm = () => {
     if (!formData.title || !formData.category || productImages.length === 0) {
       toast.error(
@@ -983,15 +809,17 @@ const EditProducts = () => {
       );
       return false;
     }
+    return true;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Create FormData object
+    if (!validateForm()) return;
+
     const data = new FormData();
 
-    // Add product data as a JSON string (stringify the object)
+    // Add product data as a JSON string
     data.append(
       "product_data",
       JSON.stringify({
@@ -1001,7 +829,7 @@ const EditProducts = () => {
         mini_category: formData.minicategory,
         description: formData.description,
         dimensions: {
-          lenght_cm: formData.length_cm,
+          length_cm: formData.length_cm,
           width_cm: formData.width_cm,
           height_cm: formData.height_cm,
           weight_gm: formData.weight_gm,
@@ -1010,46 +838,46 @@ const EditProducts = () => {
           ? formData.material_used.split(",")
           : ["Gold"],
         utility_or_usecase: formData.use_case_or_utility,
-        quantity_available: formData.quantity_available, //fix this
+        quantity_available: formData.quantity_available,
         price_per_unit: formData.price_per_unit,
         hsn_code: formData.hsn_code,
         minimum_order_quantity: formData.minimum_order_quantity,
       })
     );
 
-    // Add images to FormData (image files)
+    // Add images to FormData
     productImages.forEach((image) => {
       data.append("product_images", image);
     });
-    setIsLoading(true); // Start loading
+
+    setIsLoading(true);
 
     try {
       const response = await fetch(
-        "https://api.tanutra.com/api/product/upload/",
+        `https://api.tanutra.com/product/update-info/${productId}/`, // Use the productId in the URL
         {
-          method: "POST",
+          method: "PATCH",
           headers: {
-            Authorization: `Bearer ${accessToken}`, // Authorization header
+            Authorization: `Bearer ${accessToken}`,
           },
           body: data, // Send FormData
         }
       );
 
       if (response.ok) {
-        toast.success("Product uploaded successfully!");
+        toast.success("Product updated successfully!");
         navigate("/ThanksYou");
       } else {
         const errorData = await response.json();
         toast.error(`Error: ${errorData.message}`);
       }
     } catch (error) {
-      console.error("Error uploading product:", error);
-      toast.error("Error uploading product. Please try again.");
+      console.error("Error updating product:", error);
+      toast.error("Error updating product. Please try again.");
     } finally {
-      setIsLoading(false); // Stop loading
+      setIsLoading(false);
     }
   };
-
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[200px] 2xl:ml[300px]">
       <ToastContainer
@@ -1070,8 +898,20 @@ const EditProducts = () => {
       <div className="relative z-10 w-full max-w-4xl bg-transparent rounded-lg">
         <div className="p-2 mt-20">
           <div className="rounded-xl bg-transparent p-2 border">
+            {/* fetched uploaded images */}
+
             {/* Form */}
             <form onSubmit={handleSubmit} className="mt-2 bg-transparent">
+              <div className="flex gap-2 justify-center flex-wrap mt-4">
+                {uploadedImages.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt={`Uploaded Image ${index}`}
+                    className="w-16 h-16 object-cover rounded"
+                  />
+                ))}
+              </div>
               {/* Title Name and Category Name */}
               <p className="items-center px-5 py-1 ml-2 rounded-lg text-lg font-semibold text-black w-72 text-center opacity-60 bg-[#ECB59D]">
                 Product Attributes
@@ -1150,7 +990,7 @@ const EditProducts = () => {
                       onChange={handleMiniCategoryChange}
                       className="w-full h-9 p-1 border border-gray-300 rounded-md focus:outline-none"
                     >
-                      <option value="">Sub-subcategory</option>
+                      <option value="">Select Sub-subcategory</option>
                       {selectedSubcategory?.miniCategories.map((mini) => (
                         <option key={mini} value={mini}>
                           {mini}
@@ -1305,55 +1145,6 @@ const EditProducts = () => {
                 </div>
               </div>
 
-              <div className="flex flex-wrap justify-center items-center gap-8 p-5">
-                {/* Image Box on Left */}
-                <div className="flex flex-col w-72 ">
-                  <div className="flex flex-col w-full border bg-white rounded-lg p-3">
-                    <img
-                      src="Cloud computing.jpg"
-                      className="w-10 h-10 rounded-t-xl cursor-pointer items-center ml-28"
-                      alt="logo"
-                    />
-                    <div className="font-medium text-slate-800 p-1 text-center">
-                      Drag and drop your Product images
-                    </div>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageChange} // Handle file input
-                      multiple // Allow multiple file selection
-                      className="w-56 h-10 rounded-md p-2 ml-6"
-                    />
-                  </div>
-
-                  {/* Display Image Previews */}
-                  <div className="mt-2">
-                    {productImages.length > 0 && (
-                      <>
-                        <div>
-                          <strong>
-                            {productImages.length} image(s) uploaded
-                          </strong>
-                        </div>
-                        <div className="flex flex-wrap gap-4 mt-2 justify-start">
-                          {productImages.map((image, index) => (
-                            <div
-                              key={index}
-                              className="w-20 h-20 bg-gray-200 p-2"
-                            >
-                              <img
-                                src={URL.createObjectURL(image)}
-                                alt={`preview-${index}`}
-                                className="object-cover w-full h-full"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </div>
-              </div>
               {/* Submit Button */}
               <div className="flex justify-center p-1">
                 <button

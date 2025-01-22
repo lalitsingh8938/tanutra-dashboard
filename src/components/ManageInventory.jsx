@@ -4,6 +4,7 @@ import { GoChevronDown } from "react-icons/go";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import DeleteProducts from ".//DeleteProducts"; // Import DeleteProducts component
 import { useNavigate } from "react-router-dom";
+import EditProducts from "./EditProducts";
 
 function ManageInventory() {
   const navigate = useNavigate();
@@ -119,6 +120,7 @@ function ProductPage() {
   const [selectedProductImages, setSelectedProductImages] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
   console.log("products", products);
   useEffect(() => {
     const fetchProductData = async () => {
@@ -316,7 +318,10 @@ function ProductPage() {
                             ref={popupRef} // Attach the ref here
                             className="absolute top-6 right-0 bg-white border shadow-lg p-2 rounded z-10"
                           >
-                            <button className="block px-4 py-2 text-sm text-blue-600 font-semibold hover:bg-gray-100 w-full">
+                            <button
+                              className="block px-4 py-2 text-sm text-blue-600 font-semibold hover:bg-gray-100 w-full"
+                              onClick={() => navigate(`/EditProducts`)} // Navigate to EditProducts page with product ID
+                            >
                               Edit
                             </button>
                             <DeleteProducts
@@ -345,7 +350,7 @@ function ProductPage() {
               src={selectedProductImages[currentImageIndex]}
               alt="Preview"
               className="max-w-full max-h-[70vh] object-contain mb-4"
-            />                
+            />
             <div className="flex justify-between items-center">
               <button
                 className="bg-gray-700 text-white px-4 py-2 rounded"

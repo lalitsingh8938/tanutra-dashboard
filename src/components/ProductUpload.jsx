@@ -217,10 +217,6 @@ const ProductUpload = () => {
       ],
     },
   ];
-  // const accessToken = localStorage.getItem("access_token");
-
-  // const [productImages, setProductImages] = useState([]);
-  // const navigate = useNavigate();
   const handleCategoryChange = (event) => {
     const selectedCat = categories.find(
       (cat) => cat.category === event.target.value
@@ -253,9 +249,6 @@ const ProductUpload = () => {
     });
   };
 
-  // Get access token from localStorage
-  // const accessToken = localStorage.getItem("access_token");
-
   // Handle form input change
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -281,12 +274,8 @@ const ProductUpload = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // if (!isKYCApproved) {
-    //   toast.error("Please complete your KYC first to upload products.");
-    //   return;
-    // }
-
+    localStorage.setItem('formData', JSON.stringify(formData));
+    
     // Create FormData object
     const data = new FormData();
 
