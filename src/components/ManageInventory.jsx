@@ -320,7 +320,7 @@ function ProductPage() {
                           >
                             <button
                               className="block px-4 py-2 text-sm text-blue-600 font-semibold hover:bg-gray-100 w-full"
-                              onClick={() => navigate(`/EditProducts`)} // Navigate to EditProducts page with product ID
+                              onClick={() => navigate(`/editproducts/${product.id}`, { state: { product } })} // Pass product data
                             >
                               Edit
                             </button>

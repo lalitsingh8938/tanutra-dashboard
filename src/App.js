@@ -31,6 +31,7 @@ import FormPage from './FormPage';
 import ProductPage from './components/ProductPage';
 import VendorKYC from './components/VendorKYC';
 import EditProducts from './components/EditProducts';
+import ProductList from './components/ProductList';
 
 function App() {
   return (
@@ -78,16 +79,7 @@ function App() {
                 </PrivateRoute>
               }
             />
-            {/* <Route
-              path="/Stepper"
-              element={
-                <PrivateRoute>
-                  <Header />
-                  <Stepper />
-                  <SideMenu />
-                </PrivateRoute>
-              }
-            /> */}
+            
             <Route
               path="/BusinessProfile"
               element={
@@ -115,13 +107,26 @@ function App() {
             />
 
              <Route
-              path="/EditProducts"
+              path="/EditProducts/:id"
               element={
                 <PrivateRoute>
                   <Header />
                   <SideMenu />
                   {/* <Stepper /> */}
                   <EditProducts />
+                </PrivateRoute>
+              }
+            />
+
+
+             <Route
+              path="/ProductList"
+              element={
+                <PrivateRoute>
+                  <Header />
+                  <SideMenu />
+                  {/* <Stepper /> */}
+                  <ProductList />
                 </PrivateRoute>
               }
             />

@@ -12,8 +12,9 @@ function Signup() {
     confirm_password: "",
   });
 
-  const [errorMessage, setErrorMessage] = useState(""); // Error message state
-  const navigate = useNavigate(); // Navigation hook
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   // Handle input changes
   const handleChange = (e) => {
@@ -21,21 +22,25 @@ function Signup() {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    // Basic Validation
+    // Basic validation
     if (!formData.email || !formData.password || !formData.confirm_password) {
-      setErrorMessage("All fields are required.");
+      toast.error("All fields are required.");
+      setIsLoading(false);
       return;
     }
 
     if (formData.password !== formData.confirm_password) {
-      setErrorMessage("Passwords do not match.");
+      toast.error("Passwords do not match.");
+      setIsLoading(false);
       return;
     }
 
-    // API Call
+    // API Call for registration
     try {
       const response = await axios.post(
         "https://api.tanutra.com/api/register/",
@@ -51,34 +56,28 @@ function Signup() {
         }
       );
 
-      if (response.status === 200) {
-        toast.success("OTP sent successfully!"); // Triggering the success toast
-
-        // Store email in localStorage
+      if (response.status === 200 && response.data.status === true) {
+        toast.success("OTP sent successfully!");
         localStorage.setItem("email", formData.email);
-
-        // Redirect to OTP authentication page
         navigate("/OTPAuth");
 
-        // Reset form data
-        setFormData({
-          email: "",
-          password: "",
-          confirm_password: "",
-        });
-        setErrorMessage(""); // Clear errors
+        setFormData({ email: "", password: "", confirm_password: "" });
+        setErrorMessage("");
       } else {
-        setErrorMessage("Registration failed. Please try again.");
+        toast.error("Registration failed. Please try again.");
       }
     } catch (error) {
-      console.error(
-        "Error during registration:",
-        error.response?.data || error.message
-      );
-      setErrorMessage(
-        `Registration failed: ${error.response?.data?.detail || error.message}`
-      );
-      toast.error(`Error: ${error.response?.data?.detail || error.message}`); // Triggering the error toast
+      if (error.response && error.response.data) {
+        if (error.response.data.message?.email) {
+          toast.error(error.response.data.message.email[0]); // Show error message from backend
+        } else {
+          toast.error("Something went wrong. Please try again.");
+        }
+      } else {
+        toast.error("Server error. Please try later.");
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -92,10 +91,8 @@ function Signup() {
         linear-gradient(256.1deg, #f8f5f5, #d5ebf9 22.92%, #d5e9f5 38.54%, #fbf9e8 73.96%, #f0eded),
         radial-gradient(112% 112% at 50% -8.08%, #fff 0%, #e4f1fe 100%)`,
       }}
-
-      
     >
-        <ToastContainer
+      <ToastContainer
         position="top-center"
         autoClose={3000}
         hideProgressBar={false}
@@ -106,7 +103,7 @@ function Signup() {
         draggable
         pauseOnHover
       />
-    
+
       <div className="max-w-lg w-full p-6 rounded-xl shadow-lg bg-white">
         <div className="flex justify-center mb-5">
           <img
@@ -156,17 +153,31 @@ function Signup() {
           <div className="mt-8 items-center justify-between flex">
             <button
               type="button"
-              className="text-white font-semibold ml-14 w-20 h-9 bg-blue-500 flex justify-center text-lg items-center rounded-md hover:bg-green-500"
+              className="text-white font-semibold ml-14 w-20 h-9 bg-blue-500 flex justify-center text-lg items-center rounded-md"
               onClick={() => navigate("/Login")}
             >
               <FaLeftLong className="mr-2" />
               Back
             </button>
+
             <button
-              className="w-24 text-center items-end h-9 mr-14 bg-blue-500 text-white cursor-pointer font-medium rounded-md text-lg  hover:bg-green-500"
+              className={`w-24 text-center items-end h-9 mr-14 bg-blue-500 text-white cursor-pointer font-medium rounded-md text-lg ${
+                isLoading ||
+                !formData.email ||
+                !formData.password ||
+                !formData.confirm_password
+                  ? "opacity-50 cursor-not-allowed"
+                  : "cursor-pointer"
+              }`}
               type="submit"
+              disabled={
+                isLoading ||
+                !formData.email ||
+                !formData.password ||
+                !formData.confirm_password
+              }
             >
-              Sign Up
+              {isLoading ? "Signup..." : "Signup"}
             </button>
           </div>
           <div className="mt-8 text-center">
