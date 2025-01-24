@@ -95,6 +95,7 @@ function Login({ isAuth }) {
         setFormData({ email: "", password: "" });
         setErrorMessage("");
         toast.success("Logged in successfully!");
+        navigate("/Dashboard");
 
         setKycStatus(KYCStatus || "Unknown");
 
@@ -112,7 +113,7 @@ function Login({ isAuth }) {
             break;
           case "Accepted":
             toast.success("KYC Accepted! You can now upload your products.");
-            navigate("/ProductUpload");
+            navigate("/Dashboard");
             break;
           case "Rejected":
             toast.error(`Your KYC was rejected: ${rejection_reason}`);
