@@ -32,6 +32,8 @@ import ProductPage from './components/ProductPage';
 import VendorKYC from './components/VendorKYC';
 import EditProducts from './components/EditProducts';
 import ProductList from './components/ProductList';
+import Pagination from './components/Pagination';
+
 
 function App() {
   return (
@@ -173,6 +175,19 @@ function App() {
                 </PrivateRoute>
               }
             />
+            <Route
+              path="/Pagination"
+              element={
+                <PrivateRoute>
+                  <Header />
+                  <SideMenu />
+                  <Pagination />
+                  <ProductPage />
+                </PrivateRoute>
+              }
+            />
+          
+
             <Route
               path="/Catelog_uploads"
               element={

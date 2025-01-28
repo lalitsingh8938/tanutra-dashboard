@@ -116,30 +116,41 @@ function ProductPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [nextPage, setNextPage] = useState(null);
+  const [previousPage, setPreviousPage] = useState(null);
   const [popupProductIndex, setPopupProductIndex] = useState(null);
   const [selectedProductImages, setSelectedProductImages] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 10;
+
   const navigate = useNavigate();
+
   console.log("products", products);
   useEffect(() => {
     const fetchProductData = async () => {
       const token = localStorage.getItem("access_token");
+      
       try {
         const response = await fetch(
           "https://api.tanutra.com/api/product/get/all/",
+          
           {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
+            
           }
         );
+        
 
         if (!response.ok) {
           throw new Error(`Error: ${response.status} - ${response.statusText}`);
         }
+        
 
         const data = await response.json();
 
@@ -165,6 +176,21 @@ function ProductPage() {
 
     fetchProductData();
   }, []);
+
+  // Calculate total pages
+  const totalPages = Math.ceil(products.length / productsPerPage);
+  const currentProducts = products.slice(
+    (currentPage - 1) * productsPerPage,
+    currentPage * productsPerPage
+  );
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) setCurrentPage((prev) => prev - 1);
+  };
 
   // Function to handle image click
   const handleImageClick = (images, index) => {
@@ -270,7 +296,7 @@ function ProductPage() {
                 {products.map((product, index) => (
                   <tr key={product.id}>
                     <td className="border border-gray-300 px-4 py-2 text-center">
-                      {index + 1}
+                      {(currentPage - 1) * productsPerPage + index + 1}
                     </td>
                     <td className="border border-gray-300 px-4 py-2 cursor-pointer">
                       <div className="flex gap-2 justify-center flex-wrap">
@@ -320,7 +346,11 @@ function ProductPage() {
                           >
                             <button
                               className="block px-4 py-2 text-sm text-blue-600 font-semibold hover:bg-gray-100 w-full"
-                              onClick={() => navigate(`/editproducts/${product.id}`, { state: { product } })} // Pass product data
+                              onClick={() =>
+                                navigate(`/editproducts/${product.id}`, {
+                                  state: { product },
+                                })
+                              } // Pass product data
                             >
                               Edit
                             </button>
@@ -337,7 +367,25 @@ function ProductPage() {
               </tbody>
             </table>
           ) : (
-            <p>No products available.</p>
+            <div className="flex justify-between items-center mt-4">
+              <button
+                onClick={handlePrevPage}
+                disabled={currentPage === 1}
+                className="bg-gray-300 px-4 py-2 rounded disabled:opacity-50"
+              >
+                Previous
+              </button>
+              <p>
+                Page {currentPage} of {totalPages}
+              </p>
+              <button
+                onClick={handleNextPage}
+                disabled={currentPage === totalPages}
+                className="bg-gray-300 px-4 py-2 rounded disabled:opacity-50"
+              >
+                Next
+              </button>
+            </div>
           )}
         </div>
       </main>
@@ -371,6 +419,23 @@ function ProductPage() {
                 Close
               </button>
             </div>
+
+            <div className="mt-4 text-right"></div>
+          </div>
+
+          <div className="flex justify-between items-center mt-4">
+            <button onClick={handlePrevPage} disabled={currentPage === 1}>
+              Previous
+            </button>
+            <p>
+              Page {currentPage} of {totalPages}
+            </p>
+            <button
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
           </div>
         </div>
       )}

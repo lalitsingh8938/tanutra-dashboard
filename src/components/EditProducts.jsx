@@ -704,6 +704,12 @@ const EditProducts = () => {
     const fetchProductDetails = async () => {
       setIsLoading(true);
       try {
+
+    if (!accessToken) {
+      toast.error("Access token is missing. Please log in again.");
+      navigate("/Login"); // Redirect to login page
+      return;
+    }
         if (!id) {
           console.error("Product ID not found!");
           return;
@@ -724,11 +730,15 @@ const EditProducts = () => {
 
         const data = await response.json();
         setProductData(data);
+
+        // Set product images from API response
+        const images = data?.data?.product_images || [];
+        setProductImages(images);
         setFormData({
           title: data?.data?.title || "",
           category: data?.data?.category || "",
           sub_category: data?.data?.sub_category || "",
-          mini_category: data?.data?.mini_category || "",
+          mini_category: data?.data?.mini_category || "", // Ensure mini_category is populated if available
           description: data?.data?.description || "",
           material_used: data?.data?.material_used
             ? data.data.material_used.join(", ")
@@ -737,7 +747,7 @@ const EditProducts = () => {
           price_per_unit: data?.data?.price_per_unit || "",
           minimum_order_quantity: data?.data?.minimum_order_quantity || "",
           quantity_available: data?.data?.quantity_available || "",
-          length_cm: data?.data?.dimensions?.lenght_cm || "", // Typo in response
+          length_cm: data?.data?.dimensions?.lenght_cm || "",
           width_cm: data?.data?.dimensions?.width_cm || "",
           height_cm: data?.data?.dimensions?.height_cm || "",
           weight_gm: data?.data?.dimensions?.weight_gm || "",
@@ -754,7 +764,7 @@ const EditProducts = () => {
     if (id) {
       fetchProductDetails();
     }
-  }, [id]);
+  }, [id, accessToken, navigate]);
 
   useEffect(() => {
     const fetchCategories = () => {
@@ -967,34 +977,61 @@ const EditProducts = () => {
       [name]: value,
     });
   };
+  console.log("Form Data:", formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedProduct = { ...formData };
-    try {
-      const accessToken = localStorage.getItem("access_token");
-      const response = await fetch(
-        `https://api.tanutra.com/api/product/update-info/${id}`,
-        {
-          method: "PATCH",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedProduct),
-        }
-      );
 
-      if (response.ok) {
-        toast.success("Product update ho gaya!");
-        navigate("/products");
-      } else {
-        toast.error("Product update nahi ho paaya.");
-      }
-    } catch (error) {
-      console.error("Error updating product:", error);
-      toast.error("Product update karte waqt error.");
+    // Log the final formData before submission
+    console.log("Final Form Data before submission:", formData);
+
+    // Prepare the updated product data
+    const product_data = {
+      ...formData,
+      material_used: formData.material_used
+        .split(",")
+        .map((item) => item.trim()), // Convert to array
+      dimensions: {
+        lenght_cm: formData.length_cm,
+        width_cm: formData.width_cm,
+        height_cm: formData.height_cm,
+        weight_gm: formData.weight_gm,
+      },
+      utility_or_usecase: formData.use_case_or_utility, // Map to correct key
+    };
+// https://api.tanutra.com/product/update-info/<int:pk>/
+try {
+  const response = await fetch(
+    `https://api.tanutra.com/api/product/update-info/${id}/`,
+    {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({product_data}),
     }
+  );
+
+  console.log("Response status:", response.status);
+
+  if (response.ok) {
+    toast.success("Product updated successfully!", { autoClose: 3000 });;
+    navigate("/EditProducts/:id");
+  } else {
+    const errorData = await response.json();
+    console.error("Error response:", errorData);
+    toast.error(
+      `error during product update: ${
+        errorData.message || "Backend se error aayi."
+      }`
+    );
+  }
+} catch (error) {
+  // console.error("Error updating product:", error);
+  toast.error("Error during Product updates.");
+}
+
   };
 
   if (isLoading) {
@@ -1005,7 +1042,7 @@ const EditProducts = () => {
     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[200px] 2xl:ml[300px]">
       <ToastContainer
         position="top-center"
-        autoClose={2000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -1023,8 +1060,65 @@ const EditProducts = () => {
           <div className="rounded-xl bg-transparent p-2 border">
             {/* Form */}
             <form onSubmit={handleSubmit} className="mt-2 bg-transparent">
+              {/* Image Render Section */}
+              <div className="flex items-center gap-4 overflow-x-auto p-4 border-b">
+                {/* Display uploaded images */}
+                {uploadedImages.length > 0 && (
+                  <div className="flex items-center gap-4">
+                    {uploadedImages.map((image, index) => (
+                      <div
+                        key={index}
+                        className="relative w-10 h-10 border rounded-lg overflow-hidden"
+                      >
+                        <img
+                          src={image.url}
+                          alt={`Uploaded ${index + 1}`}
+                          className="object-cover w-16 h-16"
+                        />
+                        <button
+                          className="absolute top-2 right-2 bg-black text-white rounded-full w-6 h-6 flex items-center justify-center"
+                          title="Remove Image"
+                        >
+                          ✖
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Add image button section */}
+                {/* <div
+                  className={`flex justify-center ${
+                    uploadedImages.length > 0 ? "ml-4" : ""
+                  }`}
+                >
+                  
+                </div> */}
+
+                {/* Display Product images */}
+                <div className="w-full">
+                  {productImages.length > 0 ? (
+                    <div className="grid grid-cols-10 gap-4 mt-2">
+                      {productImages.map((image, index) => (
+                        <img
+                          key={index}
+                          src={image.url}
+                          alt={`Product Image ${index + 1}`}
+                          className="w-16 h-16 object-cover rounded shadow"
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <p>No images available for this product.</p>
+                  )}
+                </div>
+                <div className="w-16 h-16 border rounded-lg flex items-center justify-center bg-gray-200 mt-4">
+                  <button className="text-2xl font-bold">+</button>
+                </div>
+              </div>
+
               {/* Title Name and Category Name */}
-              <p className="items-center px-5 py-1 ml-2 rounded-lg text-lg font-semibold text-black w-72 text-center opacity-60 bg-[#ECB59D]">
+              <p className="items-center mt-3 px-5 py-1 ml-2 rounded-lg text-lg font-semibold text-black w-72 text-center opacity-60 bg-[#ECB59D]">
                 Product Attributes
               </p>
               <div className="flex flex-wrap justify-center items-center gap-8 p-2">
