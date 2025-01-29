@@ -704,12 +704,6 @@ const EditProducts = () => {
     const fetchProductDetails = async () => {
       setIsLoading(true);
       try {
-
-    if (!accessToken) {
-      toast.error("Access token is missing. Please log in again.");
-      navigate("/Login"); // Redirect to login page
-      return;
-    }
         if (!id) {
           console.error("Product ID not found!");
           return;
@@ -764,7 +758,7 @@ const EditProducts = () => {
     if (id) {
       fetchProductDetails();
     }
-  }, [id, accessToken, navigate]);
+  }, [id]);
 
   useEffect(() => {
     const fetchCategories = () => {
@@ -999,39 +993,38 @@ const EditProducts = () => {
       },
       utility_or_usecase: formData.use_case_or_utility, // Map to correct key
     };
-// https://api.tanutra.com/product/update-info/<int:pk>/
-try {
-  const response = await fetch(
-    `https://api.tanutra.com/api/product/update-info/${id}/`,
-    {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({product_data}),
+    // https://api.tanutra.com/product/update-info/<int:pk>/
+    try {
+      const response = await fetch(
+        `https://api.tanutra.com/api/product/update-info/${id}/`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ product_data }),
+        }
+      );
+
+      console.log("Response status:", response.status);
+
+      if (response.ok) {
+        toast.success("Product updated successfully!", { autoClose: 3000 });
+        navigate("/EditProducts/:id");
+      } else {
+        const errorData = await response.json();
+        console.error("Error response:", errorData);
+        toast.error(
+          `error during product update: ${
+            errorData.message || "Backend se error aayi."
+          }`
+        );
+      }
+    } catch (error) {
+      // console.error("Error updating product:", error);
+      toast.error("Error during Product updates.");
     }
-  );
-
-  console.log("Response status:", response.status);
-
-  if (response.ok) {
-    toast.success("Product updated successfully!", { autoClose: 3000 });;
-    navigate("/EditProducts/:id");
-  } else {
-    const errorData = await response.json();
-    console.error("Error response:", errorData);
-    toast.error(
-      `error during product update: ${
-        errorData.message || "Backend se error aayi."
-      }`
-    );
-  }
-} catch (error) {
-  // console.error("Error updating product:", error);
-  toast.error("Error during Product updates.");
-}
-
   };
 
   if (isLoading) {
@@ -1042,7 +1035,7 @@ try {
     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[200px] 2xl:ml[300px]">
       <ToastContainer
         position="top-center"
-        autoClose={3000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

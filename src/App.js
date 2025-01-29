@@ -40,16 +40,7 @@ function App() {
     <AuthProvider>
       <div className="bg-[#FFFCF4] h-screen">
         <Router>
-        <ToastContainer 
-          position="top-center"  // Customize position
-          autoClose={3000}      // 3 seconds ke baad auto-close
-          hideProgressBar={false} 
-          newestOnTop={false}
-          closeOnClick
-          pauseOnHover
-          draggable
-          pauseOnFocusLoss
-        />
+        <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
           <Routes>
             {/* Public Routes */}
             <Route path="/" element={<Login />} />

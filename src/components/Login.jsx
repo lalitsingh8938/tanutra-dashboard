@@ -117,7 +117,7 @@ function Login({ isAuth }) {
             break;
           case "Rejected":
             toast.error(`Your KYC was rejected: ${rejection_reason}`);
-            navigate("/BusinessProfile");
+            navigate("/Dashboard");
             break;
           default:
             toast.error("Unexpected KYC status. Please contact support.");

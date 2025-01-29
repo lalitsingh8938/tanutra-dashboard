@@ -8,7 +8,6 @@ const ProductUpload = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
-  const [isLoading, setIsLoading] = useState(false); // Loading state
   const [productImages, setProductImages] = useState([]);
   const [formData, setFormData] = useState({
     title: "",
@@ -28,8 +27,8 @@ const ProductUpload = () => {
     use_case_or_utility: "",
   });
 
-  const [isKYCApproved, setIsKYCApproved] = useState(false); // Track KYC status
-
+  const [kycStatus, setKycStatus] = useState(""); // Track KYC status
+  const [isLoading, setIsLoading] = useState(false); // Loading state
   const accessToken = localStorage.getItem("access_token");
 
   // Fetch KYC status on component mount
@@ -48,7 +47,13 @@ const ProductUpload = () => {
 
         if (response.ok) {
           const data = await response.json();
-          setIsKYCApproved(data.is_kyc_approved); // Assuming API returns a boolean
+          setKycStatus(data.status); // Set KYC status from API response
+
+           // Redirect if KYC is not "Accepted"
+           if (data.status !== "Accepted") {
+            toast.error(`Your KYC status is "${data.status}". You cannot upload products until it is accepted.`);
+            navigate("/Dashboard");  // Redirect to a page explaining KYC status or a relevant page
+          }
         } else {
           toast.error("Failed to fetch KYC status. Please try again.");
         }
@@ -60,6 +65,9 @@ const ProductUpload = () => {
 
     fetchKYCStatus();
   }, [accessToken]);
+
+  
+
 
   const categories = [
     {
@@ -270,6 +278,7 @@ const ProductUpload = () => {
       );
       return false;
     }
+    
   };
 
   const handleSubmit = async (e) => {
@@ -323,7 +332,7 @@ const ProductUpload = () => {
 
       if (response.ok) {
         toast.success("Product uploaded successfully!");
-        navigate("/ThanksYou");
+        navigate("/Dashboard"); // Redirect to Dashboard after successful upload
       } else {
         const errorData = await response.json();
         toast.error(`Error: ${errorData.message}`);
@@ -340,7 +349,7 @@ const ProductUpload = () => {
     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[200px] 2xl:ml[300px]">
       <ToastContainer
         position="top-center"
-        autoClose={2000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
