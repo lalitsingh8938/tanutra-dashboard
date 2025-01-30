@@ -14,7 +14,7 @@ const Header = () => {
       {/* Logo */}
       <img
         src="Tanutra_Mobile_Logo.avif"
-        className="w-28 h-[60px] lg:w-32 lg:h-[68px] cursor-pointer"
+        className="w-28 h-[60px] lg:w-32 lg:h-[70px] cursor-pointer"
         alt="logo"
       />
 

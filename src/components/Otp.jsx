@@ -131,9 +131,9 @@ function Otp() {
             alt="logo"
           />
 
-          <div className="bg-slate-100 border p-3 rounded-md w-[340px] h-[300px] mt-6">
+          <div className="bg-slate-100 border p-3 rounded-md w-[340px] h-280px] mt-6">
             <h2 className="text-2xl font-extrabold p-6 text-slate-700">
-              OTP Authentication
+              OTP Authentication 
             </h2>
 
             <form onSubmit={handleSubmit}>

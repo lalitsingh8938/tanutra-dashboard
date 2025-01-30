@@ -33,6 +33,7 @@ import VendorKYC from './components/VendorKYC';
 import EditProducts from './components/EditProducts';
 import ProductList from './components/ProductList';
 import Pagination from './components/Pagination';
+import EditProductImages from './components/EditProductImages';
 
 
 function App() {
@@ -107,6 +108,17 @@ function App() {
                   <SideMenu />
                   {/* <Stepper /> */}
                   <EditProducts />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/EditProductImages/:id"
+              element={
+                <PrivateRoute>
+                  <Header />
+                  <SideMenu />
+                  {/* <Stepper /> */}
+                  <EditProductImages />
                 </PrivateRoute>
               }
             />

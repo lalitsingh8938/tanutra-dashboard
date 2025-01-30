@@ -993,7 +993,7 @@ const EditProducts = () => {
       },
       utility_or_usecase: formData.use_case_or_utility, // Map to correct key
     };
-    //https://api.tanutra.com/product/update-images/<int:pk>/
+
     try {
       const response = await fetch(
         `https://api.tanutra.com/api/product/update-info/${id}/`,

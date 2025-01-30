@@ -98,10 +98,10 @@ function OTPAuth() {
             alt="logo"
           />
 
-          <div className="bg-slate-100 border p-3 rounded-md w-[340px] h-[300px] mt-6">
+          <div className="bg-slate-100 border p-3 w-[340px] h-[280px] mt-6 rounded-xl">
             <h2 className="text-2xl font-extrabold p-6 text-slate-700">
               OTP Authentication
-            </h2>
+            </h2> 
 
             <form onSubmit={handleSubmit}>
               <div>
