@@ -3,6 +3,7 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { BiSupport } from "react-icons/bi";
 import { useNavigate, useLocation } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
+// import { MdEdit } from "react-icons/md";
 
 function SideMenu() {
   const [activeItem, setActiveItem] = useState("");
@@ -68,6 +69,12 @@ function SideMenu() {
           alt="Vendor Profile"
           onClick={() => navigate("/VendorProfile")}
         />
+        {/* <img
+            src="editimage.png"
+            className="w-10 h-10 rounded-full border-2"
+            alt="Vendor Profile"
+          /> */}
+        {/* <MdEdit  className=" mb-6 -ml-2"/> */}
       </div>
 
       {/* Menu Items */}
@@ -114,6 +121,11 @@ function SideMenu() {
             icon: "inventory.svg",
           },
           {
+            label: "My Profile",
+            route: "/EditVendorProfile",
+            icon: "editimage.png",
+          },
+          {
             label: "Product Uploads",
             route: "/ProductUpload",
             icon: "catelogupload.svg",
@@ -150,3 +162,4 @@ function SideMenu() {
 }
 
 export default SideMenu;
+

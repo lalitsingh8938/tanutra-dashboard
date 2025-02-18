@@ -335,7 +335,7 @@ const ProductUpload = () => {
         navigate("/Dashboard"); // Redirect to Dashboard after successful upload
       } else {
         const errorData = await response.json();
-        toast.error(`Error: ${errorData.message}`);
+        toast.error(`Your KYC has not been approved yet: ${errorData.message}`);
       }
     } catch (error) {
       console.error("Error uploading product:", error);

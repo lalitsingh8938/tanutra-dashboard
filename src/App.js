@@ -1,51 +1,63 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './components/AuthContext';
-import { ToastContainer } from 'react-toastify';  // Import ToastContainer
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./components/AuthContext";
+import { ToastContainer } from "react-toastify"; // Import ToastContainer
 
 // Import your components
-import Login from './components/Login';
-import Signup from './components/Signup';
-import OTPAuth from './components/OTPAuth';
-import Dashboard from './Dashboard';
-import VendorProfile from './components/VendorProfile';
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import OTPAuth from "./components/OTPAuth";
+import Dashboard from "./Dashboard";
+import VendorProfile from "./components/VendorProfile";
 // import Stepper from './components/Stepper';
-import BusinessProfile from './components/BusinessProfile';
-import BusinessDescription from './components/BusinessDescription';
-import BankDetails from './components/BankDetails';
-import ThanksYou from './components/ThanksYou';
-import MyOrders from './components/MyOrders';
-import ManageInventory from './components/ManageInventory';
-import CatelogUploads from './components/Catelog_uploads';
-import ForgotPassword from './components/ForgotPassword';
-import Otp from './components/Otp';
-import CreatePassword from './components/CreatePassword';
-import KYCDocument from './components/KYCDocument';
-import PickupAdd from './components/PickupAdd';
-import SocialMedia from './components/SocialMedia';
-import ProductUpload from './components/ProductUpload';
-import Header from './components/Header';
-import SideMenu from './components/SideMenu';
-import PrivateRoute from './components/PrivateRoute';
-import FormPage from './FormPage';
-import ProductPage from './components/ProductPage';
-import VendorKYC from './components/VendorKYC';
-import EditProducts from './components/EditProducts';
-import ProductList from './components/ProductList';
-import Pagination from './components/Pagination';
-import EditProductImages from './components/EditProductImages';
-
+import BusinessProfile from "./components/BusinessProfile";
+import BusinessDescription from "./components/BusinessDescription";
+import BankDetails from "./components/BankDetails";
+import ThanksYou from "./components/ThanksYou";
+import MyOrders from "./components/MyOrders";
+import ManageInventory from "./components/ManageInventory";
+import CatelogUploads from "./components/Catelog_uploads";
+import ForgotPassword from "./components/ForgotPassword";
+import Otp from "./components/Otp";
+import CreatePassword from "./components/CreatePassword";
+import KYCDocument from "./components/KYCDocument";
+import PickupAdd from "./components/PickupAdd";
+import SocialMedia from "./components/SocialMedia";
+import ProductUpload from "./components/ProductUpload";
+import Header from "./components/Header";
+import SideMenu from "./components/SideMenu";
+import PrivateRoute from "./components/PrivateRoute";
+import FormPage from "./FormPage";
+import ProductPage from "./components/ProductPage";
+import VendorKYC from "./components/VendorKYC";
+import EditProducts from "./components/EditProducts";
+import ProductList from "./components/ProductList";
+import Pagination from "./components/Pagination";
+import EditProductImages from "./components/EditProductImages";
+import EditVendorProfile from "./components/EditVendorProfile";
+import MyProfileButton from "./components/MyProfileButton";
+// import DocumentView from './components/DocumentView';
 
 function App() {
   return (
     <AuthProvider>
       <div className="bg-[#FFFCF4] h-screen">
         <Router>
-        <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+          <ToastContainer
+            position="top-center"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <Routes>
             {/* Public Routes */}
             <Route path="/" element={<Login />} />
-            <Route path="/Login" element={<Login />}/>
+            <Route path="/Login" element={<Login />} />
             <Route path="/Signup" element={<Signup />} />
             <Route path="/OTPAuth" element={<OTPAuth />} />
             <Route path="/ForgotPassword" element={<ForgotPassword />} />
@@ -73,7 +85,17 @@ function App() {
                 </PrivateRoute>
               }
             />
-            
+            <Route
+              path="/MyProfileButton"
+              element={
+                <PrivateRoute>
+                  <Header />
+                  <SideMenu />
+                  <MyProfileButton />
+                </PrivateRoute>
+              }
+            />
+
             <Route
               path="/BusinessProfile"
               element={
@@ -82,9 +104,8 @@ function App() {
                   {/* <Stepper /> */}
                   <SideMenu />
                   {/* <FormPage /> */}
-           
+
                   <BusinessProfile />
-                 
                 </PrivateRoute>
               }
             />
@@ -100,7 +121,7 @@ function App() {
               }
             />
 
-             <Route
+            <Route
               path="/EditProducts/:id"
               element={
                 <PrivateRoute>
@@ -108,6 +129,16 @@ function App() {
                   <SideMenu />
                   {/* <Stepper /> */}
                   <EditProducts />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/EditVenodrProfile"
+              element={
+                <PrivateRoute>
+                  <Header />
+                  <SideMenu />
+                  <EditVendorProfile />
                 </PrivateRoute>
               }
             />
@@ -123,8 +154,7 @@ function App() {
               }
             />
 
-
-             <Route
+            <Route
               path="/ProductList"
               element={
                 <PrivateRoute>
@@ -189,7 +219,6 @@ function App() {
                 </PrivateRoute>
               }
             />
-          
 
             <Route
               path="/Catelog_uploads"
@@ -252,3 +281,92 @@ function App() {
 }
 
 export default App;
+
+// import React from 'react';
+// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// import { AuthProvider } from './components/AuthContext';
+// import { ToastContainer } from 'react-toastify';
+
+// // Import your components
+// import Login from './components/Login';
+// import Signup from './components/Signup';
+// import OTPAuth from './components/OTPAuth';
+// import Dashboard from './Dashboard';
+// import VendorProfile from './components/VendorProfile';
+// import BusinessProfile from './components/BusinessProfile';
+// import EditVendorProfile from './components/EditVendorProfile';
+// import MyProfileButton from './components/MyProfileButton';
+// import Header from './components/Header';
+// import SideMenu from './components/SideMenu';
+// import PrivateRoute from './components/PrivateRoute';
+
+// function App() {
+//   const accessToken = localStorage.getItem("access_token");
+//   return (
+//     <AuthProvider>
+//       <div className="bg-[#FFFCF4] h-screen">
+//         <Router>
+//           <ToastContainer
+//             position="top-center"
+//             autoClose={3000}
+//             hideProgressBar={false}
+//             newestOnTop={false}
+//             closeOnClick
+//             rtl={false}
+//             pauseOnFocusLoss
+//             draggable
+//             pauseOnHover
+//           />
+//           {/* Header ko yahan render karein */}
+//           <Header />
+//           {/* SideMenu ko yahan render karein */}
+//           <SideMenu />
+//           {/* MyProfileButton ko yahan render karein */}
+//           <MyProfileButton accessToken={accessToken} />
+//           <Routes>
+//             {/* Public Routes */}
+//             <Route path="/" element={<Login />} />
+//             <Route path="/Login" element={<Login />} />
+//             <Route path="/Signup" element={<Signup />} />
+//             <Route path="/OTPAuth" element={<OTPAuth />} />
+//             {/* Protected Routes */}
+//             <Route
+//               path="/Dashboard"
+//               element={
+//                 <PrivateRoute>
+//                   <Dashboard />
+//                 </PrivateRoute>
+//               }
+//             />
+//             <Route
+//               path="/VendorProfile"
+//               element={
+//                 <PrivateRoute>
+//                   <VendorProfile />
+//                 </PrivateRoute>
+//               }
+//             />
+//             <Route
+//               path="/BusinessProfile"
+//               element={
+//                 <PrivateRoute>
+//                   <BusinessProfile />
+//                 </PrivateRoute>
+//               }
+//             />
+//             <Route
+//               path="/EditVendorProfile"
+//               element={
+//                 <PrivateRoute>
+//                   <EditVendorProfile />
+//                 </PrivateRoute>
+//               }
+//             />
+//           </Routes>
+//         </Router>
+//       </div>
+//     </AuthProvider>
+//   );
+// }
+
+// export default App;
