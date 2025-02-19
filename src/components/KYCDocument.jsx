@@ -234,7 +234,17 @@ function KYCForm() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-[#FFFCF4]">
       {/* <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div> */}
-      <ToastContainer />
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="w-full max-w-3xl bg-[#FFFCF4] border rounded-lg p-8">
         <img
           src="Tanutra_Mobile_Logo.avif"
@@ -289,7 +299,7 @@ function KYCForm() {
           </div>
         </div>
         <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 bg-white">
             {[
               {
                 type: "companyCertificate",
@@ -334,7 +344,7 @@ function KYCForm() {
           <div className="mt-6 text-center">
             <button
               type="submit"
-              className="bg-green-500 text-white px-6 py-2 rounded"
+              className="bg-green-500 text-white px-8 py-2 rounded-lg"
             >
               Submit
             </button>
@@ -364,6 +374,3 @@ function KYCForm() {
 }
 
 export default KYCForm;
-
-
-
