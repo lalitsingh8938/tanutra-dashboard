@@ -7,16 +7,16 @@ import { ToastContainer } from "react-toastify"; // Import ToastContainer
 import Login from "./components/Authentication/Login";
 import Signup from "./components/Authentication/Signup";
 import OTPAuth from "./components/Authentication/SignupOTP";
-import Dashboard from "./Dashboard";
+import Dashboard from "./components/Home/Dashboard";
 import VendorProfile from "./components/VendorProfile/VendorProfile";
-// import Stepper from './components/Stepper';
+import Stepper from './components/BusinessKYC/Stepper';
 import BusinessProfile from "./components/BusinessKYC/BusinessProfile";
 import BusinessDescription from "./components/BusinessKYC/BusinessDescription";
 import BankDetails from "./components/BusinessKYC/BankDetails";
 import ThanksYou from "./components/BusinessKYC/ThanksYou";
 import MyOrders from "./components/MyOrders";
 import ManageInventory from "./components/ProductPage/ManageInventory";
-import CatelogUploads from "./components/CatelogUploads";
+import CatelogUploads from "./components/Home/CatelogUploads";
 import ForgotPassword from "./components/ForgetPassword/Password";
 import Otp from "./components/ForgetPassword/Otp";
 import CreatePassword from "./components/ForgetPassword/CreatePassword";
@@ -27,7 +27,7 @@ import ProductUpload from "./components/ProductPage/ProductUpload";
 import Header from "./components/Navbar/Header";
 import SideMenu from "./components/Navbar/SideMenu";
 import PrivateRoute from "./components/Authentication/PrivateRoute";
-import FormPage from "./FormPage";
+// import FormPage from "./FormPage";
 import VendorKycStatus from "./components/BusinessKYC/VendorKycStatus";
 import EditProducts from "./components/ProductPage/EditProducts";
 import ProductList from "./components/ProductPage/ProductList";
@@ -268,6 +268,16 @@ function App() {
                   <Header />
                   <SideMenu />
                   <ProductUpload />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/Stepper"
+              element={
+                <PrivateRoute>
+                  <Header />
+                  <SideMenu />
+                  <Stepper />
                 </PrivateRoute>
               }
             />

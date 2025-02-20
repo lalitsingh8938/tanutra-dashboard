@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import Header from "./components/Navbar/Header";
-import List from "./components/List";
-import Graph from "./components/Graph";
-import Campaign from "./components/Campaign";
-import SideMenu from "./components/Navbar/SideMenu";
+import Header from "../Navbar/Header";
+import List from "./List";
+import Graph from "./Graph";
+import Campaign from "./Campaign";
+import SideMenu from "../Navbar/SideMenu";
 import { ToastContainer, toast } from "react-toastify";
 
 const Dashboard = () => {
