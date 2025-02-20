@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { TiArrowUpThick } from "react-icons/ti";
 import { GoChevronDown } from "react-icons/go";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import DeleteProducts from ".//DeleteProducts"; // Import DeleteProducts component
+import DeleteProducts from "./DeleteProducts"; // Import DeleteProducts component
 import { useNavigate } from "react-router-dom";
 import EditProducts from "./EditProducts";
 

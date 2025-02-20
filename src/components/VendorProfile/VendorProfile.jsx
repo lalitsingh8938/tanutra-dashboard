@@ -621,6 +621,7 @@ function VendorProfile() {
 
       if (image) {
         const file = dataURLtoFile(image, "profile-picture.jpg");
+        // const imageURL = URL.createObjectURL(selectedFile);
         formDataWithFile.append("vendor_profile_picture", file);
       }
       setIsLoading(true); // Start loading

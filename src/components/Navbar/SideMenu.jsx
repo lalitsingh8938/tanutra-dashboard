@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { BiSupport } from "react-icons/bi";
 import { useNavigate, useLocation } from "react-router-dom";
-import LogoutButton from "./LogoutButton";
+import LogoutButton from "../Authentication/LogoutButton";
 // import { MdEdit } from "react-icons/md";
 
 function SideMenu() {

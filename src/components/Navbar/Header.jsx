@@ -4,7 +4,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa6";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoBagOutline } from "react-icons/io5";
-import VendorKYC from "./VendorKYC";
+import VendorKYC from "../BusinessKYC/VendorKycStatus.jsx";
 
 const Header = () => {
   const navigate = useNavigate();

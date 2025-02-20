@@ -1,6 +1,6 @@
 import React from "react";
 import Stepper from "./components/Stepper"; // Stepper component import
-import BusinessProfile from "./components/BusinessProfile"; // BusinessProfile component import
+import BusinessProfile from "./components/BusinessKYC/BusinessProfile"; // BusinessProfile component import
 
 const FormPage = () => {
   return (

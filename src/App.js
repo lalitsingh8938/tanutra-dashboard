@@ -1,41 +1,40 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./components/AuthContext";
+import { AuthProvider } from "./components/Authentication/AuthContext";
 import { ToastContainer } from "react-toastify"; // Import ToastContainer
 
 // Import your components
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import OTPAuth from "./components/OTPAuth";
+import Login from "./components/Authentication/Login";
+import Signup from "./components/Authentication/Signup";
+import OTPAuth from "./components/Authentication/SignupOTP";
 import Dashboard from "./Dashboard";
-import VendorProfile from "./components/VendorProfile";
+import VendorProfile from "./components/VendorProfile/VendorProfile";
 // import Stepper from './components/Stepper';
-import BusinessProfile from "./components/BusinessProfile";
-import BusinessDescription from "./components/BusinessDescription";
-import BankDetails from "./components/BankDetails";
-import ThanksYou from "./components/ThanksYou";
+import BusinessProfile from "./components/BusinessKYC/BusinessProfile";
+import BusinessDescription from "./components/BusinessKYC/BusinessDescription";
+import BankDetails from "./components/BusinessKYC/BankDetails";
+import ThanksYou from "./components/BusinessKYC/ThanksYou";
 import MyOrders from "./components/MyOrders";
-import ManageInventory from "./components/ManageInventory";
-import CatelogUploads from "./components/Catelog_uploads";
-import ForgotPassword from "./components/ForgotPassword";
-import Otp from "./components/Otp";
-import CreatePassword from "./components/CreatePassword";
-import KYCDocument from "./components/KYCDocument";
-import PickupAdd from "./components/PickupAdd";
-import SocialMedia from "./components/SocialMedia";
-import ProductUpload from "./components/ProductUpload";
-import Header from "./components/Header";
-import SideMenu from "./components/SideMenu";
-import PrivateRoute from "./components/PrivateRoute";
+import ManageInventory from "./components/ProductPage/ManageInventory";
+import CatelogUploads from "./components/CatelogUploads";
+import ForgotPassword from "./components/ForgetPassword/Password";
+import Otp from "./components/ForgetPassword/Otp";
+import CreatePassword from "./components/ForgetPassword/CreatePassword";
+import KYCDocument from "./components/BusinessKYC/KYCDocument";
+import PickupAdd from "./components/BusinessKYC/PickupAdd";
+import SocialMedia from "./components/BusinessKYC/SocialMedia";
+import ProductUpload from "./components/ProductPage/ProductUpload";
+import Header from "./components/Navbar/Header";
+import SideMenu from "./components/Navbar/SideMenu";
+import PrivateRoute from "./components/Authentication/PrivateRoute";
 import FormPage from "./FormPage";
-import ProductPage from "./components/ProductPage";
-import VendorKYC from "./components/VendorKYC";
-import EditProducts from "./components/EditProducts";
-import ProductList from "./components/ProductList";
-import Pagination from "./components/Pagination";
-import EditProductImages from "./components/EditProductImages";
-import EditVendorProfile from "./components/EditVendorProfile";
-import MyProfileButton from "./components/MyProfileButton";
+import VendorKycStatus from "./components/BusinessKYC/VendorKycStatus";
+import EditProducts from "./components/ProductPage/EditProducts";
+import ProductList from "./components/ProductPage/ProductList";
+import Pagination from "./components/ForgetPassword/Pagination";
+import EditProductImages from "./components/ProductPage/EditProductImages";
+import EditVendorProfile from "./components/VendorProfile/EditVendorProfile";
+import MyProfileButton from "./components/VendorProfile/MyProfileButton";
 // import DocumentView from './components/DocumentView';
 
 function App() {
@@ -215,13 +214,12 @@ function App() {
                   <Header />
                   <SideMenu />
                   <Pagination />
-                  <ProductPage />
                 </PrivateRoute>
               }
             />
 
             <Route
-              path="/Catelog_uploads"
+              path="/CatelogUploads"
               element={
                 <PrivateRoute>
                   <Header />
