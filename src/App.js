@@ -14,7 +14,7 @@ import BusinessProfile from "./components/BusinessKYC/BusinessProfile";
 import BusinessDescription from "./components/BusinessKYC/BusinessDescription";
 import BankDetails from "./components/BusinessKYC/BankDetails";
 import ThanksYou from "./components/BusinessKYC/ThanksYou";
-import MyOrders from "./components/MyOrders";
+import MyOrders from "./components/Navbar/MyOrders";
 import ManageInventory from "./components/ProductPage/ManageInventory";
 import CatelogUploads from "./components/Home/CatelogUploads";
 import ForgotPassword from "./components/ForgetPassword/Password";
