@@ -3,7 +3,6 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { BiSupport } from "react-icons/bi";
 import { useNavigate, useLocation } from "react-router-dom";
 import LogoutButton from "../Authentication/LogoutButton";
-// import { MdEdit } from "react-icons/md";
 
 function SideMenu() {
   const [activeItem, setActiveItem] = useState("");
@@ -33,6 +32,11 @@ function SideMenu() {
   useEffect(() => {
     updateProfileImage(); // Call on route change
   }, [location]);
+  const handleMyProfileClick = () => {
+    navigate("/EditVendorProfile"); // Vendor Profile Page Open Karega
+  };
+
+  <button onClick={handleMyProfileClick}></button>;
 
   const handleLogout = () => {
     localStorage.removeItem("vendor_profile_picture"); // Clear profile image
@@ -69,12 +73,6 @@ function SideMenu() {
           alt="Vendor Profile"
           onClick={() => navigate("/VendorProfile")}
         />
-        {/* <img
-            src="editimage.png"
-            className="w-10 h-10 rounded-full border-2"
-            alt="Vendor Profile"
-          /> */}
-        {/* <MdEdit  className=" mb-6 -ml-2"/> */}
       </div>
 
       {/* Menu Items */}
@@ -154,7 +152,6 @@ function SideMenu() {
             <p className="text-black text-sm ml-3">{label}</p>
           </div>
         ))}
-
         <LogoutButton onLogout={handleLogout} />
       </div>
     </aside>
@@ -162,4 +159,3 @@ function SideMenu() {
 }
 
 export default SideMenu;
-

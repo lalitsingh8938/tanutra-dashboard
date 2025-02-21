@@ -9,7 +9,7 @@ import Signup from "./components/Authentication/Signup";
 import OTPAuth from "./components/Authentication/SignupOTP";
 import Dashboard from "./components/Home/Dashboard";
 import VendorProfile from "./components/VendorProfile/VendorProfile";
-import Stepper from './components/BusinessKYC/Stepper';
+import Stepper from "./components/BusinessKYC/Stepper";
 import BusinessProfile from "./components/BusinessKYC/BusinessProfile";
 import BusinessDescription from "./components/BusinessKYC/BusinessDescription";
 import BankDetails from "./components/BusinessKYC/BankDetails";
@@ -132,7 +132,7 @@ function App() {
               }
             />
             <Route
-              path="/EditVenodrProfile"
+              path="/EditVendorProfile"
               element={
                 <PrivateRoute>
                   <Header />
