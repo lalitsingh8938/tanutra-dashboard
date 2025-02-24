@@ -131,26 +131,23 @@ function ProductPage() {
   useEffect(() => {
     const fetchProductData = async () => {
       const token = localStorage.getItem("access_token");
-      
+
       try {
         const response = await fetch(
           "https://api.tanutra.com/api/product/get/all/",
-          
+
           {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
-            
           }
         );
-        
 
         if (!response.ok) {
           throw new Error(`Error: ${response.status} - ${response.statusText}`);
         }
-        
 
         const data = await response.json();
 
@@ -445,10 +442,6 @@ function ProductPage() {
 
 export default ManageInventory;
 
-
-
-
-
 // function ProductPage() {
 //   const [products, setProducts] = useState([]);
 //   const [loading, setLoading] = useState(true);
@@ -655,4 +648,4 @@ export default ManageInventory;
 
 // export default ProductPage;
 
-// 
+//

@@ -245,9 +245,9 @@ function VendorProfile() {
           <div className="rounded-xl bg-transparent p-4">
             <p className="text-xl font-bold text-center text-slate-700">
               Vendor User Profile
-              <p className="text-sm font-medium opacity-80 text-center">
-                If you already have an account with us, please login at the page{" "}
-              </p>
+            </p>
+            <p className="text-sm font-medium opacity-80 text-center">
+              If you already have an account with us, please login at the page{" "}
             </p>
 
             {/* Form */}
@@ -435,7 +435,11 @@ function VendorProfile() {
                 <div className="flex justify-center mt-14">
                   <button
                     type="submit"
-                    className="bg-green-500 text-white font-semibold py-2 w-48 px-8 rounded-md hover:bg-indigo-600"
+                    className={`bg-green-500 text-white font-semibold py-2 w-48 px-8 rounded-md ${
+                      isLoading
+                        ? "opacity-50 cursor-not-allowed"
+                        : "cursor-pointer"
+                    }`}
                     disabled={isLoading}
                   >
                     {isLoading ? "Submitting..." : "Submit"}

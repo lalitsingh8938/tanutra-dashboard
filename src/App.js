@@ -28,10 +28,10 @@ import Header from "./components/Navbar/Header";
 import SideMenu from "./components/Navbar/SideMenu";
 import PrivateRoute from "./components/Authentication/PrivateRoute";
 // import FormPage from "./FormPage";
-import VendorKycStatus from "./components/BusinessKYC/VendorKycStatus";
+// import VendorKycStatus from "./components/BusinessKYC/VendorKycStatus";
 import EditProducts from "./components/ProductPage/EditProducts";
 import ProductList from "./components/ProductPage/ProductList";
-import Pagination from "./components/ForgetPassword/Pagination";
+// import Pagination from "./components/ForgetPassword/Pagination";
 import EditProductImages from "./components/ProductPage/EditProductImages";
 import EditVendorProfile from "./components/VendorProfile/EditVendorProfile";
 import MyProfileButton from "./components/VendorProfile/MyProfileButton";
@@ -135,8 +135,8 @@ function App() {
               path="/EditVendorProfile"
               element={
                 <PrivateRoute>
-                  <Header />
-                  <SideMenu />
+                  {/* <Header /> */}
+                  {/* <SideMenu /> */}
                   <EditVendorProfile />
                 </PrivateRoute>
               }
@@ -207,7 +207,7 @@ function App() {
                 </PrivateRoute>
               }
             />
-            <Route
+            {/* <Route
               path="/Pagination"
               element={
                 <PrivateRoute>
@@ -216,7 +216,7 @@ function App() {
                   <Pagination />
                 </PrivateRoute>
               }
-            />
+            /> */}
 
             <Route
               path="/CatelogUploads"

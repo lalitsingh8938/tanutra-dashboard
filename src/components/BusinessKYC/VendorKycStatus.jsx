@@ -40,12 +40,14 @@ const KYCStatusButton = ({ initialKYCStatus = "Unknown" }) => {
 
       // Log the response for debugging
       const data = await response.json();
-      console.log("API Response Data:", data);
+      // console.log("API Response Data:", data);
 
       // Update the KYC status based on the API response
       if (data && data.status) {
-        console.log("KYC Status:", data.status);
-        const { status, reason } = data;
+        // console.log("KYC Status:", data.status);
+        const {status} = data;
+
+        // const { status, reason } = data;
 
         if (status === "Accepted") {
           setKycStatus("Accepted");

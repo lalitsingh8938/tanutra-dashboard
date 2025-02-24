@@ -24,13 +24,11 @@ const EditVendorProfile = () => {
     phone: "",
     DOB: "",
     gender: "",
-    location: [
-      {
-        city: "",
-        state: "",
-        country: "",
-      },
-    ],
+    location: {
+      city: "",
+      state: "",
+      country: "",
+    },
     profile_pic: null,
   });
 
@@ -44,6 +42,7 @@ const EditVendorProfile = () => {
 
   // Fetch Vendor Data
   useEffect(() => {
+    // console.log(formData);
     const fetchVendorProfile = async () => {
       try {
         const response = await axios.get(
@@ -63,13 +62,11 @@ const EditVendorProfile = () => {
             phone: vendorData.phone || "",
             DOB: vendorData.DOB || "",
             gender: vendorData.gender || "",
-            location: [
-              {
-                city: vendorData.location?.city || "",
-                state: vendorData.location?.state || "",
-                country: vendorData.location?.country || "",
-              },
-            ],
+            location: {
+              city: vendorData.location?.city || "",
+              state: vendorData.location?.state || "",
+              country: vendorData.location?.country || "",
+            },
             profile_pic: vendorData.vendor_profile_picture || null,
           });
         }
@@ -185,6 +182,22 @@ const EditVendorProfile = () => {
   // Handle Form Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Check if vendor profile exists
+    if (
+      !formData.first_name ||
+      !formData.last_name ||
+      !formData.phone ||
+      !formData.DOB ||
+      !formData.gender ||
+      !formData.location.city ||
+      !formData.location.state ||
+      !formData.location.country
+    ) {
+      toast.error("Please create your Vendor profile first.");
+      return;
+    }
+
     try {
       const formDataToSend = new FormData();
       formDataToSend.append("first_name", formData.first_name);
@@ -199,8 +212,9 @@ const EditVendorProfile = () => {
       if (formData.profile_pic) {
         formDataToSend.append("profile_pic", formData.profile_pic);
       }
+      setIsLoading(true); // Start loading
 
-      const response = await axios.put(
+      const response = await axios.patch(
         "https://api.tanutra.com/api/update/vendor-profile/",
         formDataToSend,
         {
@@ -218,16 +232,17 @@ const EditVendorProfile = () => {
     } catch (error) {
       console.error("Error updating profile:", error);
       toast.error("Failed to update profile.");
+    } finally {
+      setIsLoading(false); //stop loading
     }
   };
 
   return (
-    <div className="relative  flex items-center justify-center min-h-screen bg-cover bg-center  xs:ml-[225px] sm:ml-[225px] md:ml-[225px] lg:ml-[225px] xl:ml-[200px] 2xl:ml[300px]">
+    <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center">
       {/* Overlay */}
       <div className="absolute inset-0 bg-[#FFFCF4] bg-opacity-95"></div>
-
       {/* Form Container */}
-      <div className="relative mt-24 z-10 w-full border md:max-w-3xl sm:max-w-2xl lg:max-w-4xl bg-transparent rounded-lg">
+      <div className="relative w-full max-w-4xl bg-[#FFFCF4] p-6 rounded-lg shadow-lg">
         <div className="p-2 ">
           <img
             src="Tanutra_Mobile_Logo.avif"
@@ -236,10 +251,10 @@ const EditVendorProfile = () => {
           />
           <div className="rounded-xl bg-transparent p-4">
             <p className="text-xl font-bold text-center text-slate-700">
-              Update Vendor User Profile
-              <p className="text-sm font-medium opacity-80 text-center">
-                If you already have an account with us, please login at the page{" "}
-              </p>
+              Vendor User Profile
+            </p>
+            <p className="text-sm font-medium opacity-80 text-center">
+              If you already have an account with us, please login at the page{" "}
             </p>
 
             {/* Form */}
@@ -425,7 +440,11 @@ const EditVendorProfile = () => {
                 <div className="flex justify-center mt-14">
                   <button
                     type="submit"
-                    className="bg-green-500 text-white font-semibold py-2 w-48 px-8 rounded-md hover:bg-indigo-600"
+                    className={`bg-green-500 text-white font-semibold py-2 w-48 px-8 rounded-md ${
+                      isLoading
+                        ? "opacity-50 cursor-not-allowed"
+                        : "cursor-pointer"
+                    }`}
                     disabled={isLoading}
                   >
                     {isLoading ? "Updating..." : "Update"}
