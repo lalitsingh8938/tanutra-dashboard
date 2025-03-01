@@ -258,6 +258,7 @@ const EditVendorProfile = () => {
             </p>
 
             {/* Form */}
+
             <form onSubmit={handleSubmit} className="mt-14 bg-transparent">
               {/* First Row */}
               <div className="flex items-center border bg-[#ECB59D] opacity-60 rounded-lg">
